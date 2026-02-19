@@ -1,0 +1,2643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idonet 2.0 - Sistema de Gestión Educativa</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIklkb25ldCAyLjAiLCAic2hvcnRfbmFtZSI6ICJJZG9uZXQiLCAic3RhcnRfdXJsIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgImJhY2tncm91bmRfY29sb3IiOiAiIzE2MzMzMyIsICJ0aGVtZV9jb2xvciI6ICIjMTYzMzMzIn0=">
+    <style>
+        :root {
+            --primary: #163333;
+            --secondary: #2a9d8f;
+            --accent: #e9c46a;
+            --danger: #e76f51;
+            --success: #2a9d8f;
+            --warning: #f4a261;
+            --bg: #f5f7fa;
+            --card: #ffffff;
+            --text: #2c3e50;
+            --border: #e1e8ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d1f1f 100%);
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 50%;
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Grid Systems */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #21867a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(42, 157, 143, 0.3);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            background: linear-gradient(135deg, var(--card) 0%, #f8f9fa 100%);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Section Cards (Instituciones/Secciones) */
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .section-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-4px);
+        }
+
+        .section-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            overflow: hidden;
+        }
+
+        .section-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6c757d;
+        }
+
+        /* Attendance Specific */
+        .attendance-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .attendance-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .attendance-item:hover {
+            background: #e9ecef;
+        }
+
+        .attendance-student {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .attendance-status {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .status-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .status-btn.active.present {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .status-btn.active.absent-j {
+            background: var(--warning);
+            color: white;
+            border-color: var(--warning);
+        }
+
+        .status-btn.active.absent-i {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        .status-btn.active.late {
+            background: #9b59b6;
+            color: white;
+            border-color: #9b59b6;
+        }
+
+        /* Schedule Grid */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: 80px repeat(5, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .schedule-cell {
+            background: white;
+            padding: 1rem;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .schedule-cell.header {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            min-height: auto;
+        }
+
+        .schedule-lesson {
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .schedule-lesson:hover {
+            transform: scale(1.05);
+        }
+
+        /* Reports */
+        .report-preview {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            min-height: 600px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .report-header {
+            text-align: center;
+            border-bottom: 3px double var(--primary);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .report-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+            background: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6c757d;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            background: var(--bg);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.5rem;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .toast {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.error {
+            border-left-color: var(--danger);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Hide/Show sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            .nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .main-container {
+                margin-top: 120px;
+                padding: 1rem;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 60px repeat(5, minmax(120px, 1fr));
+                overflow-x: auto;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .header, .nav, .btn, .no-print {
+                display: none !important;
+            }
+
+            .main-container {
+                margin-top: 0;
+            }
+
+            .report-preview {
+                box-shadow: none;
+                border: none;
+            }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .action-card {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid var(--border);
+        }
+
+        .action-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .action-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Search */
+        .search-box {
+            position: relative;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            padding-left: 2.5rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        /* Filter tags */
+        .filter-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .filter-tag {
+            background: var(--bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tag.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Color picker for schedule */
+        .color-picker {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: transform 0.2s;
+        }
+
+        .color-option:hover, .color-option.selected {
+            transform: scale(1.2);
+            border-color: var(--text);
+        }
+
+        /* Chart placeholder */
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            height: 200px;
+            align-items: flex-end;
+        }
+
+        .bar {
+            width: 40px;
+            background: var(--secondary);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s ease;
+            position: relative;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* File upload zone */
+        .upload-zone {
+            border: 3px dashed var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--secondary);
+            background: rgba(42, 157, 143, 0.05);
+        }
+
+        /* Toggle switch */
+        .toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 26px;
+            background: var(--border);
+            border-radius: 13px;
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .toggle.active .toggle-switch {
+            background: var(--secondary);
+        }
+
+        .toggle.active .toggle-switch::after {
+            transform: translateX(24px);
+        }
+
+        /* Loading spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border);
+            border-top-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">📚</div>
+                <span>Idonet 2.0</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" onclick="showSection('dashboard')">Dashboard</button>
+                <button class="nav-btn" onclick="showSection('instituciones')">Instituciones</button>
+                <button class="nav-btn" onclick="showSection('secciones')">Secciones</button>
+                <button class="nav-btn" onclick="showSection('asignaturas')">Asignaturas</button>
+                <button class="nav-btn" onclick="showSection('horario')">Horario</button>
+                <button class="nav-btn" onclick="showSection('asistencia')">Asistencia</button>
+                <button class="nav-btn" onclick="showSection('evaluaciones')">Evaluaciones</button>
+                <button class="nav-btn" onclick="showSection('reportes')">Reportes</button>
+                <button class="nav-btn" onclick="showSection('configuracion')">Configuración</button>
+            </nav>
+            <div class="user-menu">
+                <div class="notification-bell" onclick="showNotifications()">
+                    🔔
+                    <span class="notification-badge" id="notifCount">3</span>
+                </div>
+                <span id="userName">Docente</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Dashboard - Resumen del Día</h2>
+                    <span id="currentDate"></span>
+                </div>
+                
+                <div class="grid grid-4" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalEstudiantes">0</div>
+                        <div class="stat-label">Estudiantes Activos</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--warning);">
+                        <div class="stat-value" id="totalSecciones">0</div>
+                        <div class="stat-label">Secciones</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--danger);">
+                        <div class="stat-value" id="totalAsignaturas">0</div>
+                        <div class="stat-label">Asignaturas</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--accent);">
+                        <div class="stat-value" id="promedioGeneral">0%</div>
+                        <div class="stat-label">Promedio General</div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <div class="action-card" onclick="showSection('asistencia'); openQuickAttendance();">
+                        <div class="action-icon">✅</div>
+                        <div>Tomar Asistencia</div>
+                    </div>
+                    <div class="action-card" onclick="showSection('evaluaciones'); openQuickGrade();">
+                        <div class="action-icon">📝</div>
+                        <div>Registrar Nota</div>
+                    </div>
+                    <div class="action-card" onclick="showSection('reportes');">
+                        <div class="action-icon">📊</div>
+                        <div>Generar Reporte</div>
+                    </div>
+                    <div class="action-card" onclick="showSection('bitacora');">
+                        <div class="action-icon">📖</div>
+                        <div>Nueva Bitácora</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Recordatorios de Hoy</h3>
+                        <div id="remindersList">
+                            <div class="empty-state">
+                                <div class="empty-state-icon">📅</div>
+                                <p>No hay recordatorios para hoy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem;">Cumpleaños del Mes</h3>
+                        <div id="birthdaysList">
+                            <div class="empty-state">
+                                <div class="empty-state-icon">🎂</div>
+                                <p>No hay cumpleaños este mes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instituciones Section -->
+        <section id="instituciones" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Centros Educativos</h2>
+                    <button class="btn btn-primary" onclick="openModal('institucionModal')">
+                        ➕ Agregar Institución
+                    </button>
+                </div>
+                <div class="grid grid-3" id="institucionesGrid">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Secciones Section -->
+        <section id="secciones" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Secciones y Grupos</h2>
+                    <button class="btn btn-primary" onclick="openModal('seccionModal')">
+                        ➕ Nueva Sección
+                    </button>
+                </div>
+                <div class="grid grid-4" id="seccionesGrid">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Asignaturas Section -->
+        <section id="asignaturas" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Asignaturas</h2>
+                    <button class="btn btn-primary" onclick="openModal('asignaturaModal')">
+                        ➕ Nueva Asignatura
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table id="asignaturasTable">
+                        <thead>
+                            <tr>
+                                <th>Asignatura</th>
+                                <th>Grupo</th>
+                                <th>Año</th>
+                                <th>Institución</th>
+                                <th>Trabajo Cotidiano</th>
+                                <th>Tareas</th>
+                                <th>Pruebas</th>
+                                <th>Asistencia</th>
+                                <th>Proyecto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="asignaturasBody">
+                            <!-- Dynamic content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horario Section -->
+        <section id="horario" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Configuración de Horario</h2>
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <label>Máximo de Lecciones por Día:</label>
+                        <input type="number" id="maxLecciones" class="form-control" style="width: 80px;" value="7" onchange="updateSchedule()">
+                        <button class="btn btn-primary" onclick="saveSchedule()">Guardar Horario</button>
+                    </div>
+                </div>
+                <div id="scheduleContainer" class="schedule-grid">
+                    <!-- Dynamic schedule -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Asistencia Section -->
+        <section id="asistencia" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Registro de Asistencia</h2>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <select id="asistenciaSeccion" class="form-control" style="width: auto;" onchange="loadAsistenciaEstudiantes()">
+                            <option value="">Seleccionar Sección</option>
+                        </select>
+                        <select id="asistenciaAsignatura" class="form-control" style="width: auto;">
+                            <option value="">Seleccionar Asignatura</option>
+                        </select>
+                        <input type="date" id="asistenciaFecha" class="form-control" style="width: auto;">
+                        <select id="asistenciaLeccion" class="form-control" style="width: auto;">
+                            <option value="">Lección</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="guardarAsistencia()">Guardar Asistencia</button>
+                    </div>
+                </div>
+                <div id="asistenciaContainer" class="attendance-grid">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">👥</div>
+                        <p>Seleccione una sección para ver los estudiantes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluaciones Section -->
+        <section id="evaluaciones" class="section">
+            <div class="tabs">
+                <button class="tab active" onclick="showEvalTab('trabajo')">Trabajo Cotidiano</button>
+                <button class="tab" onclick="showEvalTab('tareas')">Tareas</button>
+                <button class="tab" onclick="showEvalTab('pruebas')">Pruebas</button>
+                <button class="tab" onclick="showEvalTab('proyecto')">Proyecto</button>
+            </div>
+
+            <!-- Trabajo Cotidiano -->
+            <div id="eval-trabajo" class="eval-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Trabajo Cotidiano - Indicadores</h3>
+                        <button class="btn btn-primary" onclick="openModal('indicadorModal')">+ Agregar Indicador</button>
+                    </div>
+                    <div id="indicadoresList">
+                        <!-- Dynamic indicators -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tareas -->
+            <div id="eval-tareas" class="eval-content" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Gestión de Tareas</h3>
+                        <button class="btn btn-primary" onclick="openModal('tareaModal')">+ Nueva Tarea</button>
+                    </div>
+                    <div id="tareasList">
+                        <!-- Dynamic tasks -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pruebas -->
+            <div id="eval-pruebas" class="eval-content" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Pruebas y Exámenes</h3>
+                        <button class="btn btn-primary" onclick="openModal('pruebaModal')">+ Nueva Prueba</button>
+                    </div>
+                    <div id="pruebasList">
+                        <!-- Dynamic tests -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proyecto -->
+            <div id="eval-proyecto" class="eval-content" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Evaluación de Proyecto</h3>
+                    </div>
+                    <div id="proyectoContent">
+                        <!-- Dynamic project evaluation -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bitácora Section -->
+        <section id="bitacora" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Bitácora de Clase</h2>
+                    <button class="btn btn-primary" onclick="openModal('bitacoraModal')">+ Nueva Entrada</button>
+                </div>
+                <div id="bitacoraList">
+                    <!-- Dynamic entries -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Reportes Section -->
+        <section id="reportes" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Generación de Reportes</h2>
+                </div>
+                <div class="grid grid-2">
+                    <div>
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Reporte</label>
+                            <select id="reporteTipo" class="form-control" onchange="updateReportOptions()">
+                                <option value="periodo">Reporte por Período</option>
+                                <option value="anual">Reporte Anual</option>
+                                <option value="individual">Reporte Individual</option>
+                                <option value="asistencia">Reporte de Asistencia</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Sección</label>
+                            <select id="reporteSeccion" class="form-control">
+                                <option value="">Todas las secciones</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Asignatura</label>
+                            <select id="reporteAsignatura" class="form-control">
+                                <option value="">Todas las asignaturas</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="periodoGroup">
+                            <label class="form-label">Período</label>
+                            <select id="reportePeriodo" class="form-control">
+                                <option value="1">I Período</option>
+                                <option value="2">II Período</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <button class="btn btn-primary" onclick="generarReporte()">Generar Vista Previa</button>
+                            <button class="btn btn-success" onclick="exportarPDF()">📄 PDF</button>
+                            <button class="btn btn-secondary" onclick="exportarWord()">📝 Word</button>
+                            <button class="btn btn-success" onclick="exportarExcel()">📊 Excel</button>
+                        </div>
+                    </div>
+                    <div class="report-preview" id="reportPreview">
+                        <div style="text-align: center; color: #6c757d; padding-top: 200px;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">📋</div>
+                            <p>Configure los filtros y genere el reporte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Configuración Section -->
+        <section id="configuracion" class="section">
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3 class="card-title" style="margin-bottom: 1.5rem;">Datos del Docente</h3>
+                    <div class="form-group">
+                        <label class="form-label">Nombre Completo</label>
+                        <input type="text" id="docenteNombre" class="form-control" placeholder="Dr. Nombre Apellido">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" id="docenteEmail" class="form-control">
+                    </div>
+                    <button class="btn btn-primary" onclick="guardarConfiguracion()">Guardar Cambios</button>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title" style="margin-bottom: 1.5rem;">Seguridad</h3>
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div>
+                                <div style="font-weight: 600;">Autenticación en Dos Factores</div>
+                                <div style="font-size: 0.9rem; color: #6c757d;">Añade seguridad adicional a tu cuenta</div>
+                            </div>
+                            <div class="toggle" onclick="this.classList.toggle('active')">
+                                <div class="toggle-switch"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">Exportar Datos</div>
+                        <button class="btn btn-outline" onclick="exportarDatos()">💾 Exportar Backup</button>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">Importar Datos</div>
+                        <div class="upload-zone" onclick="document.getElementById('importFile').click()">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📁</div>
+                            <div>Arrastre archivos o haga clic para seleccionar</div>
+                            <input type="file" id="importFile" style="display: none;" accept=".json" onchange="importarDatos(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    
+    <!-- Institución Modal -->
+    <div id="institucionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nueva Institución</h3>
+                <button class="close-btn" onclick="closeModal('institucionModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Nombre del Centro Educativo</label>
+                    <input type="text" id="instNombre" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Dirección Regional</label>
+                    <input type="text" id="instRegional" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Circuito Escolar</label>
+                    <input type="text" id="instCircuito" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Código</label>
+                    <input type="text" id="instCodigo" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Logo (URL o Base64)</label>
+                    <input type="text" id="instLogo" class="form-control" placeholder="Opcional">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('institucionModal')">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarInstitucion()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Modal -->
+    <div id="seccionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nueva Sección</h3>
+                <button class="close-btn" onclick="closeModal('seccionModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Nombre de la Sección (ej: 9-1)</label>
+                    <input type="text" id="secNombre" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Institución</label>
+                    <select id="secInstitucion" class="form-control">
+                        <!-- Dynamic -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Año Lectivo</label>
+                    <input type="number" id="secAnio" class="form-control" value="2025">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cantidad de Períodos</label>
+                    <select id="secPeriodos" class="form-control">
+                        <option value="2">2 Períodos</option>
+                        <option value="3">3 Períodos</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('seccionModal')">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarSeccion()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Asignatura Modal -->
+    <div id="asignaturaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nueva Asignatura</h3>
+                <button class="close-btn" onclick="closeModal('asignaturaModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Nombre de la Asignatura</label>
+                    <input type="text" id="asigNombre" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Sección</label>
+                    <select id="asigSeccion" class="form-control">
+                        <!-- Dynamic -->
+                    </select>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Trabajo Cotidiano (%)</label>
+                        <input type="number" id="asigTC" class="form-control" value="50" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tareas (%)</label>
+                        <input type="number" id="asigTareas" class="form-control" value="10" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Pruebas (%)</label>
+                        <input type="number" id="asigPruebas" class="form-control" value="30" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Asistencia (%)</label>
+                        <input type="number" id="asigAsistencia" class="form-control" value="10" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Proyecto (%)</label>
+                        <input type="number" id="asigProyecto" class="form-control" value="0" min="0" max="100">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('asignaturaModal')">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarAsignatura()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estudiante Modal -->
+    <div id="estudianteModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3 id="estModalTitle">Nuevo Estudiante</h3>
+                <button class="close-btn" onclick="closeModal('estudianteModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="estId">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Cédula/ID</label>
+                        <input type="text" id="estCedula" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nombre Completo</label>
+                        <input type="text" id="estNombre" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Encargado 1</label>
+                        <input type="text" id="estEnc1" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teléfono 1</label>
+                        <input type="tel" id="estTel1" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Encargado 2</label>
+                        <input type="text" id="estEnc2" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teléfono 2</label>
+                        <input type="tel" id="estTel2" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" id="estNacimiento" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Correo MEP</label>
+                        <input type="email" id="estEmail" class="form-control" placeholder="@est.mep.go.cr">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Adecuación Curricular</label>
+                    <select id="estAdecuacion" class="form-control">
+                        <option value="ninguna">Ninguna</option>
+                        <option value="significativa">Adecuación Curricular Significativa</option>
+                        <option value="no_significativa">Adecuación Curricular No Significativa</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('estudianteModal')">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarEstudiante()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bitácora Modal -->
+    <div id="bitacoraModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nueva Bitácora</h3>
+                <button class="close-btn" onclick="closeModal('bitacoraModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Asignatura</label>
+                    <select id="bitAsignatura" class="form-control">
+                        <!-- Dynamic -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha</label>
+                    <input type="date" id="bitFecha" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contenido / Observaciones</label>
+                    <textarea id="bitContenido" class="form-control" rows="6" placeholder="Desarrolle el contenido de la clase, actividades realizadas, observaciones..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Recordatorio (opcional)</label>
+                    <input type="date" id="bitRecordatorio" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('bitacoraModal')">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarBitacora()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Indicador Modal -->
+    <div id="indicadorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Agregar Indicador</h3>
+                <button class="close-btn" onclick="closeModal('indicadorModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Descripción del Indicador</label>
+                    <textarea id="indDescripcion" class="form-control" rows="3" placeholder="Ej: Analiza críticamente las causas y consecuencias de la Segunda Guerra Mundial..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Evaluación</label>
+                    <input type="date" id="indFecha" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Puntos por indicador</label>
+                    <input type="number" id="indPuntos" class="form-control" value="3" min="1" max="10">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('indicadorModal')">Cancelar</button>
+                <button class="btn btn-primary" onclick="guardarIndicador()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // ==========================================
+        // IDONET 2.0 - SISTEMA COMPLETO
+        // ==========================================
+
+        // Inicialización de datos
+        let data = {
+            instituciones: [],
+            secciones: [],
+            estudiantes: [],
+            asignaturas: [],
+            horario: [],
+            asistencia: [],
+            bitacoras: [],
+            indicadores: [],
+            tareas: [],
+            pruebas: [],
+            notas: {},
+            configuracion: {
+                docente: { nombre: '', email: '' },
+                maxLecciones: 7
+            }
+        };
+
+        // Cargar datos del LocalStorage
+        function loadData() {
+            const saved = localStorage.getItem('idonet_data');
+            if (saved) {
+                data = JSON.parse(saved);
+            } else {
+                // Datos de ejemplo para demostración
+                initDemoData();
+            }
+            updateDashboard();
+            renderAll();
+        }
+
+        // Guardar en LocalStorage
+        function saveData() {
+            localStorage.setItem('idonet_data', JSON.stringify(data));
+        }
+
+        // Datos de demostración
+        function initDemoData() {
+            data.instituciones = [
+                { id: 1, nombre: 'Liceo Rural Las Moras', regional: 'Limón', circuito: '10', codigo: '0255-00', logo: '' },
+                { id: 2, nombre: 'El Pilar de Los Naranjos', regional: 'San Carlos', circuito: '05', codigo: '3357-00', logo: '' }
+            ];
+
+            data.secciones = [
+                { id: 1, nombre: '9-1', institucionId: 1, anio: 2025, periodos: 2 },
+                { id: 2, nombre: '9-2', institucionId: 1, anio: 2025, periodos: 2 },
+                { id: 3, nombre: '8-1', institucionId: 2, anio: 2025, periodos: 2 }
+            ];
+
+            data.estudiantes = [
+                { id: 1, cedula: '9262092620', nombre: 'Alberto Laureano Guevara', seccionId: 1, encargado1: 'Clara Trejo', telefono1: '88888888', encargado2: 'Alonso Anguiano', telefono2: '88888888', nacimiento: '2010-03-10', email: '9262092620@est.mep.go.cr', adecuacion: 'significativa' },
+                { id: 2, cedula: '8778187781', nombre: 'Amalia Gil Longoria', seccionId: 1, encargado1: 'Eugenia Campos', telefono1: '88888888', encargado2: '', telefono2: '', nacimiento: '2010-11-01', email: '8778187781@est.mep.go.cr', adecuacion: 'ninguna' },
+                { id: 3, cedula: '4564045640', nombre: 'Enrique Yuridia Jaramillo Becerra', seccionId: 1, encargado1: 'Dr. Oswaldo Guevara', telefono1: '88888888', encargado2: 'Juan Jiménez', telefono2: '88888888', nacimiento: '2012-03-09', email: '4564045640@est.mep.go.cr', adecuacion: 'no_significativa' }
+            ];
+
+            data.asignaturas = [
+                { id: 1, nombre: 'Estudios Sociales', seccionId: 1, tc: 50, tareas: 10, pruebas: 30, asistencia: 10, proyecto: 0 },
+                { id: 2, nombre: 'Cívica', seccionId: 1, tc: 50, tareas: 10, pruebas: 20, asistencia: 10, proyecto: 10 }
+            ];
+
+            data.bitacoras = [
+                { id: 1, asignaturaId: 1, fecha: '2025-04-03', contenido: 'Tema: La Segunda Guerra Mundial. Objetivo: Reconocer las causas y etapas del conflicto bélico. Actividades: Línea del tiempo en equipos, lluvia de ideas sobre consecuencias políticas.', recordatorio: '2025-04-10' }
+            ];
+
+            saveData();
+        }
+
+        // ==========================================
+        // NAVEGACIÓN
+        // ==========================================
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (sectionId === 'instituciones') renderInstituciones();
+            if (sectionId === 'secciones') renderSecciones();
+            if (sectionId === 'asignaturas') renderAsignaturas();
+            if (sectionId === 'horario') renderSchedule();
+            if (sectionId === 'asistencia') initAsistencia();
+            if (sectionId === 'bitacora') renderBitacoras();
+        }
+
+        function showEvalTab(tab) {
+            document.querySelectorAll('.eval-content').forEach(e => e.style.display = 'none');
+            document.getElementById('eval-' + tab).style.display = 'block';
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // ==========================================
+        // MODALES
+        // ==========================================
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            populateSelects();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // ==========================================
+        // DASHBOARD
+        // ==========================================
+
+        function updateDashboard() {
+            document.getElementById('totalEstudiantes').textContent = data.estudiantes.length;
+            document.getElementById('totalSecciones').textContent = data.secciones.length;
+            document.getElementById('totalAsignaturas').textContent = data.asignaturas.length;
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            });
+
+            // Calcular promedio general
+            let totalNotas = 0;
+            let count = 0;
+            Object.values(data.notas).forEach(n => {
+                if (n.valor) {
+                    totalNotas += parseFloat(n.valor);
+                    count++;
+                }
+            });
+            const promedio = count > 0 ? (totalNotas / count).toFixed(1) : 0;
+            document.getElementById('promedioGeneral').textContent = promedio + '%';
+
+            // Recordatorios
+            renderReminders();
+            renderBirthdays();
+        }
+
+        function renderReminders() {
+            const container = document.getElementById('remindersList');
+            const hoy = new Date().toISOString().split('T')[0];
+            const reminders = data.bitacoras.filter(b => b.recordatorio === hoy);
+            
+            if (reminders.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📅</div>
+                        <p>No hay recordatorios para hoy</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = reminders.map(r => `
+                <div class="attendance-item">
+                    <div>
+                        <strong>${getAsignaturaName(r.asignaturaId)}</strong>
+                        <div style="font-size: 0.9rem; color: #6c757d;">${r.contenido.substring(0, 100)}...</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderBirthdays() {
+            const container = document.getElementById('birthdaysList');
+            const mesActual = new Date().getMonth();
+            const cumpleaneros = data.estudiantes.filter(e => {
+                const mes = new Date(e.nacimiento).getMonth();
+                return mes === mesActual;
+            });
+
+            if (cumpleaneros.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🎂</div>
+                        <p>No hay cumpleaños este mes</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = cumpleaneros.map(c => `
+                <div class="attendance-item">
+                    <div class="attendance-student">
+                        <div class="student-avatar">🎉</div>
+                        <div>
+                            <strong>${c.nombre}</strong>
+                            <div style="font-size: 0.9rem; color: #6c757d;">
+                                ${new Date(c.nacimiento).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ==========================================
+        // INSTITUCIONES
+        // ==========================================
+
+        function renderInstituciones() {
+            const grid = document.getElementById('institucionesGrid');
+            if (data.instituciones.length === 0) {
+                grid.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><div class="empty-state-icon">🏫</div><p>No hay instituciones registradas</p></div>';
+                return;
+            }
+
+            grid.innerHTML = data.instituciones.map(inst => `
+                <div class="section-card">
+                    <div class="section-logo">
+                        ${inst.logo ? `<img src="${inst.logo}" alt="">` : '🏫'}
+                    </div>
+                    <h3 style="text-align: center; margin-bottom: 1rem;">${inst.nombre}</h3>
+                    <div style="font-size: 0.9rem; color: #6c757d; margin-bottom: 0.5rem;">
+                        <strong>Dirección Regional:</strong> ${inst.regional}
+                    </div>
+                    <div style="font-size: 0.9rem; color: #6c757d; margin-bottom: 0.5rem;">
+                        <strong>Circuito:</strong> ${inst.circuito}
+                    </div>
+                    <div style="font-size: 0.9rem; color: #6c757d; margin-bottom: 1rem;">
+                        <strong>Código:</strong> ${inst.codigo}
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn btn-sm btn-primary" style="flex: 1;" onclick="editarInstitucion(${inst.id})">Editar</button>
+                        <button class="btn btn-sm btn-danger" style="flex: 1;" onclick="eliminarInstitucion(${inst.id})">Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function guardarInstitucion() {
+            const inst = {
+                id: Date.now(),
+                nombre: document.getElementById('instNombre').value,
+                regional: document.getElementById('instRegional').value,
+                circuito: document.getElementById('instCircuito').value,
+                codigo: document.getElementById('instCodigo').value,
+                logo: document.getElementById('instLogo').value
+            };
+
+            if (!inst.nombre) {
+                showToast('El nombre es obligatorio', 'error');
+                return;
+            }
+
+            data.instituciones.push(inst);
+            saveData();
+            closeModal('institucionModal');
+            renderInstituciones();
+            showToast('Institución guardada correctamente');
+        }
+
+        function eliminarInstitucion(id) {
+            if (confirm('¿Está seguro de eliminar esta institución?')) {
+                data.instituciones = data.instituciones.filter(i => i.id !== id);
+                saveData();
+                renderInstituciones();
+                showToast('Institución eliminada');
+            }
+        }
+
+        // ==========================================
+        // SECCIONES
+        // ==========================================
+
+        function renderSecciones() {
+            const grid = document.getElementById('seccionesGrid');
+            if (data.secciones.length === 0) {
+                grid.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><div class="empty-state-icon">👥</div><p>No hay secciones registradas</p></div>';
+                return;
+            }
+
+            grid.innerHTML = data.secciones.map(sec => {
+                const inst = data.instituciones.find(i => i.id === sec.institucionId);
+                const countEst = data.estudiantes.filter(e => e.seccionId === sec.id).length;
+                return `
+                    <div class="section-card">
+                        <h3 style="font-size: 2rem; text-align: center; color: var(--secondary); margin-bottom: 0.5rem;">${sec.nombre}</h3>
+                        <div style="text-align: center; color: #6c757d; margin-bottom: 1rem;">
+                            ${inst ? inst.nombre : 'Sin institución'}<br>
+                            Año: ${sec.anio} | Períodos: ${sec.periodos}
+                        </div>
+                        <div style="text-align: center; margin-bottom: 1rem;">
+                            <span class="badge badge-success">${countEst} estudiantes</span>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-bottom: 0.5rem;" onclick="verEstudiantes(${sec.id})">Ver Estudiantes</button>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-sm btn-secondary" style="flex: 1;" onclick="editarSeccion(${sec.id})">Editar</button>
+                            <button class="btn btn-sm btn-danger" style="flex: 1;" onclick="eliminarSeccion(${sec.id})">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function guardarSeccion() {
+            const sec = {
+                id: Date.now(),
+                nombre: document.getElementById('secNombre').value,
+                institucionId: parseInt(document.getElementById('secInstitucion').value),
+                anio: parseInt(document.getElementById('secAnio').value),
+                periodos: parseInt(document.getElementById('secPeriodos').value)
+            };
+
+            if (!sec.nombre || !sec.institucionId) {
+                showToast('Complete todos los campos obligatorios', 'error');
+                return;
+            }
+
+            data.secciones.push(sec);
+            saveData();
+            closeModal('seccionModal');
+            renderSecciones();
+            showToast('Sección creada correctamente');
+        }
+
+        function verEstudiantes(seccionId) {
+            const sec = data.secciones.find(s => s.id === seccionId);
+            const estudiantes = data.estudiantes.filter(e => e.seccionId === seccionId);
+            
+            let html = `
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Estudiantes de ${sec.nombre}</h3>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-success" onclick="exportarPlantilla(${seccionId})">📥 Plantilla Excel</button>
+                            <button class="btn btn-primary" onclick="openModal('estudianteModal'); document.getElementById('estId').value=''; document.getElementById('estModalTitle').textContent='Nuevo Estudiante';">+ Agregar Estudiante</button>
+                        </div>
+                    </div>
+            `;
+
+            if (estudiantes.length === 0) {
+                html += `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🎓</div>
+                        <p>No hay estudiantes registrados en esta sección</p>
+                    </div>
+                </div>`;
+            } else {
+                html += `
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cédula</th>
+                                    <th>Nombre</th>
+                                    <th>Encargado 1</th>
+                                    <th>Teléfono</th>
+                                    <th>Cumpleaños</th>
+                                    <th>Adecuación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${estudiantes.map(e => `
+                                    <tr>
+                                        <td>${e.cedula}</td>
+                                        <td>${e.nombre}</td>
+                                        <td>${e.encargado1}</td>
+                                        <td>${e.telefono1}</td>
+                                        <td>${e.nacimiento}</td>
+                                        <td><span class="badge ${e.adecuacion === 'ninguna' ? 'badge-success' : 'badge-warning'}">${e.adecuacion}</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" onclick="editarEstudiante(${e.id})">Editar</button>
+                                            <button class="btn btn-sm btn-danger" onclick="eliminarEstudiante(${e.id})">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>`;
+            }
+
+            // Reemplazar temporalmente el contenido
+            const container = document.createElement('div');
+            container.innerHTML = html;
+            container.id = 'estudiantesView';
+            
+            const seccionesSection = document.getElementById('secciones');
+            seccionesSection.appendChild(container);
+            
+            // Ocultar grid original
+            document.getElementById('seccionesGrid').style.display = 'none';
+            
+            // Agregar botón volver
+            const backBtn = document.createElement('button');
+            backBtn.className = 'btn btn-outline';
+            backBtn.innerHTML = '← Volver a Secciones';
+            backBtn.onclick = () => {
+                container.remove();
+                document.getElementById('seccionesGrid').style.display = 'grid';
+            };
+            container.querySelector('.card-header').insertBefore(backBtn, container.querySelector('.card-header').firstChild);
+        }
+
+        // ==========================================
+        // ESTUDIANTES
+        // ==========================================
+
+        function guardarEstudiante() {
+            const id = document.getElementById('estId').value;
+            const est = {
+                id: id ? parseInt(id) : Date.now(),
+                cedula: document.getElementById('estCedula').value,
+                nombre: document.getElementById('estNombre').value,
+                seccionId: parseInt(document.querySelector('#secciones .card-header button:last-child').getAttribute('onclick').match(/\d+/)[0]),
+                encargado1: document.getElementById('estEnc1').value,
+                telefono1: document.getElementById('estTel1').value,
+                encargado2: document.getElementById('estEnc2').value,
+                telefono2: document.getElementById('estTel2').value,
+                nacimiento: document.getElementById('estNacimiento').value,
+                email: document.getElementById('estEmail').value,
+                adecuacion: document.getElementById('estAdecuacion').value
+            };
+
+            if (!est.cedula || !est.nombre) {
+                showToast('Cédula y nombre son obligatorios', 'error');
+                return;
+            }
+
+            if (id) {
+                const idx = data.estudiantes.findIndex(e => e.id === parseInt(id));
+                data.estudiantes[idx] = est;
+            } else {
+                data.estudiantes.push(est);
+            }
+
+            saveData();
+            closeModal('estudianteModal');
+            showToast('Estudiante guardado correctamente');
+            
+            // Refresh view
+            verEstudiantes(est.seccionId);
+        }
+
+        function editarEstudiante(id) {
+            const e = data.estudiantes.find(est => est.id === id);
+            document.getElementById('estId').value = e.id;
+            document.getElementById('estCedula').value = e.cedula;
+            document.getElementById('estNombre').value = e.nombre;
+            document.getElementById('estEnc1').value = e.encargado1;
+            document.getElementById('estTel1').value = e.telefono1;
+            document.getElementById('estEnc2').value = e.encargado2;
+            document.getElementById('estTel2').value = e.telefono2;
+            document.getElementById('estNacimiento').value = e.nacimiento;
+            document.getElementById('estEmail').value = e.email;
+            document.getElementById('estAdecuacion').value = e.adecuacion;
+            document.getElementById('estModalTitle').textContent = 'Editar Estudiante';
+            openModal('estudianteModal');
+        }
+
+        function eliminarEstudiante(id) {
+            if (confirm('¿Eliminar este estudiante?')) {
+                data.estudiantes = data.estudiantes.filter(e => e.id !== id);
+                saveData();
+                showToast('Estudiante eliminado');
+                // Refresh
+                const secId = parseInt(document.querySelector('#secciones .card-header button:last-child').getAttribute('onclick').match(/\d+/)[0]);
+                verEstudiantes(secId);
+            }
+        }
+
+        // ==========================================
+        // ASIGNATURAS
+        // ==========================================
+
+        function renderAsignaturas() {
+            const tbody = document.getElementById('asignaturasBody');
+            if (data.asignaturas.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" style="text-align: center;">No hay asignaturas registradas</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.asignaturas.map(a => {
+                const sec = data.secciones.find(s => s.id === a.seccionId);
+                const inst = sec ? data.instituciones.find(i => i.id === sec.institucionId) : null;
+                return `
+                    <tr>
+                        <td><strong>${a.nombre}</strong></td>
+                        <td>${sec ? sec.nombre : '-'}</td>
+                        <td>${sec ? sec.anio : '-'}</td>
+                        <td>${inst ? inst.nombre : '-'}</td>
+                        <td>${a.tc}%</td>
+                        <td>${a.tareas}%</td>
+                        <td>${a.pruebas}%</td>
+                        <td>${a.asistencia}%</td>
+                        <td>${a.proyecto}%</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" onclick="editarAsignatura(${a.id})">Editar</button>
+                            <button class="btn btn-sm btn-danger" onclick="eliminarAsignatura(${a.id})">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function guardarAsignatura() {
+            const total = parseInt(document.getElementById('asigTC').value) + 
+                         parseInt(document.getElementById('asigTareas').value) + 
+                         parseInt(document.getElementById('asigPruebas').value) + 
+                         parseInt(document.getElementById('asigAsistencia').value) + 
+                         parseInt(document.getElementById('asigProyecto').value);
+
+            if (total !== 100) {
+                showToast(`La suma de porcentajes debe ser 100%. Actual: ${total}%`, 'error');
+                return;
+            }
+
+            const asig = {
+                id: Date.now(),
+                nombre: document.getElementById('asigNombre').value,
+                seccionId: parseInt(document.getElementById('asigSeccion').value),
+                tc: parseInt(document.getElementById('asigTC').value),
+                tareas: parseInt(document.getElementById('asigTareas').value),
+                pruebas: parseInt(document.getElementById('asigPruebas').value),
+                asistencia: parseInt(document.getElementById('asigAsistencia').value),
+                proyecto: parseInt(document.getElementById('asigProyecto').value)
+            };
+
+            data.asignaturas.push(asig);
+            saveData();
+            closeModal('asignaturaModal');
+            renderAsignaturas();
+            showToast('Asignatura creada correctamente');
+        }
+
+        // ==========================================
+        // HORARIO
+        // ==========================================
+
+        function renderSchedule() {
+            const dias = ['', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+            const container = document.getElementById('scheduleContainer');
+            const maxLecc = parseInt(document.getElementById('maxLecciones').value) || 7;
+
+            let html = '';
+            
+            // Headers
+            dias.forEach((dia, idx) => {
+                html += `<div class="schedule-cell header">${dia || 'Lección'}</div>`;
+            });
+
+            // Grid
+            for (let leccion = 1; leccion <= maxLecc; leccion++) {
+                html += `<div class="schedule-cell header">${leccion}</div>`;
+                for (let dia = 1; dia <= 5; dia++) {
+                    const asig = data.horario.find(h => h.dia === dia && h.leccion === leccion);
+                    if (asig) {
+                        const a = data.asignaturas.find(as => as.id === asig.asignaturaId);
+                        html += `
+                            <div class="schedule-cell" onclick="editScheduleCell(${dia}, ${leccion})">
+                                <div class="schedule-lesson" style="background: ${asig.color || 'var(--secondary)'};">
+                                    ${a ? a.nombre.substring(0, 20) : 'Clase'}
+                                    <br><small>${a ? data.secciones.find(s => s.id === a.seccionId)?.nombre : ''}</small>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        html += `<div class="schedule-cell" onclick="editScheduleCell(${dia}, ${leccion})" style="cursor: pointer; color: #ccc;">+</div>`;
+                    }
+                }
+            }
+
+            container.innerHTML = html;
+        }
+
+        function editScheduleCell(dia, leccion) {
+            const asignaturas = data.asignaturas.map(a => {
+                const sec = data.secciones.find(s => s.id === a.seccionId);
+                return `<option value="${a.id}">${a.nombre} - ${sec ? sec.nombre : ''}</option>`;
+            }).join('');
+
+            const colores = ['#2a9d8f', '#e9c46a', '#e76f51', '#f4a261', '#264653', '#2b2d42', '#8d99ae'];
+
+            const modal = document.createElement('div');
+            modal.className = 'modal active';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 400px;">
+                    <div class="modal-header">
+                        <h3>Configurar Lección</h3>
+                        <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Asignatura</label>
+                            <select id="schedAsig" class="form-control">
+                                <option value="">Libre</option>
+                                ${asignaturas}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Color</label>
+                            <div class="color-picker">
+                                ${colores.map(c => `<div class="color-option" style="background: ${c}" onclick="selectColor(this, '${c}')"></div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline" onclick="this.closest('.modal').remove()">Cancelar</button>
+                        <button class="btn btn-danger" onclick="removeSchedule(${dia}, ${leccion}); this.closest('.modal').remove();">Eliminar</button>
+                        <button class="btn btn-primary" onclick="saveScheduleCell(${dia}, ${leccion}, this)">Guardar</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        let selectedColor = '#2a9d8f';
+        function selectColor(el, color) {
+            document.querySelectorAll('.color-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedColor = color;
+        }
+
+        function saveScheduleCell(dia, leccion, btn) {
+            const asigId = document.getElementById('schedAsig').value;
+            if (!asigId) return;
+
+            // Remove existing
+            data.horario = data.horario.filter(h => !(h.dia === dia && h.leccion === leccion));
+            
+            data.horario.push({
+                dia, leccion, asignaturaId: parseInt(asigId), color: selectedColor
+            });
+
+            saveData();
+            renderSchedule();
+            btn.closest('.modal').remove();
+            showToast('Horario actualizado');
+        }
+
+        function removeSchedule(dia, leccion) {
+            data.horario = data.horario.filter(h => !(h.dia === dia && h.leccion === leccion));
+            saveData();
+            renderSchedule();
+            showToast('Lección eliminada');
+        }
+
+        function saveSchedule() {
+            showToast('Horario guardado correctamente');
+        }
+
+        // ==========================================
+        // ASISTENCIA
+        // ==========================================
+
+        function initAsistencia() {
+            const selSeccion = document.getElementById('asistenciaSeccion');
+            selSeccion.innerHTML = '<option value="">Seleccionar Sección</option>' + 
+                data.secciones.map(s => `<option value="${s.id}">${s.nombre}</option>`).join('');
+            
+            document.getElementById('asistenciaFecha').value = new Date().toISOString().split('T')[0];
+            
+            // Poblar lecciones
+            const selLeccion = document.getElementById('asistenciaLeccion');
+            selLeccion.innerHTML = '<option value="">Lección</option>';
+            for (let i = 1; i <= 7; i++) {
+                selLeccion.innerHTML += `<option value="${i}">Lección ${i}</option>`;
+            }
+        }
+
+        function loadAsistenciaEstudiantes() {
+            const seccionId = document.getElementById('asistenciaSeccion').value;
+            const container = document.getElementById('asistenciaContainer');
+            
+            if (!seccionId) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">👥</div><p>Seleccione una sección</p></div>';
+                return;
+            }
+
+            // Actualizar asignaturas según sección
+            const selAsig = document.getElementById('asistenciaAsignatura');
+            const asigs = data.asignaturas.filter(a => a.seccionId == seccionId);
+            selAsig.innerHTML = '<option value="">Seleccionar Asignatura</option>' +
+                asigs.map(a => `<option value="${a.id}">${a.nombre}</option>`).join('');
+
+            const estudiantes = data.estudiantes.filter(e => e.seccionId == seccionId);
+            
+            container.innerHTML = estudiantes.map(e => `
+                <div class="attendance-item" data-estid="${e.id}">
+                    <div class="attendance-student">
+                        <div class="student-avatar">${e.nombre.charAt(0)}</div>
+                        <div>
+                            <strong>${e.nombre}</strong>
+                            <div style="font-size: 0.85rem; color: #6c757d;">${e.cedula}</div>
+                        </div>
+                    </div>
+                    <div class="attendance-status">
+                        <button class="status-btn active present" onclick="setAttendance(this, ${e.id}, 'presente')">Presente</button>
+                        <button class="status-btn absent-j" onclick="setAttendance(this, ${e.id}, 'ausente_j')">A.Just</button>
+                        <button class="status-btn absent-i" onclick="setAttendance(this, ${e.id}, 'ausente_i')">A.Injust</button>
+                        <button class="status-btn late" onclick="setAttendance(this, ${e.id}, 'tarde')">Tarde</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setAttendance(btn, estId, estado) {
+            // Remover active de hermanos
+            btn.parentElement.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            btn.closest('.attendance-item').dataset.estado = estado;
+        }
+
+        function guardarAsistencia() {
+            const seccionId = document.getElementById('asistenciaSeccion').value;
+            const asignaturaId = document.getElementById('asistenciaAsignatura').value;
+            const fecha = document.getElementById('asistenciaFecha').value;
+            const leccion = document.getElementById('asistenciaLeccion').value;
+
+            if (!seccionId || !asignaturaId || !fecha || !leccion) {
+                showToast('Complete todos los campos', 'error');
+                return;
+            }
+
+            const items = document.querySelectorAll('.attendance-item');
+            items.forEach(item => {
+                const estId = item.dataset.estid;
+                const estado = item.dataset.estado || 'presente';
+                
+                // Eliminar registro existente para esta fecha/lección/estudiante
+                data.asistencia = data.asistencia.filter(a => 
+                    !(a.estudianteId == estId && a.fecha === fecha && a.leccion == leccion)
+                );
+
+                data.asistencia.push({
+                    id: Date.now() + Math.random(),
+                    estudianteId: parseInt(estId),
+                    asignaturaId: parseInt(asignaturaId),
+                    fecha,
+                    leccion: parseInt(leccion),
+                    estado
+                });
+            });
+
+            saveData();
+            showToast(`Asistencia guardada: ${items.length} estudiantes registrados`);
+        }
+
+        // ==========================================
+        // BITÁCORA
+        // ==========================================
+
+        function renderBitacoras() {
+            const container = document.getElementById('bitacoraList');
+            if (data.bitacoras.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📖</div><p>No hay registros en la bitácora</p></div>';
+                return;
+            }
+
+            container.innerHTML = data.bitacoras.sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).map(b => {
+                const asig = data.asignaturas.find(a => a.id === b.asignaturaId);
+                return `
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <div>
+                                <span class="badge badge-success">${asig ? asig.nombre : 'General'}</span>
+                                <div style="font-size: 0.9rem; color: #6c757d; margin-top: 0.25rem;">
+                                    ${new Date(b.fecha).toLocaleDateString('es-ES')}
+                                    ${b.recordatorio ? `| Recordatorio: ${new Date(b.recordatorio).toLocaleDateString('es-ES')}` : ''}
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-primary" onclick="editarBitacora(${b.id})">Editar</button>
+                                <button class="btn btn-sm btn-danger" onclick="eliminarBitacora(${b.id})">Eliminar</button>
+                            </div>
+                        </div>
+                        <p style="white-space: pre-wrap;">${b.contenido}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function guardarBitacora() {
+            const bit = {
+                id: Date.now(),
+                asignaturaId: parseInt(document.getElementById('bitAsignatura').value),
+                fecha: document.getElementById('bitFecha').value,
+                contenido: document.getElementById('bitContenido').value,
+                recordatorio: document.getElementById('bitRecordatorio').value || null
+            };
+
+            data.bitacoras.push(bit);
+            saveData();
+            closeModal('bitacoraModal');
+            renderBitacoras();
+            showToast('Bitácora guardada');
+        }
+
+        // ==========================================
+        // REPORTES
+        // ==========================================
+
+        function generarReporte() {
+            const tipo = document.getElementById('reporteTipo').value;
+            const preview = document.getElementById('reportPreview');
+            
+            // Simulación de reporte
+            const inst = data.instituciones[0] || { nombre: 'Institución' };
+            const fecha = new Date().toLocaleDateString('es-ES');
+            
+            let contenido = '';
+            
+            if (tipo === 'asistencia') {
+                contenido = generarReporteAsistencia();
+            } else {
+                contenido = generarReporteNotas(tipo);
+            }
+
+            preview.innerHTML = `
+                <div class="report-header">
+                    <div class="report-logo">📚</div>
+                    <h2>MINISTERIO DE EDUCACIÓN PÚBLICA</h2>
+                    <h3>${inst.nombre}</h3>
+                    <p>Dirección Regional: ${inst.regional || 'N/A'} | Circuito: ${inst.circuito || 'N/A'}</p>
+                    <hr style="margin: 1rem 0;">
+                    <h2>${tipo === 'asistencia' ? 'REPORTE DE ASISTENCIA' : 'REPORTE DE CALIFICACIONES'}</h2>
+                    <p>Fecha: ${fecha}</p>
+                </div>
+                ${contenido}
+            `;
+        }
+
+        function generarReporteAsistencia() {
+            const estudiantes = data.estudiantes.slice(0, 5); // Demo con primeros 5
+            return `
+                <table style="width: 100%; border-collapse: collapse; margin-top: 2rem;">
+                    <thead>
+                        <tr style="background: #163333; color: white;">
+                            <th style="padding: 0.75rem; border: 1px solid #ddd;">Estudiante</th>
+                            <th style="padding: 0.75rem; border: 1px solid #ddd;">Lecciones Presentes</th>
+                            <th style="padding: 0.75rem; border: 1px solid #ddd;">Ausencias Just.</th>
+                            <th style="padding: 0.75rem; border: 1px solid #ddd;">Ausencias Injust.</th>
+                            <th style="padding: 0.75rem; border: 1px solid #ddd;">Tardanzas</th>
+                            <th style="padding: 0.75rem; border: 1px solid #ddd;">% Asistencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${estudiantes.map(e => {
+                            const asist = data.asistencia.filter(a => a.estudianteId === e.id);
+                            const presentes = asist.filter(a => a.estado === 'presente').length;
+                            const aj = asist.filter(a => a.estado === 'ausente_j').length;
+                            const ai = asist.filter(a => a.estado === 'ausente_i').length;
+                            const tard = asist.filter(a => a.estado === 'tarde').length;
+                            const total = asist.length || 1;
+                            const pct = ((presentes / total) * 100).toFixed(1);
+                            return `
+                                <tr>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd;">${e.nombre}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center;">${presentes}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center;">${aj}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center;">${ai}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center;">${tard}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; font-weight: bold;">${pct}%</td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+                <div style="margin-top: 2rem; text-align: right;">
+                    <p><strong>Docente:</strong> ${data.configuracion.docente.nombre || '_____________________'}</p>
+                    <p style="margin-top: 2rem;">_____________________</p>
+                    <p>Firma</p>
+                </div>
+            `;
+        }
+
+        function generarReporteNotas(tipo) {
+            return `
+                <div style="margin-top: 2rem;">
+                    <h3>I Período</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                        <thead>
+                            <tr style="background: #163333; color: white;">
+                                <th style="padding: 0.75rem; border: 1px solid #ddd;">Estudiante</th>
+                                <th style="padding: 0.75rem; border: 1px solid #ddd;">T.Cotidiano (50%)</th>
+                                <th style="padding: 0.75rem; border: 1px solid #ddd;">Tareas (10%)</th>
+                                <th style="padding: 0.75rem; border: 1px solid #ddd;">Pruebas (30%)</th>
+                                <th style="padding: 0.75rem; border: 1px solid #ddd;">Asistencia (10%)</th>
+                                <th style="padding: 0.75rem; border: 1px solid #ddd;">Nota Final</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.estudiantes.slice(0, 5).map(e => `
+                                <tr>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd;">${e.nombre}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center;">${(Math.random() * 10 + 40).toFixed(0)}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center;">${(Math.random() * 2 + 8).toFixed(1)}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center;">${(Math.random() * 20 + 20).toFixed(0)}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center;">${(Math.random() * 2 + 8).toFixed(1)}</td>
+                                    <td style="padding: 0.75rem; border: 1px solid #ddd; text-align: center; font-weight: bold;">${(Math.random() * 20 + 75).toFixed(0)}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function exportarPDF() {
+            window.print();
+        }
+
+        function exportarWord() {
+            const content = document.getElementById('reportPreview').innerHTML;
+            const blob = new Blob([`
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
+                <head><meta charset='utf-8'><title>Reporte</title></head>
+                <body>${content}</body>
+                </html>
+            `], { type: 'application/msword' });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'reporte.doc';
+            a.click();
+        }
+
+        function exportarExcel() {
+            // Simulación simple de CSV
+            let csv = 'Estudiante,Nota1,Nota2,Nota3\n';
+            data.estudiantes.forEach(e => {
+                csv += `${e.nombre},${Math.random()*100},${Math.random()*100},${Math.random()*100}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'reporte.csv';
+            a.click();
+        }
+
+        // ==========================================
+        // CONFIGURACIÓN Y UTILIDADES
+        // ==========================================
+
+        function guardarConfiguracion() {
+            data.configuracion.docente.nombre = document.getElementById('docenteNombre').value;
+            data.configuracion.docente.email = document.getElementById('docenteEmail').value;
+            saveData();
+            showToast('Configuración guardada');
+        }
+
+        function exportarDatos() {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `idonet_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            showToast('Backup exportado correctamente');
+        }
+
+        function importarDatos(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    data = imported;
+                    saveData();
+                    renderAll();
+                    showToast('Datos importados correctamente');
+                } catch (err) {
+                    showToast('Error al importar archivo', 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // ==========================================
+        // HELPERS
+        // ==========================================
+
+        function populateSelects() {
+            // Poblar selects de instituciones
+            const instSelects = document.querySelectorAll('#secInstitucion, #reporteInstitucion');
+            instSelects.forEach(sel => {
+                if (sel) sel.innerHTML = data.instituciones.map(i => `<option value="${i.id}">${i.nombre}</option>`).join('');
+            });
+
+            // Poblar selects de secciones
+            const secSelects = document.querySelectorAll('#asigSeccion, #reporteSeccion, #bitAsignatura');
+            secSelects.forEach(sel => {
+                if (sel) sel.innerHTML = '<option value="">Seleccionar...</option>' + 
+                    data.secciones.map(s => `<option value="${s.id}">${s.nombre}</option>`).join('');
+            });
+        }
+
+        function getAsignaturaName(id) {
+            const a = data.asignaturas.find(as => as.id === id);
+            return a ? a.nombre : 'General';
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type === 'error' ? 'error' : ''}`;
+            toast.innerHTML = `
+                <span>${type === 'error' ? '❌' : '✅'}</span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        function renderAll() {
+            renderInstituciones();
+            renderSecciones();
+            renderAsignaturas();
+            renderBitacoras();
+            updateDashboard();
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            document.getElementById('bitFecha').value = new Date().toISOString().split('T')[0];
+        });
+
+        // Cerrar modales al hacer clic fuera
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Service Worker para PWA (offline)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:text/javascript,' + encodeURIComponent(`
+                self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+                self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+                self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
+            `)).catch(() => console.log('SW no registrado'));
+        }
+    </script>
+</body>
+</html>
