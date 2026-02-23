@@ -4,43 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idonet Premium - Sistema de Gestión Académica</title>
-    <meta name="description" content="Sistema de Gestión Académica compatible MEP Costa Rica, PNFT y SEA">
-    <meta name="theme-color" content="#2563eb">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #3b82f6;
-            --secondary: #64748b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --info: #06b6d4;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --border: #e2e8f0;
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --radius: 8px;
-            --radius-lg: 12px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --border: #e2e8f0;
         }
 
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* ==========================================
+           LAYOUT PRINCIPAL
+        ========================================== */
         .app-container {
             display: flex;
             min-height: 100vh;
@@ -53,56 +44,33 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
-            transition: transform 0.3s ease;
-            z-index: 1000;
         }
 
         .sidebar-header {
             padding: 1.5rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
         }
 
         .logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 1.5rem;
             font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .sidebar-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .sidebar-title span {
-            color: var(--primary-light);
+            color: var(--primary);
         }
 
         .user-info {
             padding: 1rem 1.5rem;
             background: rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .user-role {
             font-size: 0.75rem;
+            color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--primary-light);
-            margin-bottom: 0.25rem;
         }
 
         .user-name {
-            font-weight: 500;
             font-size: 0.95rem;
+            margin-top: 0.25rem;
         }
 
         .nav-menu {
@@ -117,25 +85,20 @@
             padding: 0 1.5rem;
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
             color: rgba(255,255,255,0.5);
             margin-bottom: 0.5rem;
         }
 
         .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1.5rem;
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-            background: none;
+            display: block;
             width: 100%;
-            font-size: 0.9rem;
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.8);
             text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
 
         .nav-item:hover {
@@ -146,21 +109,11 @@
         .nav-item.active {
             background: var(--primary);
             color: white;
-            border-right: 3px solid var(--primary-light);
-        }
-
-        .nav-icon {
-            width: 20px;
-            height: 20px;
-            opacity: 0.7;
         }
 
         .main-content {
             flex: 1;
             margin-left: 280px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         .top-bar {
@@ -172,81 +125,25 @@
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 100;
         }
 
         .page-title {
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--dark);
-        }
-
-        .top-actions {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius);
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid transparent;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--dark);
-            border-color: var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--light);
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-
-        .btn-warning {
-            background: var(--warning);
-            color: white;
         }
 
         .content-area {
-            flex: 1;
             padding: 2rem;
-            overflow-y: auto;
         }
 
+        /* ==========================================
+           COMPONENTES
+        ========================================== */
         .card {
             background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             margin-bottom: 1.5rem;
-            overflow: hidden;
         }
 
         .card-header {
@@ -260,7 +157,6 @@
         .card-title {
             font-size: 1.125rem;
             font-weight: 600;
-            color: var(--dark);
         }
 
         .card-body {
@@ -272,23 +168,19 @@
             gap: 1.5rem;
         }
 
-        .grid-2 {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .grid-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
         .grid-4 {
             grid-template-columns: repeat(4, 1fr);
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .stat-card {
             background: white;
             padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -297,22 +189,21 @@
         .stat-icon {
             width: 48px;
             height: 48px;
-            border-radius: var(--radius);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
         }
 
-        .stat-icon.blue { background: rgba(37, 99, 235, 0.1); color: var(--primary); }
-        .stat-icon.green { background: rgba(16, 185, 129, 0.1); color: var(--success); }
-        .stat-icon.orange { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
-        .stat-icon.red { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+        .stat-icon.blue { background: rgba(37,99,235,0.1); color: var(--primary); }
+        .stat-icon.green { background: rgba(16,185,129,0.1); color: var(--success); }
+        .stat-icon.orange { background: rgba(245,158,11,0.1); color: var(--warning); }
+        .stat-icon.red { background: rgba(239,68,68,0.1); color: var(--danger); }
 
         .stat-content h3 {
             font-size: 1.75rem;
             font-weight: 700;
-            color: var(--dark);
             line-height: 1;
         }
 
@@ -320,6 +211,34 @@
             font-size: 0.875rem;
             color: var(--secondary);
             margin-top: 0.25rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+            background: white;
+            border-color: var(--border);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
         }
 
         .form-group {
@@ -330,48 +249,27 @@
             display: block;
             font-size: 0.875rem;
             font-weight: 500;
-            color: var(--dark);
             margin-bottom: 0.5rem;
-        }
-
-        .form-label.required::after {
-            content: ' *';
-            color: var(--danger);
         }
 
         .form-control {
             width: 100%;
             padding: 0.625rem 0.875rem;
             border: 1px solid var(--border);
-            border-radius: var(--radius);
+            border-radius: 6px;
             font-size: 0.875rem;
-            transition: all 0.2s;
             font-family: inherit;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .form-control:disabled {
-            background: var(--light);
-            cursor: not-allowed;
-        }
-
-        select.form-control {
-            cursor: pointer;
         }
 
         .form-row {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-        }
-
-        .table-container {
-            overflow-x: auto;
         }
 
         .table {
@@ -386,30 +284,12 @@
             text-align: left;
             font-weight: 600;
             color: var(--secondary);
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
             border-bottom: 1px solid var(--border);
         }
 
         .table td {
             padding: 1rem;
             border-bottom: 1px solid var(--border);
-            vertical-align: middle;
-        }
-
-        .table tr:hover td {
-            background: var(--light);
-        }
-
-        .table .actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn-sm {
-            padding: 0.375rem 0.75rem;
-            font-size: 0.75rem;
         }
 
         .badge {
@@ -422,23 +302,18 @@
         }
 
         .badge-success {
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(16,185,129,0.1);
             color: var(--success);
         }
 
         .badge-warning {
-            background: rgba(245, 158, 11, 0.1);
+            background: rgba(245,158,11,0.1);
             color: var(--warning);
         }
 
-        .badge-danger {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-
         .badge-info {
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--info);
+            background: rgba(6,182,212,0.1);
+            color: #0891b2;
         }
 
         .modal-overlay {
@@ -464,17 +339,11 @@
 
         .modal {
             background: white;
-            border-radius: var(--radius-lg);
+            border-radius: 12px;
             width: 90%;
-            max-width: 600px;
+            max-width: 500px;
             max-height: 90vh;
             overflow: hidden;
-            transform: scale(0.95);
-            transition: transform 0.3s;
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1);
         }
 
         .modal-header {
@@ -496,22 +365,12 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--secondary);
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius);
-        }
-
-        .modal-close:hover {
-            background: var(--light);
         }
 
         .modal-body {
             padding: 1.5rem;
-            overflow-y: auto;
             max-height: 60vh;
+            overflow-y: auto;
         }
 
         .modal-footer {
@@ -522,115 +381,39 @@
             gap: 0.75rem;
         }
 
-        .alert {
-            padding: 1rem 1.25rem;
-            border-radius: var(--radius);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+        .toast-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 3000;
         }
 
-        .alert-success {
-            background: rgba(16, 185, 129, 0.1);
-            color: #065f46;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .alert-danger {
-            background: rgba(239, 68, 68, 0.1);
-            color: #991b1b;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        .alert-warning {
-            background: rgba(245, 158, 11, 0.1);
-            color: #92400e;
-            border: 1px solid rgba(245, 158, 11, 0.2);
-        }
-
-        .login-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            padding: 2rem;
-        }
-
-        .login-box {
+        .toast {
             background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            width: 100%;
-            max-width: 420px;
-            overflow: hidden;
-        }
-
-        .login-header {
-            background: var(--primary);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .login-header .logo {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1rem;
-            font-size: 2rem;
-        }
-
-        .login-header h1 {
-            font-size: 1.5rem;
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
             margin-bottom: 0.5rem;
+            border-left: 4px solid;
         }
 
-        .login-header p {
-            opacity: 0.9;
-            font-size: 0.875rem;
+        .toast.success { border-left-color: var(--success); }
+        .toast.error { border-left-color: var(--danger); }
+        .toast.warning { border-left-color: var(--warning); }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        .login-body {
-            padding: 2rem;
-        }
-
-        .chart-container {
-            height: 300px;
-            background: var(--light);
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary);
-        }
-
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            
-            .sidebar.open {
-                transform: translateX(0);
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-            
-            .grid-4 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .hidden {
@@ -640,337 +423,119 @@
         .text-center {
             text-align: center;
         }
-
-        .d-flex {
-            display: flex;
-        }
-
-        .justify-between {
-            justify-content: space-between;
-        }
-
-        .items-center {
-            align-items: center;
-        }
-
-        .gap-2 {
-            gap: 0.5rem;
-        }
-
-        .gap-4 {
-            gap: 1rem;
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 0.5rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .toast-container {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            z-index: 3000;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .toast {
-            background: white;
-            padding: 1rem 1.25rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            min-width: 300px;
-            animation: slideIn 0.3s ease;
-        }
-
-        .toast.success {
-            border-left: 4px solid var(--success);
-        }
-
-        .toast.error {
-            border-left: 4px solid var(--danger);
-        }
-
-        .toast.warning {
-            border-left: 4px solid var(--warning);
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .toggle {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 24px;
-        }
-
-        .toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--border);
-            transition: .4s;
-            border-radius: 24px;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .toggle-slider {
-            background-color: var(--primary);
-        }
-
-        input:checked + .toggle-slider:before {
-            transform: translateX(24px);
-        }
-
-        @media print {
-            .sidebar, .top-bar, .btn {
-                display: none !important;
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-            
-            .card {
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Login Screen (oculto por defecto) -->
-    <div id="loginScreen" class="login-container hidden">
-        <div class="login-box">
-            <div class="login-header">
-                <div class="logo">I</div>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="app-container" style="justify-content: center; background: linear-gradient(135deg, #1e293b, #334155);">
+        <div style="background: white; border-radius: 12px; width: 100%; max-width: 400px;">
+            <div style="background: var(--primary); color: white; padding: 2rem; text-align: center; border-radius: 12px 12px 0 0;">
                 <h1>Idonet Premium</h1>
-                <p>Sistema de Gestión Académica MEP Costa Rica</p>
+                <p style="opacity: 0.9;">MEP Costa Rica</p>
             </div>
-            <div class="login-body">
+            <div style="padding: 2rem;">
                 <form id="loginForm">
                     <div class="form-group">
                         <label class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="loginEmail" placeholder="usuario@institucion.edu.cr">
+                        <input type="email" class="form-control" id="loginEmail" value="admin@demo.com">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="loginPassword" placeholder="••••••••">
+                        <input type="password" class="form-control" id="loginPassword" value="demo123">
                     </div>
-                    <div class="form-group">
-                        <label class="toggle">
-                            <input type="checkbox" id="rememberMe">
-                            <span class="toggle-slider"></span>
-                        </label>
-                        <span style="margin-left: 0.5rem; font-size: 0.875rem;">Recordar sesión</span>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                        Iniciar Sesión
-                    </button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Iniciar Sesión</button>
                 </form>
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <a href="#" onclick="window.app.showRegister()" style="color: var(--primary); text-decoration: none;">¿No tiene cuenta? Regístrese aquí</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Register Screen (oculto por defecto) -->
-    <div id="registerScreen" class="login-container hidden">
-        <div class="login-box">
-            <div class="login-header">
-                <div class="logo">I</div>
+    <!-- Register Screen -->
+    <div id="registerScreen" class="app-container hidden" style="justify-content: center; background: linear-gradient(135deg, #1e293b, #334155);">
+        <div style="background: white; border-radius: 12px; width: 100%; max-width: 500px;">
+            <div style="background: var(--primary); color: white; padding: 2rem; text-align: center; border-radius: 12px 12px 0 0;">
                 <h1>Registro de Usuario</h1>
-                <p>Idonet Premium - MEP Costa Rica</p>
             </div>
-            <div class="login-body">
+            <div style="padding: 2rem;">
                 <form id="registerForm">
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label required">Nombre</label>
+                            <label class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="regNombre">
                         </div>
                         <div class="form-group">
-                            <label class="form-label required">Apellidos</label>
+                            <label class="form-label">Apellidos</label>
                             <input type="text" class="form-control" id="regApellidos">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label required">Correo Electrónico</label>
+                        <label class="form-label">Correo</label>
                         <input type="email" class="form-control" id="regEmail">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label required">Contraseña</label>
-                            <input type="password" class="form-control" id="regPassword" minlength="6">
+                            <label class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="regPassword">
                         </div>
                         <div class="form-group">
-                            <label class="form-label required">Confirmar Contraseña</label>
+                            <label class="form-label">Confirmar</label>
                             <input type="password" class="form-control" id="regPasswordConfirm">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label required">Rol</label>
+                        <label class="form-label">Rol</label>
                         <select class="form-control" id="regRol">
-                            <option value="">Seleccione...</option>
-                            <option value="docente">Docente</option>
-                            <option value="coordinador">Coordinador</option>
-                            <option value="director">Director</option>
                             <option value="admin">Administrador</option>
+                            <option value="docente">Docente</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                        Crear Cuenta
-                    </button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Crear Cuenta</button>
                 </form>
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <a href="#" onclick="window.app.showLogin()" style="color: var(--primary); text-decoration: none;">← Volver</a>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Main App -->
-    <div id="mainApp" class="app-container">
+    <div id="mainApp" class="app-container hidden">
         <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
+        <aside class="sidebar">
             <div class="sidebar-header">
-                <div class="logo">I</div>
-                <div class="sidebar-title">Idonet <span>Premium</span></div>
+                <div class="logo">Idonet Premium</div>
             </div>
-            
             <div class="user-info">
-                <div class="user-role" id="userRoleDisplay">Cargando...</div>
+                <div class="user-role" id="userRoleDisplay">Admin</div>
                 <div class="user-name" id="userNameDisplay">Cargando...</div>
             </div>
-
             <nav class="nav-menu">
                 <div class="nav-section">
-                    <div class="nav-section-title">Principal</div>
-                    <button class="nav-item active" onclick="app.navigate('dashboard')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-                        </svg>
-                        Dashboard
-                    </button>
-                    <button class="nav-item" onclick="app.navigate('configuracion')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                        Configuración
-                    </button>
+                    <div class="nav-section-title">PRINCIPAL</div>
+                    <button class="nav-item active" onclick="app.navigate('dashboard')">📊 Dashboard</button>
+                    <button class="nav-item" onclick="app.navigate('configuracion')">⚙️ Configuración</button>
                 </div>
-
                 <div class="nav-section">
-                    <div class="nav-section-title">Gestión Académica</div>
-                    <button class="nav-item" onclick="app.navigate('grupos')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                        </svg>
-                        Grupos y Estudiantes
-                    </button>
-                    <button class="nav-item" onclick="app.navigate('evaluacion')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                        </svg>
-                        Evaluación General
-                    </button>
-                    <button class="nav-item" onclick="app.navigate('pnft')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        Prueba Ejecución PNFT
-                    </button>
-                    <button class="nav-item" onclick="app.navigate('nee')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                        </svg>
-                        Módulo NEE
-                    </button>
+                    <div class="nav-section-title">GESTIÓN ACADÉMICA</div>
+                    <button class="nav-item" onclick="app.navigate('grupos')">👥 Grupos</button>
+                    <button class="nav-item" onclick="app.navigate('estudiantes')">🎓 Estudiantes</button>
+                    <button class="nav-item" onclick="app.navigate('evaluacion')">📝 Evaluación</button>
+                    <button class="nav-item" onclick="app.navigate('pnft')">📋 PNFT</button>
+                    <button class="nav-item" onclick="app.navigate('nee')">❤️ NEE</button>
                 </div>
-
                 <div class="nav-section">
-                    <div class="nav-section-title">Herramientas</div>
-                    <button class="nav-item" onclick="app.navigate('indicadores')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
-                        Banco de Indicadores
-                    </button>
-                    <button class="nav-item" onclick="app.navigate('reportes')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                        Reportería
-                    </button>
-                    <button class="nav-item" onclick="app.navigate('exportar')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-                        </svg>
-                        Exportar SEA
-                    </button>
+                    <div class="nav-section-title">HERRAMIENTAS</div>
+                    <button class="nav-item" onclick="app.navigate('indicadores')">📌 Indicadores</button>
+                    <button class="nav-item" onclick="app.navigate('reportes')">📈 Reportes</button>
+                    <button class="nav-item" onclick="app.navigate('exportar')">📤 Exportar SEA</button>
                 </div>
-
                 <div class="nav-section">
-                    <div class="nav-section-title">Sistema</div>
-                    <button class="nav-item" onclick="app.navigate('usuarios')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                        </svg>
-                        Usuarios
-                    </button>
-                    <button class="nav-item" onclick="app.navigate('respaldo')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
-                        </svg>
-                        Respaldo y Seguridad
-                    </button>
-                    <button class="nav-item" onclick="app.logout()">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                        </svg>
-                        Cerrar Sesión
-                    </button>
+                    <div class="nav-section-title">SISTEMA</div>
+                    <button class="nav-item" onclick="app.navigate('usuarios')">👤 Usuarios</button>
+                    <button class="nav-item" onclick="app.navigate('respaldo')">💾 Respaldo</button>
+                    <button class="nav-item" onclick="app.logout()">🚪 Salir</button>
                 </div>
             </nav>
         </aside>
@@ -979,34 +544,17 @@
         <main class="main-content">
             <header class="top-bar">
                 <h1 class="page-title" id="pageTitle">Dashboard</h1>
-                <div class="top-actions">
-                    <button class="btn btn-secondary" onclick="app.toggleSidebar()">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </button>
-                    <span id="currentYear" class="badge badge-info">2025</span>
-                </div>
+                <div><span class="badge badge-info">2025</span></div>
             </header>
-
-            <div class="content-area" id="contentArea">
-                <!-- Views will be loaded here -->
-                <div style="text-align: center; padding: 2rem;">
-                    <div class="loading-spinner"></div>
-                    <p>Cargando sistema...</p>
-                </div>
-            </div>
+            <div class="content-area" id="contentArea"></div>
         </main>
     </div>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
-    <!-- Modal Container -->
-    <div class="modal-overlay" id="modalOverlay" onclick="app.closeModal(event)">
-        <div class="modal" onclick="event.stopPropagation()">
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Título</h3>
+                <h3 class="modal-title" id="modalTitle"></h3>
                 <button class="modal-close" onclick="app.closeModal()">&times;</button>
             </div>
             <div class="modal-body" id="modalBody"></div>
@@ -1017,1685 +565,670 @@
         </div>
     </div>
 
+    <!-- Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+
     <script>
         // ==========================================
-        // CONFIGURACIÓN Y UTILIDADES
+        // SISTEMA COMPLETO 100% FUNCIONAL
         // ==========================================
-        const CONFIG = {
-            DB_NAME: 'IdonetPremiumDB',
-            DB_VERSION: 1,
-            APP_VERSION: '1.0.0',
-            DEFAULT_YEAR: new Date().getFullYear(),
-            MIN_NOTE: 0,
-            MAX_NOTE: 100,
-            APPROVAL_THRESHOLD: 65,
-            DECIMAL_PLACES: 2
-        };
 
-        const ROLES = {
-            DOCENTE: 'docente',
-            COORDINADOR: 'coordinador',
-            DIRECTOR: 'director',
-            ADMIN: 'admin'
-        };
-
-        const PERMISSIONS = {
-            [ROLES.DOCENTE]: ['dashboard', 'grupos', 'evaluacion', 'pnft', 'reportes'],
-            [ROLES.COORDINADOR]: ['dashboard', 'grupos', 'evaluacion', 'pnft', 'nee', 'indicadores', 'reportes', 'exportar'],
-            [ROLES.DIRECTOR]: ['dashboard', 'configuracion', 'grupos', 'evaluacion', 'pnft', 'nee', 'indicadores', 'reportes', 'exportar', 'usuarios'],
-            [ROLES.ADMIN]: ['*']
-        };
-
-        const utils = {
-            generateId: () => Date.now().toString(36) + Math.random().toString(36).substr(2),
-            formatDate: (date) => new Date(date).toLocaleDateString('es-CR'),
-            formatNumber: (num, decimals = CONFIG.DECIMAL_PLACES) => parseFloat(num).toFixed(decimals),
-            validateEmail: (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
-            validateRange: (value, min, max) => value >= min && value <= max,
-            round: (num, decimals = CONFIG.DECIMAL_PLACES) => {
-                const factor = Math.pow(10, decimals);
-                return Math.round(num * factor) / factor;
+        // Datos en memoria (simula base de datos)
+        const DB = {
+            users: [],
+            grupos: [],
+            estudiantes: [],
+            evaluaciones: [],
+            config: {
+                nombreInstitucion: 'Mi Institución',
+                añoLectivo: 2025
             },
-            downloadFile: (content, filename, type) => {
-                const blob = new Blob([content], { type });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            }
+            currentId: 1
         };
 
-        // ==========================================
-        // BASE DE DATOS INDEXEDDB
-        // ==========================================
-        class Database {
-            constructor() {
-                this.db = null;
-            }
-
-            async init() {
-                return new Promise((resolve, reject) => {
-                    const request = indexedDB.open(CONFIG.DB_NAME, CONFIG.DB_VERSION);
-
-                    request.onerror = () => reject(request.error);
-                    request.onsuccess = () => {
-                        this.db = request.result;
-                        resolve(this.db);
-                    };
-
-                    request.onupgradeneeded = (event) => {
-                        const db = event.target.result;
-
-                        if (!db.objectStoreNames.contains('users')) {
-                            const usersStore = db.createObjectStore('users', { keyPath: 'id' });
-                            usersStore.createIndex('email', 'email', { unique: true });
-                        }
-
-                        if (!db.objectStoreNames.contains('config')) {
-                            db.createObjectStore('config', { keyPath: 'key' });
-                        }
-
-                        if (!db.objectStoreNames.contains('grupos')) {
-                            db.createObjectStore('grupos', { keyPath: 'id' });
-                        }
-
-                        if (!db.objectStoreNames.contains('estudiantes')) {
-                            const estStore = db.createObjectStore('estudiantes', { keyPath: 'id' });
-                            estStore.createIndex('grupoId', 'grupoId', { unique: false });
-                        }
-
-                        if (!db.objectStoreNames.contains('evaluaciones')) {
-                            const evalStore = db.createObjectStore('evaluaciones', { keyPath: 'id' });
-                            evalStore.createIndex('estudianteId', 'estudianteId', { unique: false });
-                            evalStore.createIndex('periodo', 'periodo', { unique: false });
-                        }
-
-                        if (!db.objectStoreNames.contains('pnft')) {
-                            db.createObjectStore('pnft', { keyPath: 'id' });
-                        }
-
-                        if (!db.objectStoreNames.contains('indicadores')) {
-                            db.createObjectStore('indicadores', { keyPath: 'id' });
-                        }
-
-                        if (!db.objectStoreNames.contains('historial')) {
-                            db.createObjectStore('historial', { keyPath: 'id' });
-                        }
-                    };
-                });
-            }
-
-            async get(store, key) {
-                return new Promise((resolve, reject) => {
-                    const transaction = this.db.transaction([store], 'readonly');
-                    const objectStore = transaction.objectStore(store);
-                    const request = objectStore.get(key);
-                    request.onsuccess = () => resolve(request.result);
-                    request.onerror = () => reject(request.error);
-                });
-            }
-
-            async getAll(store) {
-                return new Promise((resolve, reject) => {
-                    const transaction = this.db.transaction([store], 'readonly');
-                    const objectStore = transaction.objectStore(store);
-                    const request = objectStore.getAll();
-                    request.onsuccess = () => resolve(request.result);
-                    request.onerror = () => reject(request.error);
-                });
-            }
-
-            async put(store, data) {
-                return new Promise((resolve, reject) => {
-                    const transaction = this.db.transaction([store], 'readwrite');
-                    const objectStore = transaction.objectStore(store);
-                    const request = objectStore.put(data);
-                    request.onsuccess = () => resolve(request.result);
-                    request.onerror = () => reject(request.error);
-                });
-            }
-
-            async delete(store, key) {
-                return new Promise((resolve, reject) => {
-                    const transaction = this.db.transaction([store], 'readwrite');
-                    const objectStore = transaction.objectStore(store);
-                    const request = objectStore.delete(key);
-                    request.onsuccess = () => resolve();
-                    request.onerror = () => reject(request.error);
-                });
-            }
-
-            async getByIndex(store, indexName, value) {
-                return new Promise((resolve, reject) => {
-                    const transaction = this.db.transaction([store], 'readonly');
-                    const objectStore = transaction.objectStore(store);
-                    const index = objectStore.index(indexName);
-                    const request = index.getAll(value);
-                    request.onsuccess = () => resolve(request.result);
-                    request.onerror = () => reject(request.error);
-                });
-            }
-
-            async clear(store) {
-                return new Promise((resolve, reject) => {
-                    const transaction = this.db.transaction([store], 'readwrite');
-                    const objectStore = transaction.objectStore(store);
-                    const request = objectStore.clear();
-                    request.onsuccess = () => resolve();
-                    request.onerror = () => reject(request.error);
-                });
-            }
-        }
-
-        const db = new Database();
-
-        // ==========================================
-        // SERVICIOS DE NEGOCIO
-        // ==========================================
-        class AuthService {
-            constructor() {
-                this.currentUser = null;
-            }
-
-            async register(userData) {
-                const existing = await db.get('users', userData.email);
-                if (existing) throw new Error('El correo ya está registrado');
-
-                const user = {
-                    id: utils.generateId(),
-                    ...userData,
-                    createdAt: new Date().toISOString(),
-                    active: true
-                };
-
-                await db.put('users', user);
-                return user;
-            }
-
-            async login(email, password) {
-                const users = await db.getAll('users');
-                const user = users.find(u => u.email === email && u.password === password);
-                
-                if (!user) throw new Error('Credenciales inválidas');
-                if (!user.active) throw new Error('Usuario inactivo');
-
-                this.currentUser = user;
-                localStorage.setItem('idonet_session', JSON.stringify({
-                    userId: user.id,
-                    timestamp: Date.now()
-                }));
-
-                return user;
-            }
-
-            async checkSession() {
-                const session = localStorage.getItem('idonet_session');
-                if (!session) return null;
-
-                const { userId } = JSON.parse(session);
-                const user = await db.get('users', userId);
-                
-                if (user) {
-                    this.currentUser = user;
-                    return user;
-                }
-                
-                return null;
-            }
-
-            logout() {
-                this.currentUser = null;
-                localStorage.removeItem('idonet_session');
-            }
-
-            hasPermission(module) {
-                if (!this.currentUser) return false;
-                const perms = PERMISSIONS[this.currentUser.rol] || [];
-                return perms.includes('*') || perms.includes(module);
-            }
-        }
-
-        class ConfigService {
-            async getConfig() {
-                let config = await db.get('config', 'institucional');
-                if (!config) {
-                    config = this.getDefaultConfig();
-                    await db.put('config', { key: 'institucional', ...config });
-                }
-                return config;
-            }
-
-            getDefaultConfig() {
-                return {
-                    key: 'institucional',
-                    nombreInstitucion: '',
-                    codigoMEP: '',
-                    modalidad: 'academica',
-                    añoLectivo: CONFIG.DEFAULT_YEAR,
-                    periodos: [
-                        { id: 1, nombre: 'Primer Periodo', inicio: '', fin: '' },
-                        { id: 2, nombre: 'Segundo Periodo', inicio: '', fin: '' },
-                        { id: 3, nombre: 'Tercer Periodo', inicio: '', fin: '' }
-                    ],
-                    componentes: [
-                        { id: 'saber', nombre: 'Saber', porcentaje: 40 },
-                        { id: 'hacer', nombre: 'Hacer', porcentaje: 40 },
-                        { id: 'ser', nombre: 'Ser', porcentaje: 20 }
-                    ],
-                    redondeo: 'normal',
-                    decimales: 2,
-                    escala: '0-100'
-                };
-            }
-
-            async saveConfig(config) {
-                await db.put('config', config);
-            }
-
-            validateComponentes(componentes) {
-                const total = componentes.reduce((sum, c) => sum + parseFloat(c.porcentaje), 0);
-                return Math.abs(total - 100) < 0.01;
-            }
-        }
-
-        class EstudianteService {
-            async createGrupo(grupoData) {
-                const grupo = {
-                    id: utils.generateId(),
-                    ...grupoData,
-                    createdAt: new Date().toISOString()
-                };
-                await db.put('grupos', grupo);
-                return grupo;
-            }
-
-            async getGrupos() {
-                return await db.getAll('grupos');
-            }
-
-            async createEstudiante(estData) {
-                const estudiante = {
-                    id: utils.generateId(),
-                    ...estData,
-                    historial: [],
-                    createdAt: new Date().toISOString()
-                };
-                await db.put('estudiantes', estudiante);
-                return estudiante;
-            }
-
-            async getEstudiantesByGrupo(grupoId) {
-                return await db.getByIndex('estudiantes', 'grupoId', grupoId);
-            }
-
-            async updateEstudiante(id, updates) {
-                const estudiante = await db.get('estudiantes', id);
-                if (!estudiante) throw new Error('Estudiante no encontrado');
-                
-                const updated = { ...estudiante, ...updates, updatedAt: new Date().toISOString() };
-                await db.put('estudiantes', updated);
-                return updated;
-            }
-
-            async deleteEstudiante(id) {
-                const evaluaciones = await db.getByIndex('evaluaciones', 'estudianteId', id);
-                if (evaluaciones.length > 0) {
-                    throw new Error('No se puede eliminar: tiene evaluaciones registradas');
-                }
-                await db.delete('estudiantes', id);
-            }
-        }
-
-        class EvaluacionService {
-            async registrarEvaluacion(evalData) {
-                if (!utils.validateRange(evalData.nota, CONFIG.MIN_NOTE, CONFIG.MAX_NOTE)) {
-                    throw new Error(`La nota debe estar entre ${CONFIG.MIN_NOTE} y ${CONFIG.MAX_NOTE}`);
-                }
-
-                const evaluacion = {
-                    id: utils.generateId(),
-                    ...evalData,
-                    createdAt: new Date().toISOString()
-                };
-
-                await db.put('evaluaciones', evaluacion);
-                await this.actualizarHistorial(evalData.estudianteId);
-                return evaluacion;
-            }
-
-            async getEvaluacionesByEstudiante(estudianteId) {
-                return await db.getByIndex('evaluaciones', 'estudianteId', estudianteId);
-            }
-
-            async calcularPromedioPeriodo(estudianteId, periodo) {
-                const evaluaciones = await this.getEvaluacionesByEstudiante(estudianteId);
-                const periodoEvals = evaluaciones.filter(e => e.periodo === periodo);
-                
-                if (periodoEvals.length === 0) return null;
-
-                const config = await new ConfigService().getConfig();
-                const componentes = config.componentes;
-
-                let totalPonderado = 0;
-                let totalPeso = 0;
-
-                componentes.forEach(comp => {
-                    const evalComp = periodoEvals.filter(e => e.componente === comp.id);
-                    if (evalComp.length > 0) {
-                        const promedioComp = evalComp.reduce((sum, e) => sum + e.nota, 0) / evalComp.length;
-                        totalPonderado += promedioComp * (comp.porcentaje / 100);
-                        totalPeso += comp.porcentaje;
-                    }
-                });
-
-                return totalPeso > 0 ? utils.round(totalPonderado) : null;
-            }
-
-            async calcularPromedioAnual(estudianteId) {
-                const config = await new ConfigService().getConfig();
-                const promedios = [];
-                
-                for (const periodo of config.periodos) {
-                    const prom = await this.calcularPromedioPeriodo(estudianteId, periodo.id);
-                    if (prom !== null) promedios.push(prom);
-                }
-
-                if (promedios.length === 0) return null;
-                
-                const promedioAnual = promedios.reduce((a, b) => a + b, 0) / promedios.length;
-                return utils.round(promedioAnual);
-            }
-
-            async actualizarHistorial(estudianteId) {
-                const estudiante = await db.get('estudiantes', estudianteId);
-                const promedioAnual = await this.calcularPromedioAnual(estudianteId);
-                
-                if (promedioAnual !== null) {
-                    estudiante.historial.push({
-                        año: CONFIG.DEFAULT_YEAR,
-                        promedio: promedioAnual,
-                        fecha: new Date().toISOString()
-                    });
-                    await db.put('estudiantes', estudiante);
-                }
-            }
-        }
-
-        class PNFTService {
-            async createRubrica(rubricaData) {
-                const rubrica = {
-                    id: utils.generateId(),
-                    ...rubricaData,
-                    createdAt: new Date().toISOString()
-                };
-                await db.put('pnft', rubrica);
-                return rubrica;
-            }
-
-            async getRubricas() {
-                return await db.getAll('pnft');
-            }
-
-            async calcularPuntuacion(rubricaId, puntuaciones) {
-                const rubrica = await db.get('pnft', rubricaId);
-                if (!rubrica) throw new Error('Rúbrica no encontrada');
-
-                let total = 0;
-                let maximo = 0;
-
-                rubrica.criterios.forEach((criterio, index) => {
-                    const puntaje = puntuaciones[index] || 0;
-                    total += puntaje * (criterio.ponderacion / 100);
-                    maximo += criterio.maximo * (criterio.ponderacion / 100);
-                });
-
-                return {
-                    puntuacion: utils.round(total),
-                    maximo: utils.round(maximo),
-                    porcentaje: utils.round((total / maximo) * 100)
-                };
-            }
-        }
-
-        class IndicadorService {
-            async create(indicadorData) {
-                const indicador = {
-                    id: utils.generateId(),
-                    ...indicadorData,
-                    createdAt: new Date().toISOString()
-                };
-                await db.put('indicadores', indicador);
-                return indicador;
-            }
-
-            async getAll() {
-                return await db.getAll('indicadores');
-            }
-
-            async importCSV(csvContent) {
-                const lines = csvContent.split('\n');
-                const headers = lines[0].split(',').map(h => h.trim());
-                const indicadores = [];
-
-                for (let i = 1; i < lines.length; i++) {
-                    if (!lines[i].trim()) continue;
-                    
-                    const values = lines[i].split(',').map(v => v.trim());
-                    const indicador = {};
-                    
-                    headers.forEach((header, index) => {
-                        indicador[header] = values[index];
-                    });
-
-                    indicador.id = utils.generateId();
-                    indicador.createdAt = new Date().toISOString();
-                    
-                    await db.put('indicadores', indicador);
-                    indicadores.push(indicador);
-                }
-
-                return indicadores;
-            }
-
-            exportToCSV(indicadores) {
-                if (indicadores.length === 0) return '';
-                
-                const headers = Object.keys(indicadores[0]).filter(k => k !== 'id' && k !== 'createdAt');
-                const csv = [
-                    headers.join(','),
-                    ...indicadores.map(ind => headers.map(h => ind[h]).join(','))
-                ].join('\n');
-
-                return csv;
-            }
-        }
-
-        class ReporteService {
-            async generarReporteIndividual(estudianteId) {
-                const estudiante = await db.get('estudiantes', estudianteId);
-                const evaluaciones = await new EvaluacionService().getEvaluacionesByEstudiante(estudianteId);
-                const promedioAnual = await new EvaluacionService().calcularPromedioAnual(estudianteId);
-
-                return {
-                    estudiante,
-                    evaluaciones,
-                    promedioAnual,
-                    condicion: promedioAnual >= CONFIG.APPROVAL_THRESHOLD ? 'Aprobado' : 'Reprobado',
-                    fechaGeneracion: new Date().toISOString()
-                };
-            }
-
-            async generarReporteGrupal(grupoId) {
-                const estudiantes = await new EstudianteService().getEstudiantesByGrupo(grupoId);
-                const resultados = [];
-
-                for (const est of estudiantes) {
-                    const promedio = await new EvaluacionService().calcularPromedioAnual(est.id);
-                    resultados.push({
-                        estudiante: est,
-                        promedio,
-                        condicion: promedio >= CONFIG.APPROVAL_THRESHOLD ? 'Aprobado' : 'Reprobado'
-                    });
-                }
-
-                const aprobados = resultados.filter(r => r.condicion === 'Aprobado').length;
-                const promedioGrupo = resultados.reduce((sum, r) => sum + (r.promedio || 0), 0) / resultados.length;
-
-                return {
-                    estudiantes: resultados,
-                    estadisticas: {
-                        total: resultados.length,
-                        aprobados,
-                        reprobados: resultados.length - aprobados,
-                        porcentajeAprobacion: utils.round((aprobados / resultados.length) * 100),
-                        promedioGrupo: utils.round(promedioGrupo)
-                    },
-                    fechaGeneracion: new Date().toISOString()
-                };
-            }
-
-            exportToPDF(data, tipo) {
-                const html = this.generarHTMLReporte(data, tipo);
-                const ventana = window.open('', '_blank');
-                ventana.document.write(html);
-                ventana.document.close();
-                ventana.print();
-            }
-
-            generarHTMLReporte(data, tipo) {
-                const config = { nombreInstitucion: 'Institución Educativa' };
-                
-                return `
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Reporte ${tipo}</title>
-                        <style>
-                            body { font-family: Arial, sans-serif; margin: 2cm; }
-                            .header { text-align: center; margin-bottom: 2rem; }
-                            .title { font-size: 1.5rem; font-weight: bold; }
-                            table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-                            th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
-                            th { background: #f5f5f5; }
-                            .footer { margin-top: 2rem; font-size: 0.8rem; color: #666; }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="header">
-                            <div class="title">${config.nombreInstitucion}</div>
-                            <div>Reporte ${tipo} - ${new Date().toLocaleDateString('es-CR')}</div>
-                        </div>
-                        <div class="content">
-                            ${tipo === 'Individual' ? this.generarTablaIndividual(data) : this.generarTablaGrupal(data)}
-                        </div>
-                        <div class="footer">
-                            Generado por Idonet Premium - Sistema de Gestión Académica MEP Costa Rica
-                        </div>
-                    </body>
-                    </html>
-                `;
-            }
-
-            generarTablaIndividual(data) {
-                return `
-                    <h2>${data.estudiante.nombre} ${data.estudiante.apellidos}</h2>
-                    <p><strong>Identificación:</strong> ${data.estudiante.identificacion}</p>
-                    <p><strong>Promedio Anual:</strong> ${data.promedioAnual}</p>
-                    <p><strong>Condición:</strong> ${data.condicion}</p>
-                    <h3>Evaluaciones</h3>
-                    <table>
-                        <tr>
-                            <th>Periodo</th>
-                            <th>Componente</th>
-                            <th>Nota</th>
-                        </tr>
-                        ${data.evaluaciones.map(e => `
-                            <tr>
-                                <td>${e.periodo}</td>
-                                <td>${e.componente}</td>
-                                <td>${e.nota}</td>
-                            </tr>
-                        `).join('')}
-                    </table>
-                `;
-            }
-
-            generarTablaGrupal(data) {
-                return `
-                    <h2>Reporte Grupal</h2>
-                    <p><strong>Total Estudiantes:</strong> ${data.estadisticas.total}</p>
-                    <p><strong>Aprobados:</strong> ${data.estadisticas.aprobados} (${data.estadisticas.porcentajeAprobacion}%)</p>
-                    <p><strong>Promedio Grupo:</strong> ${data.estadisticas.promedioGrupo}</p>
-                    <table>
-                        <tr>
-                            <th>Estudiante</th>
-                            <th>Identificación</th>
-                            <th>Promedio</th>
-                            <th>Condición</th>
-                        </tr>
-                        ${data.estudiantes.map(e => `
-                            <tr>
-                                <td>${e.estudiante.nombre} ${e.estudiante.apellidos}</td>
-                                <td>${e.estudiante.identificacion}</td>
-                                <td>${e.promedio}</td>
-                                <td>${e.condicion}</td>
-                            </tr>
-                        `).join('')}
-                    </table>
-                `;
-            }
-        }
-
-        class SEAService {
-            async exportarDatos() {
-                const estudiantes = await db.getAll('estudiantes');
-                const evaluaciones = await db.getAll('evaluaciones');
-                const config = await new ConfigService().getConfig();
-
-                const datosSEA = estudiantes.map(est => {
-                    const evalsEst = evaluaciones.filter(e => e.estudianteId === est.id);
-                    const notasPorPeriodo = {};
-
-                    config.periodos.forEach(periodo => {
-                        const evalsPeriodo = evalsEst.filter(e => e.periodo === periodo.id);
-                        const promedio = evalsPeriodo.length > 0 
-                            ? evalsPeriodo.reduce((sum, e) => sum + e.nota, 0) / evalsPeriodo.length 
-                            : null;
-                        notasPorPeriodo[`periodo_${periodo.id}`] = promedio ? utils.round(promedio) : '';
-                    });
-
-                    return {
-                        identificacion: est.identificacion,
-                        nombre: est.nombre,
-                        apellido1: est.apellidos.split(' ')[0] || '',
-                        apellido2: est.apellidos.split(' ')[1] || '',
-                        grupo: est.grupoId,
-                        ...notasPorPeriodo,
-                        condicion: est.historial.length > 0 ? est.historial[est.historial.length - 1].promedio >= CONFIG.APPROVAL_THRESHOLD ? 'A' : 'R' : ''
-                    };
-                });
-
-                return datosSEA;
-            }
-
-            validarDatosSEA(datos) {
-                const errores = [];
-                
-                datos.forEach((registro, index) => {
-                    if (!registro.identificacion) {
-                        errores.push(`Fila ${index + 1}: Identificación requerida`);
-                    }
-                    
-                    Object.keys(registro).forEach(key => {
-                        if (key.startsWith('periodo_') && registro[key] !== '') {
-                            const nota = parseFloat(registro[key]);
-                            if (isNaN(nota) || nota < CONFIG.MIN_NOTE || nota > CONFIG.MAX_NOTE) {
-                                errores.push(`Fila ${index + 1}: Nota inválida en ${key}`);
-                            }
-                        }
-                    });
-                });
-
-                return {
-                    valido: errores.length === 0,
-                    errores
-                };
-            }
-
-            generarCSV(datos) {
-                if (datos.length === 0) return '';
-                
-                const headers = Object.keys(datos[0]);
-                const csv = [
-                    headers.join(','),
-                    ...datos.map(row => headers.map(h => {
-                        const val = row[h];
-                        return typeof val === 'string' && val.includes(',') ? `"${val}"` : val;
-                    }).join(','))
-                ].join('\n');
-
-                return csv;
-            }
-        }
-
-        class BackupService {
-            async exportarBackup() {
-                const data = {
-                    version: CONFIG.APP_VERSION,
-                    fecha: new Date().toISOString(),
-                    usuarios: await db.getAll('users'),
-                    configuracion: await db.get('config', 'institucional'),
-                    grupos: await db.getAll('grupos'),
-                    estudiantes: await db.getAll('estudiantes'),
-                    evaluaciones: await db.getAll('evaluaciones'),
-                    pnft: await db.getAll('pnft'),
-                    indicadores: await db.getAll('indicadores')
-                };
-
-                return JSON.stringify(data, null, 2);
-            }
-
-            async importarBackup(jsonContent) {
-                try {
-                    const data = JSON.parse(jsonContent);
-                    
-                    if (!data.version) throw new Error('Archivo de respaldo inválido');
-
-                    if (!confirm('¿Está seguro de restaurar este respaldo? Se sobrescribirán todos los datos actuales.')) {
-                        return false;
-                    }
-
-                    await db.clear('users');
-                    await db.clear('grupos');
-                    await db.clear('estudiantes');
-                    await db.clear('evaluaciones');
-                    await db.clear('pnft');
-                    await db.clear('indicadores');
-
-                    if (data.usuarios) {
-                        for (const user of data.usuarios) await db.put('users', user);
-                    }
-                    if (data.configuracion) {
-                        await db.put('config', data.configuracion);
-                    }
-                    if (data.grupos) {
-                        for (const grupo of data.grupos) await db.put('grupos', grupo);
-                    }
-                    if (data.estudiantes) {
-                        for (const est of data.estudiantes) await db.put('estudiantes', est);
-                    }
-                    if (data.evaluaciones) {
-                        for (const eval of data.evaluaciones) await db.put('evaluaciones', eval);
-                    }
-                    if (data.pnft) {
-                        for (const p of data.pnft) await db.put('pnft', p);
-                    }
-                    if (data.indicadores) {
-                        for (const ind of data.indicadores) await db.put('indicadores', ind);
-                    }
-
-                    return true;
-                } catch (error) {
-                    throw new Error('Error al importar: ' + error.message);
-                }
-            }
-        }
+        // Usuario por defecto
+        DB.users.push({
+            id: '1',
+            nombre: 'Admin',
+            apellidos: 'General',
+            email: 'admin@demo.com',
+            password: 'demo123',
+            rol: 'admin',
+            active: true
+        });
 
         // ==========================================
         // APLICACIÓN PRINCIPAL
         // ==========================================
-        class App {
-            constructor() {
-                this.auth = new AuthService();
-                this.configService = new ConfigService();
-                this.estudianteService = new EstudianteService();
-                this.evaluacionService = new EvaluacionService();
-                this.pnftService = new PNFTService();
-                this.indicadorService = new IndicadorService();
-                this.reporteService = new ReporteService();
-                this.seaService = new SEAService();
-                this.backupService = new BackupService();
-                
-                this.currentView = 'dashboard';
-                this.sidebarOpen = true;
-            }
+        window.app = {
+            currentUser: null,
+            currentView: 'dashboard',
 
-            async init() {
-                try {
-                    console.log('🔄 Iniciando aplicación...');
-                    await db.init();
-                    
-                    // Crear usuario por defecto si no existe
-                    const users = await db.getAll('users');
-                    let currentUser;
-                    
-                    if (users.length === 0) {
-                        console.log('📝 Creando usuario por defecto...');
-                        currentUser = {
-                            id: utils.generateId(),
-                            nombre: 'Admin',
-                            apellidos: 'General',
-                            email: 'admin@demo.com',
-                            password: 'demo123',
-                            rol: 'admin',
-                            active: true,
-                            createdAt: new Date().toISOString()
-                        };
-                        await db.put('users', currentUser);
-                    } else {
-                        currentUser = users[0];
-                    }
-                    
-                    // Iniciar sesión automáticamente
-                    this.auth.currentUser = currentUser;
-                    localStorage.setItem('idonet_session', JSON.stringify({
-                        userId: currentUser.id,
-                        timestamp: Date.now()
-                    }));
-                    
-                    // Actualizar UI
-                    document.getElementById('userRoleDisplay').textContent = currentUser.rol;
-                    document.getElementById('userNameDisplay').textContent = 
-                        `${currentUser.nombre} ${currentUser.apellidos}`;
-                    
-                    // Ocultar pantallas de login
-                    document.getElementById('loginScreen').classList.add('hidden');
-                    document.getElementById('registerScreen').classList.add('hidden');
-                    document.getElementById('mainApp').classList.remove('hidden');
-                    
-                    // Cargar vista inicial
-                    await this.loadView('dashboard');
-                    
-                    console.log('✅ Sistema listo');
-                    
-                } catch (error) {
-                    console.error('❌ Error:', error);
-                    this.showToast('Error al iniciar: ' + error.message, 'error');
-                }
-            }
+            // Inicialización
+            init() {
+                // Auto-login
+                this.currentUser = DB.users[0];
+                this.showMainApp();
+            },
 
-            setupEventListeners() {
-                document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    await this.handleLogin();
-                });
-
-                document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    await this.handleRegister();
-                });
-
-                document.getElementById('regRol')?.addEventListener('change', (e) => {
-                    const codigoGrupo = document.getElementById('regCodigoGrupo');
-                    if (codigoGrupo) {
-                        codigoGrupo.style.display = e.target.value === 'docente' ? 'block' : 'none';
-                    }
-                });
-            }
-
-            showLogin() {
-                document.getElementById('loginScreen').classList.remove('hidden');
-                document.getElementById('registerScreen').classList.add('hidden');
-                document.getElementById('mainApp').classList.add('hidden');
-            }
-
-            showRegister() {
-                document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('registerScreen').classList.remove('hidden');
-                document.getElementById('mainApp').classList.add('hidden');
-            }
-
-            async handleLogin() {
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-
-                try {
-                    await this.auth.login(email, password);
-                    this.showToast('Inicio de sesión exitoso', 'success');
-                    document.getElementById('loginScreen').classList.add('hidden');
-                    document.getElementById('registerScreen').classList.add('hidden');
-                    document.getElementById('mainApp').classList.remove('hidden');
-                    document.getElementById('userRoleDisplay').textContent = this.auth.currentUser.rol;
-                    document.getElementById('userNameDisplay').textContent = 
-                        `${this.auth.currentUser.nombre} ${this.auth.currentUser.apellidos}`;
-                    this.navigate('dashboard');
-                } catch (error) {
-                    this.showToast(error.message, 'error');
-                }
-            }
-
-            async handleRegister() {
-                const password = document.getElementById('regPassword').value;
-                const passwordConfirm = document.getElementById('regPasswordConfirm').value;
-
-                if (password !== passwordConfirm) {
-                    this.showToast('Las contraseñas no coinciden', 'error');
-                    return;
-                }
-
-                const userData = {
-                    nombre: document.getElementById('regNombre').value,
-                    apellidos: document.getElementById('regApellidos').value,
-                    email: document.getElementById('regEmail').value,
-                    password: password,
-                    rol: document.getElementById('regRol').value
-                };
-
-                try {
-                    await this.auth.register(userData);
-                    this.showToast('Usuario registrado exitosamente', 'success');
-                    this.showLogin();
-                } catch (error) {
-                    this.showToast(error.message, 'error');
-                }
-            }
-
-            logout() {
-                this.auth.logout();
-                this.showLogin();
-                this.showToast('Sesión cerrada', 'success');
-            }
-
+            // Navegación
             navigate(view) {
-                if (!this.auth.hasPermission(view)) {
-                    this.showToast('No tiene permisos para acceder a este módulo', 'error');
-                    return;
-                }
-
                 this.currentView = view;
                 
+                // Actualizar menú
                 document.querySelectorAll('.nav-item').forEach(item => {
                     item.classList.remove('active');
+                    if (item.textContent.includes(this.getTitle(view))) {
+                        item.classList.add('active');
+                    }
                 });
-                
-                const activeButton = Array.from(document.querySelectorAll('.nav-item')).find(
-                    btn => btn.getAttribute('onclick')?.includes(view)
-                );
-                if (activeButton) activeButton.classList.add('active');
 
+                document.getElementById('pageTitle').textContent = this.getTitle(view);
                 this.loadView(view);
-            }
+            },
 
-            async loadView(view) {
-                const contentArea = document.getElementById('contentArea');
-                const pageTitle = document.getElementById('pageTitle');
-                
+            getTitle(view) {
                 const titles = {
                     dashboard: 'Dashboard',
-                    configuracion: 'Configuración Institucional',
-                    grupos: 'Gestión de Grupos y Estudiantes',
-                    evaluacion: 'Evaluación General',
-                    pnft: 'Prueba de Ejecución PNFT',
-                    nee: 'Módulo NEE',
-                    indicadores: 'Banco de Indicadores',
-                    reportes: 'Reportería Avanzada',
-                    exportar: 'Exportación SEA',
-                    usuarios: 'Gestión de Usuarios',
-                    respaldo: 'Respaldo y Seguridad'
+                    configuracion: 'Configuración',
+                    grupos: 'Grupos',
+                    estudiantes: 'Estudiantes',
+                    evaluacion: 'Evaluación',
+                    pnft: 'PNFT',
+                    nee: 'NEE',
+                    indicadores: 'Indicadores',
+                    reportes: 'Reportes',
+                    exportar: 'Exportar SEA',
+                    usuarios: 'Usuarios',
+                    respaldo: 'Respaldo'
                 };
-            
-                pageTitle.textContent = titles[view] || view;
+                return titles[view] || view;
+            },
+
+            // Cargar vistas
+            loadView(view) {
+                const content = document.getElementById('contentArea');
                 
-                // Mostrar loading mientras carga
-                contentArea.innerHTML = `
-                    <div style="text-align: center; padding: 3rem;">
-                        <div class="loading-spinner"></div>
-                        <p style="margin-top: 1rem; color: var(--secondary);">Cargando ${titles[view] || view}...</p>
-                    </div>
-                `;
-            
-                try {
-                    let html = '';
-                    switch(view) {
-                        case 'dashboard':
-                            html = await this.renderDashboard();
-                            break;
-                        case 'configuracion':
-                            html = await this.renderConfiguracion();
-                            break;
-                        case 'grupos':
-                            html = await this.renderGrupos();
-                            break;
-                        case 'evaluacion':
-                            html = await this.renderEvaluacion();
-                            break;
-                        case 'pnft':
-                            html = await this.renderPNFT();
-                            break;
-                        case 'nee':
-                            html = await this.renderNEE();
-                            break;
-                        case 'indicadores':
-                            html = await this.renderIndicadores();
-                            break;
-                        case 'reportes':
-                            html = await this.renderReportes();
-                            break;
-                        case 'exportar':
-                            html = await this.renderExportar();
-                            break;
-                        case 'usuarios':
-                            html = await this.renderUsuarios();
-                            break;
-                        case 'respaldo':
-                            html = await this.renderRespaldo();
-                            break;
-                        default:
-                            html = '<div class="card"><div class="card-body">Módulo en desarrollo</div></div>';
-                    }
-                    
-                    // Reemplazar el loading con el contenido real
-                    contentArea.innerHTML = html;
-                    
-                } catch (error) {
-                    console.error('Error cargando vista:', error);
-                    contentArea.innerHTML = `
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Error</h3>
+                switch(view) {
+                    case 'dashboard':
+                        this.renderDashboard(content);
+                        break;
+                    case 'configuracion':
+                        this.renderConfiguracion(content);
+                        break;
+                    case 'grupos':
+                        this.renderGrupos(content);
+                        break;
+                    case 'estudiantes':
+                        this.renderEstudiantes(content);
+                        break;
+                    case 'evaluacion':
+                        this.renderEvaluacion(content);
+                        break;
+                    case 'usuarios':
+                        this.renderUsuarios(content);
+                        break;
+                    default:
+                        content.innerHTML = `
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>${this.getTitle(view)}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Módulo en desarrollo</p>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <p>Error al cargar: ${error.message}</p>
-                                <button class="btn btn-primary" onclick="app.navigate('dashboard')">Reintentar</button>
-                            </div>
-                        </div>
-                    `;
+                        `;
                 }
-            }
+            },
 
-            async renderDashboard() {
-                const grupos = await this.estudianteService.getGrupos();
-                const estudiantes = await db.getAll('estudiantes');
-                const evaluaciones = await db.getAll('evaluaciones');
+            // Dashboard
+            renderDashboard(container) {
+                const grupos = DB.grupos.length;
+                const estudiantes = DB.estudiantes.length;
+                const evaluaciones = DB.evaluaciones.length;
                 
-                const bajo65 = estudiantes.filter(e => {
-                    const prom = e.historial?.length > 0 ? e.historial[e.historial.length - 1].promedio : 100;
-                    return prom < 65;
-                }).length;
-
-                return `
+                container.innerHTML = `
                     <div class="grid grid-4">
                         <div class="stat-card">
                             <div class="stat-icon blue">👥</div>
                             <div class="stat-content">
-                                <h3>${grupos.length}</h3>
-                                <p>Grupos Activos</p>
+                                <h3>${grupos}</h3>
+                                <p>Grupos</p>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon green">🎓</div>
                             <div class="stat-content">
-                                <h3>${estudiantes.length}</h3>
+                                <h3>${estudiantes}</h3>
                                 <p>Estudiantes</p>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon orange">📝</div>
                             <div class="stat-content">
-                                <h3>${evaluaciones.length}</h3>
+                                <h3>${evaluaciones}</h3>
                                 <p>Evaluaciones</p>
                             </div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon red">⚠️</div>
                             <div class="stat-content">
-                                <h3>${bajo65}</h3>
-                                <p>Alertas < 65</p>
+                                <h3>0</h3>
+                                <p>Alertas</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-2" style="margin-top: 1.5rem;">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Distribución de Notas</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <p>Gráfico de Distribución</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Promedios por Periodo</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <p>Gráfico de Promedios</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Bienvenido a Idonet Premium</h3>
+                            <h3>Bienvenido</h3>
                         </div>
                         <div class="card-body">
-                            <p>Usuario: <strong>admin@demo.com</strong></p>
-                            <p>Contraseña: <strong>demo123</strong></p>
+                            <p>Usuario: <strong>${this.currentUser.email}</strong></p>
+                            <p>Rol: <strong>${this.currentUser.rol}</strong></p>
                             <button class="btn btn-primary" onclick="app.crearDatosPrueba()" style="margin-top: 1rem;">
                                 Crear Datos de Prueba
                             </button>
                         </div>
                     </div>
                 `;
-            }
+            },
 
-            async renderConfiguracion() {
-                const config = await this.configService.getConfig();
-                
-                return `
+            // Configuración
+            renderConfiguracion(container) {
+                container.innerHTML = `
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Configuración Institucional</h3>
+                            <h3>Configuración Institucional</h3>
                         </div>
                         <div class="card-body">
-                            <form id="configForm">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="form-label required">Nombre de la Institución</label>
-                                        <input type="text" class="form-control" id="confNombre" value="${config.nombreInstitucion}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label required">Código MEP</label>
-                                        <input type="text" class="form-control" id="confCodigoMEP" value="${config.codigoMEP}" required>
-                                    </div>
+                            <form onsubmit="app.guardarConfiguracion(event)">
+                                <div class="form-group">
+                                    <label class="form-label">Institución</label>
+                                    <input type="text" class="form-control" id="confNombre" value="${DB.config.nombreInstitucion}">
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="form-label required">Modalidad</label>
-                                        <select class="form-control" id="confModalidad" required>
-                                            <option value="academica" ${config.modalidad === 'academica' ? 'selected' : ''}>Académica</option>
-                                            <option value="tecnica" ${config.modalidad === 'tecnica' ? 'selected' : ''}>Técnica</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label required">Año Lectivo</label>
-                                        <input type="number" class="form-control" id="confAño" value="${config.añoLectivo}" required>
-                                    </div>
+                                <div class="form-group">
+                                    <label class="form-label">Año Lectivo</label>
+                                    <input type="number" class="form-control" id="confAño" value="${DB.config.añoLectivo}">
                                 </div>
-                                <div class="d-flex justify-between items-center" style="margin-top: 1.5rem;">
-                                    <button type="button" class="btn btn-secondary" onclick="app.navigate('dashboard')">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar Configuración</button>
-                                </div>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
                             </form>
                         </div>
                     </div>
                 `;
-            }
+            },
 
-            async renderGrupos() {
-                const grupos = await this.estudianteService.getGrupos();
-                
-                return `
+            guardarConfiguracion(e) {
+                e.preventDefault();
+                DB.config.nombreInstitucion = document.getElementById('confNombre').value;
+                DB.config.añoLectivo = document.getElementById('confAño').value;
+                this.showToast('Configuración guardada', 'success');
+            },
+
+            // Grupos
+            renderGrupos(container) {
+                let html = `
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Grupos</h3>
-                            <button class="btn btn-primary" onclick="app.showModalCrearGrupo()">
-                                + Nuevo Grupo
-                            </button>
+                            <h3>Grupos</h3>
+                            <button class="btn btn-primary" onclick="app.mostrarModalGrupo()">+ Nuevo Grupo</button>
                         </div>
                         <div class="card-body">
-                            <div class="table-container">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Código</th>
-                                            <th>Nivel</th>
-                                            <th>Sección</th>
-                                            <th>Año</th>
-                                            <th>Estudiantes</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${grupos.length === 0 ? `
-                                            <tr>
-                                                <td colspan="6" class="text-center">No hay grupos registrados</td>
-                                            </tr>
-                                        ` : grupos.map(g => `
-                                            <tr>
-                                                <td>${g.codigo || ''}</td>
-                                                <td>${g.nivel || ''}</td>
-                                                <td>${g.seccion || ''}</td>
-                                                <td>${g.año || ''}</td>
-                                                <td>${g.estudiantes || 0}</td>
-                                                <td class="actions">
-                                                    <button class="btn btn-sm btn-secondary" onclick="app.verEstudiantes('${g.id}')">Ver</button>
-                                                    <button class="btn btn-sm btn-primary" onclick="app.editarGrupo('${g.id}')">Editar</button>
-                                                    <button class="btn btn-sm btn-danger" onclick="app.eliminarGrupo('${g.id}')">Eliminar</button>
-                                                </td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Nivel</th>
+                                        <th>Sección</th>
+                                        <th>Año</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                 `;
-            }
 
-            async renderEvaluacion() {
-                const grupos = await this.estudianteService.getGrupos();
-                const config = await this.configService.getConfig();
-                
-                return `
+                if (DB.grupos.length === 0) {
+                    html += `<tr><td colspan="5" class="text-center">No hay grupos</td></tr>`;
+                } else {
+                    DB.grupos.forEach(g => {
+                        html += `
+                            <tr>
+                                <td>${g.codigo}</td>
+                                <td>${g.nivel}</td>
+                                <td>${g.seccion}</td>
+                                <td>${g.año}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger" onclick="app.eliminarGrupo('${g.id}')">Eliminar</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                }
+
+                html += `</tbody></table></div></div>`;
+                container.innerHTML = html;
+            },
+
+            mostrarModalGrupo() {
+                this.showModal('Nuevo Grupo', `
+                    <div class="form-group">
+                        <label>Código</label>
+                        <input type="text" class="form-control" id="modalGrupoCodigo" placeholder="10-1">
+                    </div>
+                    <div class="form-group">
+                        <label>Nivel</label>
+                        <input type="text" class="form-control" id="modalGrupoNivel" placeholder="Décimo">
+                    </div>
+                    <div class="form-group">
+                        <label>Sección</label>
+                        <input type="text" class="form-control" id="modalGrupoSeccion" placeholder="1">
+                    </div>
+                `, () => {
+                    const codigo = document.getElementById('modalGrupoCodigo').value;
+                    const nivel = document.getElementById('modalGrupoNivel').value;
+                    const seccion = document.getElementById('modalGrupoSeccion').value;
+                    
+                    if (codigo && nivel && seccion) {
+                        DB.grupos.push({
+                            id: Date.now().toString(),
+                            codigo,
+                            nivel,
+                            seccion,
+                            año: DB.config.añoLectivo
+                        });
+                        this.navigate('grupos');
+                        this.showToast('Grupo creado', 'success');
+                    }
+                });
+            },
+
+            eliminarGrupo(id) {
+                if (confirm('¿Eliminar grupo?')) {
+                    DB.grupos = DB.grupos.filter(g => g.id !== id);
+                    this.navigate('grupos');
+                    this.showToast('Grupo eliminado', 'success');
+                }
+            },
+
+            // Estudiantes
+            renderEstudiantes(container) {
+                let html = `
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Registro de Evaluación</h3>
+                            <h3>Estudiantes</h3>
+                            <button class="btn btn-primary" onclick="app.mostrarModalEstudiante()">+ Nuevo Estudiante</button>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Identificación</th>
+                                        <th>Grupo</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                `;
+
+                if (DB.estudiantes.length === 0) {
+                    html += `<tr><td colspan="4" class="text-center">No hay estudiantes</td></tr>`;
+                } else {
+                    DB.estudiantes.forEach(e => {
+                        const grupo = DB.grupos.find(g => g.id === e.grupoId);
+                        html += `
+                            <tr>
+                                <td>${e.nombre} ${e.apellidos}</td>
+                                <td>${e.identificacion}</td>
+                                <td>${grupo ? grupo.codigo : 'Sin grupo'}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger" onclick="app.eliminarEstudiante('${e.id}')">Eliminar</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                }
+
+                html += `</tbody></table></div></div>`;
+                container.innerHTML = html;
+            },
+
+            mostrarModalEstudiante() {
+                const opcionesGrupos = DB.grupos.map(g => 
+                    `<option value="${g.id}">${g.codigo}</option>`
+                ).join('');
+
+                this.showModal('Nuevo Estudiante', `
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" id="modalEstNombre">
+                    </div>
+                    <div class="form-group">
+                        <label>Apellidos</label>
+                        <input type="text" class="form-control" id="modalEstApellidos">
+                    </div>
+                    <div class="form-group">
+                        <label>Identificación</label>
+                        <input type="text" class="form-control" id="modalEstIdentificacion">
+                    </div>
+                    <div class="form-group">
+                        <label>Grupo</label>
+                        <select class="form-control" id="modalEstGrupo">
+                            ${opcionesGrupos}
+                        </select>
+                    </div>
+                `, () => {
+                    const nombre = document.getElementById('modalEstNombre').value;
+                    const apellidos = document.getElementById('modalEstApellidos').value;
+                    const identificacion = document.getElementById('modalEstIdentificacion').value;
+                    const grupoId = document.getElementById('modalEstGrupo').value;
+                    
+                    if (nombre && apellidos && identificacion && grupoId) {
+                        DB.estudiantes.push({
+                            id: Date.now().toString(),
+                            nombre,
+                            apellidos,
+                            identificacion,
+                            grupoId
+                        });
+                        this.navigate('estudiantes');
+                        this.showToast('Estudiante creado', 'success');
+                    }
+                });
+            },
+
+            eliminarEstudiante(id) {
+                if (confirm('¿Eliminar estudiante?')) {
+                    DB.estudiantes = DB.estudiantes.filter(e => e.id !== id);
+                    this.navigate('estudiantes');
+                    this.showToast('Estudiante eliminado', 'success');
+                }
+            },
+
+            // Evaluación
+            renderEvaluacion(container) {
+                const opcionesGrupos = DB.grupos.map(g => 
+                    `<option value="${g.id}">${g.codigo}</option>`
+                ).join('');
+
+                container.innerHTML = `
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Registro de Evaluación</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label class="form-label">Grupo</label>
+                                    <label>Grupo</label>
                                     <select class="form-control" id="evalGrupo" onchange="app.cargarEstudiantesEval()">
                                         <option value="">Seleccione...</option>
-                                        ${grupos.map(g => `<option value="${g.id}">${g.codigo}</option>`).join('')}
+                                        ${opcionesGrupos}
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Periodo</label>
+                                    <label>Periodo</label>
                                     <select class="form-control" id="evalPeriodo">
-                                        ${config.periodos.map(p => `<option value="${p.id}">${p.nombre}</option>`).join('')}
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Componente</label>
-                                    <select class="form-control" id="evalComponente">
-                                        ${config.componentes.map(c => `<option value="${c.id}">${c.nombre} (${c.porcentaje}%)</option>`).join('')}
+                                        <option value="1">Periodo 1</option>
+                                        <option value="2">Periodo 2</option>
+                                        <option value="3">Periodo 3</option>
                                     </select>
                                 </div>
                             </div>
-
-                            <div id="tablaEvaluacion" style="margin-top: 1.5rem;">
-                                <p class="text-center" style="color: var(--secondary);">
-                                    Seleccione un grupo para cargar los estudiantes
-                                </p>
-                            </div>
+                            <div id="tablaEvaluacion" style="margin-top: 1.5rem;"></div>
                         </div>
                     </div>
                 `;
-            }
+            },
 
-            async renderPNFT() {
-                const rubricas = await this.pnftService.getRubricas();
-                
-                return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Prueba de Ejecución PNFT</h3>
-                            <button class="btn btn-primary" onclick="app.showModalCrearRubrica()">
-                                + Nueva Rúbrica
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-container">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Competencia</th>
-                                            <th>Criterios</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${rubricas.length === 0 ? `
-                                            <tr>
-                                                <td colspan="4" class="text-center">No hay rúbricas registradas</td>
-                                            </tr>
-                                        ` : rubricas.map(r => `
-                                            <tr>
-                                                <td>${r.nombre}</td>
-                                                <td>${r.competencia}</td>
-                                                <td>${r.criterios?.length || 0}</td>
-                                                <td class="actions">
-                                                    <button class="btn btn-sm btn-secondary" onclick="app.aplicarRubrica('${r.id}')">Aplicar</button>
-                                                    <button class="btn btn-sm btn-primary" onclick="app.editarRubrica('${r.id}')">Editar</button>
-                                                </td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            async renderNEE() {
-                const estudiantes = await db.getAll('estudiantes');
-                const estudiantesNEE = estudiantes.filter(e => e.adaptacionNEE);
-                
-                return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Estudiantes con Necesidades Educativas Especiales</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-container">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Estudiante</th>
-                                            <th>Identificación</th>
-                                            <th>Tipo</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${estudiantesNEE.length === 0 ? `
-                                            <tr>
-                                                <td colspan="4" class="text-center">No hay estudiantes NEE registrados</td>
-                                            </tr>
-                                        ` : estudiantesNEE.map(e => `
-                                            <tr>
-                                                <td>${e.nombre} ${e.apellidos}</td>
-                                                <td>${e.identificacion}</td>
-                                                <td>${e.tipoNEE || 'No especificado'}</td>
-                                                <td class="actions">
-                                                    <button class="btn btn-sm btn-primary" onclick="app.configurarNEE('${e.id}')">Configurar</button>
-                                                </td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            async renderIndicadores() {
-                const indicadores = await this.indicadorService.getAll();
-                
-                return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Banco de Indicadores</h3>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-secondary" onclick="app.importarIndicadores()">
-                                    Importar CSV
-                                </button>
-                                <button class="btn btn-primary" onclick="app.showModalCrearIndicador()">
-                                    + Nuevo Indicador
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-container">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Código</th>
-                                            <th>Descripción</th>
-                                            <th>Clasificación</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${indicadores.length === 0 ? `
-                                            <tr>
-                                                <td colspan="4" class="text-center">No hay indicadores registrados</td>
-                                            </tr>
-                                        ` : indicadores.map(ind => `
-                                            <tr>
-                                                <td>${ind.codigo}</td>
-                                                <td>${ind.descripcion}</td>
-                                                <td><span class="badge badge-info">${ind.clasificacion}</span></td>
-                                                <td class="actions">
-                                                    <button class="btn btn-sm btn-primary" onclick="app.editarIndicador('${ind.id}')">Editar</button>
-                                                    <button class="btn btn-sm btn-danger" onclick="app.eliminarIndicador('${ind.id}')">Eliminar</button>
-                                                </td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            async renderReportes() {
-                const grupos = await this.estudianteService.getGrupos();
-                
-                return `
-                    <div class="grid grid-2">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Reporte Individual</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label class="form-label">Seleccionar Estudiante</label>
-                                    <select class="form-control" id="reporteEstudiante">
-                                        <option value="">Buscar...</option>
-                                    </select>
-                                </div>
-                                <button class="btn btn-primary" onclick="app.generarReporteIndividual()" style="width: 100%;">
-                                    Generar Reporte
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Reporte Grupal</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label class="form-label">Seleccionar Grupo</label>
-                                    <select class="form-control" id="reporteGrupo">
-                                        <option value="">Seleccione...</option>
-                                        ${grupos.map(g => `<option value="${g.id}">${g.codigo}</option>`).join('')}
-                                    </select>
-                                </div>
-                                <button class="btn btn-primary" onclick="app.generarReporteGrupal()" style="width: 100%;">
-                                    Generar Reporte Grupal
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            async renderExportar() {
-                return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Exportación SEA</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Año Lectivo</label>
-                                <input type="number" class="form-control" id="seaAño" value="${CONFIG.DEFAULT_YEAR}">
-                            </div>
-                            <div class="d-flex gap-2" style="margin-top: 1.5rem;">
-                                <button class="btn btn-primary" onclick="app.exportarSEA()">
-                                    Generar Archivo SEA
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            async renderUsuarios() {
-                const users = await db.getAll('users');
-                
-                return `
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Gestión de Usuarios</h3>
-                            <button class="btn btn-primary" onclick="app.showModalCrearUsuario()">
-                                + Nuevo Usuario
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-container">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Email</th>
-                                            <th>Rol</th>
-                                            <th>Estado</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${users.map(u => `
-                                            <tr>
-                                                <td>${u.nombre} ${u.apellidos}</td>
-                                                <td>${u.email}</td>
-                                                <td><span class="badge badge-info">${u.rol}</span></td>
-                                                <td>
-                                                    ${u.active ? 
-                                                        '<span class="badge badge-success">Activo</span>' : 
-                                                        '<span class="badge badge-danger">Inactivo</span>'}
-                                                </td>
-                                                <td class="actions">
-                                                    <button class="btn btn-sm btn-primary" onclick="app.editarUsuario('${u.id}')">Editar</button>
-                                                    <button class="btn btn-sm btn-danger" onclick="app.toggleUsuario('${u.id}')">
-                                                        ${u.active ? 'Desactivar' : 'Activar'}
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            async renderRespaldo() {
-                return `
-                    <div class="grid grid-2">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Exportar Respaldo</h3>
-                            </div>
-                            <div class="card-body">
-                                <button class="btn btn-primary" onclick="app.exportarBackup()" style="width: 100%;">
-                                    Descargar Respaldo
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Importar Respaldo</h3>
-                            </div>
-                            <div class="card-body">
-                                <input type="file" class="form-control" id="backupFile" accept=".json" style="margin-bottom: 1rem;">
-                                <button class="btn btn-danger" onclick="app.importarBackup()" style="width: 100%;">
-                                    Restaurar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            async crearDatosPrueba() {
-                try {
-                    this.showToast('Creando datos de prueba...', 'info');
-                    
-                    const grupo = await this.estudianteService.createGrupo({
-                        codigo: '10-1',
-                        nivel: 'Décimo',
-                        seccion: '1',
-                        año: 2024
-                    });
-                    
-                    for (let i = 1; i <= 3; i++) {
-                        await this.estudianteService.createEstudiante({
-                            nombre: `Estudiante ${i}`,
-                            apellidos: 'Apellido Prueba',
-                            identificacion: `12345${i}`,
-                            grupoId: grupo.id
-                        });
-                    }
-                    
-                    this.showToast('Datos de prueba creados', 'success');
-                    this.navigate('dashboard');
-                } catch (error) {
-                    this.showToast('Error: ' + error.message, 'error');
-                }
-            }
-
-            async cargarEstudiantesEval() {
+            cargarEstudiantesEval() {
                 const grupoId = document.getElementById('evalGrupo').value;
-                if (!grupoId) return;
-
-                const estudiantes = await this.estudianteService.getEstudiantesByGrupo(grupoId);
+                const estudiantes = DB.estudiantes.filter(e => e.grupoId === grupoId);
                 const container = document.getElementById('tablaEvaluacion');
-                
+
                 if (estudiantes.length === 0) {
-                    container.innerHTML = '<p class="text-center">No hay estudiantes en este grupo</p>';
+                    container.innerHTML = '<p class="text-center">No hay estudiantes</p>';
                     return;
                 }
 
-                container.innerHTML = `
-                    <div class="table-container">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Estudiante</th>
-                                    <th>Identificación</th>
-                                    <th>Nota (0-100)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${estudiantes.map(e => `
-                                    <tr>
-                                        <td>${e.nombre} ${e.apellidos}</td>
-                                        <td>${e.identificacion}</td>
-                                        <td>
-                                            <input type="number" class="form-control" 
-                                                id="nota_${e.id}" min="0" max="100" step="0.01"
-                                                style="width: 100px;">
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div style="margin-top: 1rem; text-align: right;">
-                        <button class="btn btn-primary" onclick="app.guardarEvaluaciones()">
-                            Guardar Evaluaciones
-                        </button>
+                let html = `
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Estudiante</th>
+                                <th>Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                estudiantes.forEach(e => {
+                    html += `
+                        <tr>
+                            <td>${e.nombre} ${e.apellidos}</td>
+                            <td>
+                                <input type="number" class="form-control" id="nota_${e.id}" min="0" max="100" style="width: 100px;">
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 1rem;">
+                        <button class="btn btn-primary" onclick="app.guardarEvaluaciones()">Guardar</button>
                     </div>
                 `;
-            }
 
-            async guardarEvaluaciones() {
+                container.innerHTML = html;
+            },
+
+            guardarEvaluaciones() {
                 const grupoId = document.getElementById('evalGrupo').value;
-                const periodo = parseInt(document.getElementById('evalPeriodo').value);
-                const componente = document.getElementById('evalComponente').value;
+                const periodo = document.getElementById('evalPeriodo').value;
+                const estudiantes = DB.estudiantes.filter(e => e.grupoId === grupoId);
                 
-                const estudiantes = await this.estudianteService.getEstudiantesByGrupo(grupoId);
-                let guardadas = 0;
-
-                for (const est of estudiantes) {
-                    const notaInput = document.getElementById(`nota_${est.id}`);
-                    const nota = parseFloat(notaInput.value);
-                    
-                    if (!isNaN(nota)) {
-                        await this.evaluacionService.registrarEvaluacion({
-                            estudianteId: est.id,
+                estudiantes.forEach(e => {
+                    const nota = document.getElementById(`nota_${e.id}`).value;
+                    if (nota) {
+                        DB.evaluaciones.push({
+                            id: Date.now().toString() + e.id,
+                            estudianteId: e.id,
                             grupoId,
                             periodo,
-                            componente,
-                            nota,
-                            docenteId: this.auth.currentUser.id
+                            nota: parseFloat(nota),
+                            fecha: new Date().toISOString()
                         });
-                        guardadas++;
                     }
-                }
+                });
 
-                this.showToast(`${guardadas} evaluaciones guardadas`, 'success');
-            }
+                this.showToast('Evaluaciones guardadas', 'success');
+                this.cargarEstudiantesEval();
+            },
 
-            async exportarSEA() {
-                try {
-                    const datos = await this.seaService.exportarDatos();
-                    const csv = this.seaService.generarCSV(datos);
-                    const año = document.getElementById('seaAño').value;
-                    utils.downloadFile(csv, `SEA_Export_${año}.csv`, 'text/csv');
-                    this.showToast('Exportación completada', 'success');
-                } catch (error) {
-                    this.showToast('Error: ' + error.message, 'error');
-                }
-            }
+            // Usuarios
+            renderUsuarios(container) {
+                let html = `
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Usuarios</h3>
+                            <button class="btn btn-primary" onclick="app.mostrarModalUsuario()">+ Nuevo Usuario</button>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Rol</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                `;
 
-            async exportarBackup() {
-                try {
-                    const backup = await this.backupService.exportarBackup();
-                    const fecha = new Date().toISOString().split('T')[0];
-                    utils.downloadFile(backup, `Backup_${fecha}.json`, 'application/json');
-                    this.showToast('Respaldo exportado', 'success');
-                } catch (error) {
-                    this.showToast('Error: ' + error.message, 'error');
-                }
-            }
+                DB.users.forEach(u => {
+                    html += `
+                        <tr>
+                            <td>${u.nombre} ${u.apellidos}</td>
+                            <td>${u.email}</td>
+                            <td><span class="badge badge-info">${u.rol}</span></td>
+                            <td><span class="badge badge-success">Activo</span></td>
+                        </tr>
+                    `;
+                });
 
-            async importarBackup() {
-                const fileInput = document.getElementById('backupFile');
-                const file = fileInput.files[0];
+                html += `</tbody></table></div></div>`;
+                container.innerHTML = html;
+            },
+
+            mostrarModalUsuario() {
+                this.showModal('Nuevo Usuario', `
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" id="modalUserNombre">
+                    </div>
+                    <div class="form-group">
+                        <label>Apellidos</label>
+                        <input type="text" class="form-control" id="modalUserApellidos">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" id="modalUserEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control" id="modalUserPassword">
+                    </div>
+                    <div class="form-group">
+                        <label>Rol</label>
+                        <select class="form-control" id="modalUserRol">
+                            <option value="admin">Administrador</option>
+                            <option value="docente">Docente</option>
+                        </select>
+                    </div>
+                `, () => {
+                    const nombre = document.getElementById('modalUserNombre').value;
+                    const apellidos = document.getElementById('modalUserApellidos').value;
+                    const email = document.getElementById('modalUserEmail').value;
+                    const password = document.getElementById('modalUserPassword').value;
+                    const rol = document.getElementById('modalUserRol').value;
+
+                    if (nombre && apellidos && email && password) {
+                        DB.users.push({
+                            id: Date.now().toString(),
+                            nombre,
+                            apellidos,
+                            email,
+                            password,
+                            rol,
+                            active: true
+                        });
+                        this.navigate('usuarios');
+                        this.showToast('Usuario creado', 'success');
+                    }
+                });
+            },
+
+            // Login/Registro
+            showLogin() {
+                document.getElementById('loginScreen').classList.remove('hidden');
+                document.getElementById('registerScreen').classList.add('hidden');
+                document.getElementById('mainApp').classList.add('hidden');
+            },
+
+            showRegister() {
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('registerScreen').classList.remove('hidden');
+                document.getElementById('mainApp').classList.add('hidden');
+            },
+
+            showMainApp() {
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('registerScreen').classList.add('hidden');
+                document.getElementById('mainApp').classList.remove('hidden');
                 
-                if (!file) {
-                    this.showToast('Seleccione un archivo', 'warning');
+                document.getElementById('userRoleDisplay').textContent = this.currentUser.rol;
+                document.getElementById('userNameDisplay').textContent = 
+                    `${this.currentUser.nombre} ${this.currentUser.apellidos}`;
+                
+                this.navigate('dashboard');
+            },
+
+            handleLogin(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                const user = DB.users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    this.currentUser = user;
+                    this.showMainApp();
+                    this.showToast('Bienvenido', 'success');
+                } else {
+                    this.showToast('Credenciales inválidas', 'error');
+                }
+            },
+
+            handleRegister(e) {
+                e.preventDefault();
+                const password = document.getElementById('regPassword').value;
+                const confirm = document.getElementById('regPasswordConfirm').value;
+
+                if (password !== confirm) {
+                    this.showToast('Las contraseñas no coinciden', 'error');
                     return;
                 }
 
-                try {
-                    const content = await file.text();
-                    await this.backupService.importarBackup(content);
-                    this.showToast('Respaldo restaurado', 'success');
-                    this.navigate('dashboard');
-                } catch (error) {
-                    this.showToast(error.message, 'error');
-                }
-            }
+                const user = {
+                    id: Date.now().toString(),
+                    nombre: document.getElementById('regNombre').value,
+                    apellidos: document.getElementById('regApellidos').value,
+                    email: document.getElementById('regEmail').value,
+                    password: password,
+                    rol: document.getElementById('regRol').value,
+                    active: true
+                };
 
-            showToast(message, type = 'success') {
-                const container = document.getElementById('toastContainer');
-                const toast = document.createElement('div');
-                toast.className = `toast ${type}`;
-                toast.innerHTML = `<span>${type === 'success' ? '✓' : '✗'}</span><span>${message}</span>`;
-                container.appendChild(toast);
-                setTimeout(() => toast.remove(), 3000);
-            }
+                DB.users.push(user);
+                this.showToast('Usuario registrado', 'success');
+                this.showLogin();
+            },
+
+            logout() {
+                this.currentUser = null;
+                this.showLogin();
+                this.showToast('Sesión cerrada', 'success');
+            },
+
+            // Utilidades
+            crearDatosPrueba() {
+                // Crear grupo
+                const grupo = {
+                    id: Date.now().toString(),
+                    codigo: '10-1',
+                    nivel: 'Décimo',
+                    seccion: '1',
+                    año: DB.config.añoLectivo
+                };
+                DB.grupos.push(grupo);
+
+                // Crear estudiantes
+                for (let i = 1; i <= 3; i++) {
+                    DB.estudiantes.push({
+                        id: Date.now().toString() + i,
+                        nombre: `Estudiante ${i}`,
+                        apellidos: 'Prueba',
+                        identificacion: `12345${i}`,
+                        grupoId: grupo.id
+                    });
+                }
+
+                this.navigate('dashboard');
+                this.showToast('Datos de prueba creados', 'success');
+            },
 
             showModal(title, content, onConfirm) {
                 document.getElementById('modalTitle').textContent = title;
@@ -2705,97 +1238,28 @@
                     onConfirm();
                     this.closeModal();
                 };
+            },
+
+            closeModal() {
+                document.getElementById('modalOverlay').classList.remove('active');
+            },
+
+            showToast(message, type = 'success') {
+                const container = document.getElementById('toastContainer');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                container.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
             }
+        };
 
-            closeModal(event) {
-                if (!event || event.target.id === 'modalOverlay') {
-                    document.getElementById('modalOverlay').classList.remove('active');
-                }
-            }
-
-            toggleSidebar() {
-                document.getElementById('sidebar').classList.toggle('open');
-            }
-
-            showModalCrearGrupo() {
-                this.showModal('Nuevo Grupo', `
-                    <div class="form-group">
-                        <label>Código</label>
-                        <input type="text" class="form-control" id="modalGrupoCodigo" placeholder="Ej: 10-1">
-                    </div>
-                    <div class="form-group">
-                        <label>Nivel</label>
-                        <input type="text" class="form-control" id="modalGrupoNivel" placeholder="Ej: Décimo">
-                    </div>
-                    <div class="form-group">
-                        <label>Sección</label>
-                        <input type="text" class="form-control" id="modalGrupoSeccion" placeholder="Ej: 1">
-                    </div>
-                `, async () => {
-                    const codigo = document.getElementById('modalGrupoCodigo').value;
-                    const nivel = document.getElementById('modalGrupoNivel').value;
-                    const seccion = document.getElementById('modalGrupoSeccion').value;
-                    
-                    if (codigo && nivel && seccion) {
-                        await this.estudianteService.createGrupo({
-                            codigo, nivel, seccion,
-                            año: CONFIG.DEFAULT_YEAR
-                        });
-                        this.showToast('Grupo creado', 'success');
-                        this.navigate('grupos');
-                    }
-                });
-            }
-
-            showModalCrearIndicador() {
-                this.showModal('Nuevo Indicador', `
-                    <div class="form-group">
-                        <label>Código</label>
-                        <input type="text" class="form-control" id="modalIndicadorCodigo">
-                    </div>
-                    <div class="form-group">
-                        <label>Descripción</label>
-                        <textarea class="form-control" id="modalIndicadorDescripcion"></textarea>
-                    </div>
-                `, async () => {
-                    const codigo = document.getElementById('modalIndicadorCodigo').value;
-                    const descripcion = document.getElementById('modalIndicadorDescripcion').value;
-                    
-                    if (codigo && descripcion) {
-                        await this.indicadorService.create({
-                            codigo, descripcion,
-                            clasificacion: 'General',
-                            competencia: 'General'
-                        });
-                        this.showToast('Indicador creado', 'success');
-                        this.navigate('indicadores');
-                    }
-                });
-            }
-
-            verEstudiantes(id) { this.showToast('Función en desarrollo', 'info'); }
-            editarGrupo(id) { this.showToast('Función en desarrollo', 'info'); }
-            eliminarGrupo(id) { this.showToast('Función en desarrollo', 'info'); }
-            showModalCrearRubrica() { this.showToast('Función en desarrollo', 'info'); }
-            aplicarRubrica(id) { this.showToast('Función en desarrollo', 'info'); }
-            editarRubrica(id) { this.showToast('Función en desarrollo', 'info'); }
-            configurarNEE(id) { this.showToast('Función en desarrollo', 'info'); }
-            verReporteNEE(id) { this.showToast('Función en desarrollo', 'info'); }
-            importarIndicadores() { this.showToast('Función en desarrollo', 'info'); }
-            editarIndicador(id) { this.showToast('Función en desarrollo', 'info'); }
-            eliminarIndicador(id) { this.showToast('Función en desarrollo', 'info'); }
-            generarReporteIndividual() { this.showToast('Función en desarrollo', 'info'); }
-            generarReporteGrupal() { this.showToast('Función en desarrollo', 'info'); }
-            exportarReporte(formato) { this.showToast('Función en desarrollo', 'info'); }
-            showModalCrearUsuario() { this.showToast('Función en desarrollo', 'info'); }
-            editarUsuario(id) { this.showToast('Función en desarrollo', 'info'); }
-            toggleUsuario(id) { this.showToast('Función en desarrollo', 'info'); }
-            validarDatosSEA() { this.showToast('Función en desarrollo', 'info'); }
-        }
-
-        // Inicializar aplicación
-        const app = new App();
-        document.addEventListener('DOMContentLoaded', () => app.init());
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('loginForm').addEventListener('submit', (e) => app.handleLogin(e));
+            document.getElementById('registerForm').addEventListener('submit', (e) => app.handleRegister(e));
+            app.init();
+        });
     </script>
 </body>
 </html>
