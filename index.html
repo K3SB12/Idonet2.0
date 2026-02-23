@@ -11,7 +11,7 @@
     <style>
         :root {
             --primary: #2563eb;
-            --primary-dark: #1d4ed8; 
+            --primary-dark: #1d4ed8;
             --primary-light: #3b82f6;
             --secondary: #64748b;
             --success: #10b981;
@@ -41,13 +41,11 @@
             overflow-x: hidden;
         }
 
-        /* Layout Principal */
         .app-container {
             display: flex;
             min-height: 100vh;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 280px;
             background: var(--dark);
@@ -162,7 +160,6 @@
             opacity: 1;
         }
 
-        /* Contenido Principal */
         .main-content {
             flex: 1;
             margin-left: 280px;
@@ -249,7 +246,6 @@
             overflow-y: auto;
         }
 
-        /* Cards */
         .card {
             background: white;
             border-radius: var(--radius-lg);
@@ -276,7 +272,6 @@
             padding: 1.5rem;
         }
 
-        /* Grid */
         .grid {
             display: grid;
             gap: 1.5rem;
@@ -294,7 +289,6 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
-        /* Stats Cards */
         .stat-card {
             background: white;
             padding: 1.5rem;
@@ -333,7 +327,6 @@
             margin-top: 0.25rem;
         }
 
-        /* Forms */
         .form-group {
             margin-bottom: 1.25rem;
         }
@@ -386,7 +379,6 @@
             grid-template-columns: repeat(3, 1fr);
         }
 
-        /* Tables */
         .table-container {
             overflow-x: auto;
         }
@@ -438,7 +430,6 @@
             justify-content: center;
         }
 
-        /* Badges */
         .badge {
             display: inline-flex;
             align-items: center;
@@ -468,7 +459,6 @@
             color: var(--info);
         }
 
-        /* Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -550,7 +540,6 @@
             gap: 0.75rem;
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             border-bottom: 1px solid var(--border);
@@ -583,7 +572,6 @@
             display: block;
         }
 
-        /* Alertas */
         .alert {
             padding: 1rem 1.25rem;
             border-radius: var(--radius);
@@ -611,7 +599,6 @@
             border: 1px solid rgba(245, 158, 11, 0.2);
         }
 
-        /* Login */
         .login-container {
             min-height: 100vh;
             display: flex;
@@ -658,7 +645,6 @@
             padding: 2rem;
         }
 
-        /* Progress Bar */
         .progress-bar {
             height: 8px;
             background: var(--border);
@@ -672,7 +658,6 @@
             transition: width 0.3s ease;
         }
 
-        /* Charts Placeholder */
         .chart-container {
             height: 300px;
             background: var(--light);
@@ -683,7 +668,6 @@
             color: var(--secondary);
         }
 
-        /* Rubric */
         .rubric-table th {
             background: var(--dark);
             color: white;
@@ -693,7 +677,6 @@
             min-width: 100px;
         }
 
-        /* Responsive */
         @media (max-width: 1024px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -722,7 +705,6 @@
             }
         }
 
-        /* Utilities */
         .hidden {
             display: none !important;
         }
@@ -763,7 +745,6 @@
             gap: 1rem;
         }
 
-        /* Loading */
         .loading {
             display: inline-block;
             width: 20px;
@@ -778,7 +759,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Toast */
         .toast-container {
             position: fixed;
             top: 1rem;
@@ -824,7 +804,6 @@
             border-left: 4px solid var(--warning);
         }
 
-        /* Toggle Switch */
         .toggle {
             position: relative;
             display: inline-block;
@@ -870,7 +849,6 @@
             transform: translateX(24px);
         }
 
-        /* Print Styles */
         @media print {
             .sidebar, .top-bar, .btn {
                 display: none !important;
@@ -888,8 +866,8 @@
     </style>
 </head>
 <body>
-    <!-- Login Screen -->
-    <div id="loginScreen" class="login-container">
+    <!-- Login Screen (OCULTO POR DEFECTO) -->
+    <div id="loginScreen" class="login-container hidden">
         <div class="login-box">
             <div class="login-header">
                 <div class="logo">I</div>
@@ -900,11 +878,11 @@
                 <form id="loginForm">
                     <div class="form-group">
                         <label class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="loginEmail" required placeholder="usuario@institucion.edu.cr">
+                        <input type="email" class="form-control" id="loginEmail" placeholder="usuario@institucion.edu.cr">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="loginPassword" required placeholder="••••••••">
+                        <input type="password" class="form-control" id="loginPassword" placeholder="••••••••">
                     </div>
                     <div class="form-group">
                         <label class="toggle">
@@ -918,15 +896,15 @@
                     </button>
                 </form>
                 <div style="margin-top: 1.5rem; text-align: center;">
-                <a href="javascript:void(0)" onclick="app.showRegister()" style="color: var(--primary); text-decoration: none; font-size: 0.875rem; cursor: pointer;">
-                    ¿No tiene cuenta? Regístrese aquí
-                </a>
-            </div>
+                    <a href="javascript:void(0)" onclick="app.showRegister()" style="color: var(--primary); text-decoration: none; font-size: 0.875rem; cursor: pointer;">
+                        ¿No tiene cuenta? Regístrese aquí
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Register Screen -->
+    <!-- Register Screen (OCULTO POR DEFECTO) -->
     <div id="registerScreen" class="login-container hidden">
         <div class="login-box">
             <div class="login-header">
@@ -939,30 +917,30 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label required">Nombre</label>
-                            <input type="text" class="form-control" id="regNombre" required>
+                            <input type="text" class="form-control" id="regNombre">
                         </div>
                         <div class="form-group">
                             <label class="form-label required">Apellidos</label>
-                            <input type="text" class="form-control" id="regApellidos" required>
+                            <input type="text" class="form-control" id="regApellidos">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label required">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="regEmail" required>
+                        <input type="email" class="form-control" id="regEmail">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label required">Contraseña</label>
-                            <input type="password" class="form-control" id="regPassword" required minlength="6">
+                            <input type="password" class="form-control" id="regPassword" minlength="6">
                         </div>
                         <div class="form-group">
                             <label class="form-label required">Confirmar Contraseña</label>
-                            <input type="password" class="form-control" id="regPasswordConfirm" required>
+                            <input type="password" class="form-control" id="regPasswordConfirm">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label required">Rol</label>
-                        <select class="form-control" id="regRol" required>
+                        <select class="form-control" id="regRol">
                             <option value="">Seleccione...</option>
                             <option value="docente">Docente</option>
                             <option value="coordinador">Coordinador</option>
@@ -979,16 +957,16 @@
                     </button>
                 </form>
                 <div style="margin-top: 1.5rem; text-align: center;">
-                <a href="javascript:void(0)" onclick="app.showLogin()" style="color: var(--primary); text-decoration: none; font-size: 0.875rem;">
-                    ← Volver al inicio de sesión
-                </a>
-            </div>
+                    <a href="javascript:void(0)" onclick="app.showLogin()" style="color: var(--primary); text-decoration: none; font-size: 0.875rem;">
+                        ← Volver al inicio de sesión
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Main App -->
-    <div id="mainApp" class="app-container hidden">
+    <!-- Main App (VISIBLE POR DEFECTO) -->
+    <div id="mainApp" class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -997,8 +975,8 @@
             </div>
             
             <div class="user-info">
-                <div class="user-role" id="userRoleDisplay">Rol</div>
-                <div class="user-name" id="userNameDisplay">Nombre Usuario</div>
+                <div class="user-role" id="userRoleDisplay">Admin</div>
+                <div class="user-name" id="userNameDisplay">Cargando...</div>
             </div>
 
             <nav class="nav-menu">
@@ -1134,14 +1112,6 @@
     </div>
 
     <script>
-        /**
-         * Idonet Premium - Sistema de Gestión Académica
-         * Compatible MEP Costa Rica, PNFT y SEA
-         * 
-         * @version 1.0.0
-         * @author Sistema Idonet
-         */
-
         // ==========================================
         // CONFIGURACIÓN Y UTILIDADES
         // ==========================================
@@ -1171,7 +1141,6 @@
             [ROLES.ADMIN]: ['*']
         };
 
-        // Utilidades
         const utils = {
             generateId: () => Date.now().toString(36) + Math.random().toString(36).substr(2),
             
@@ -1247,7 +1216,6 @@
                     request.onupgradeneeded = (event) => {
                         const db = event.target.result;
 
-                        // Stores
                         if (!db.objectStoreNames.contains('users')) {
                             const usersStore = db.createObjectStore('users', { keyPath: 'id' });
                             usersStore.createIndex('email', 'email', { unique: true });
@@ -1361,11 +1329,9 @@
             }
 
             async register(userData) {
-                // 1. Verificar si el usuario ya existe
                 const existing = await db.get('users', userData.email);
                 if (existing) throw new Error('El correo ya está registrado');
 
-                // 2. Crear el objeto del usuario con un ID único
                 const user = {
                     id: utils.generateId(),
                     ...userData,
@@ -1373,10 +1339,7 @@
                     active: true
                 };
 
-                // 3. Guardar el usuario en la base de datos (¡CORRECCIÓN APLICADA!)
                 await db.put('users', user);
-
-                // 4. Devolver el usuario creado
                 return user;
             }
 
@@ -1438,7 +1401,7 @@
                     key: 'institucional',
                     nombreInstitucion: '',
                     codigoMEP: '',
-                    modalidad: 'academica', // academica | tecnica
+                    modalidad: 'academica',
                     añoLectivo: CONFIG.DEFAULT_YEAR,
                     periodos: [
                         { id: 1, nombre: 'Primer Periodo', inicio: '', fin: '' },
@@ -1450,9 +1413,9 @@
                         { id: 'hacer', nombre: 'Hacer', porcentaje: 40 },
                         { id: 'ser', nombre: 'Ser', porcentaje: 20 }
                     ],
-                    redondeo: 'normal', // normal | matematico | truncado
+                    redondeo: 'normal',
                     decimales: 2,
-                    escala: '0-100' // 0-100 | 0-10
+                    escala: '0-100'
                 };
             }
 
@@ -1506,7 +1469,6 @@
             }
 
             async deleteEstudiante(id) {
-                // Verificar dependencias
                 const evaluaciones = await db.getByIndex('evaluaciones', 'estudianteId', id);
                 if (evaluaciones.length > 0) {
                     throw new Error('No se puede eliminar: tiene evaluaciones registradas');
@@ -1517,7 +1479,6 @@
 
         class EvaluacionService {
             async registrarEvaluacion(evalData) {
-                // Validar rango
                 if (!utils.validateRange(evalData.nota, CONFIG.MIN_NOTE, CONFIG.MAX_NOTE)) {
                     throw new Error(`La nota debe estar entre ${CONFIG.MIN_NOTE} y ${CONFIG.MAX_NOTE}`);
                 }
@@ -1529,10 +1490,7 @@
                 };
 
                 await db.put('evaluaciones', evaluacion);
-                
-                // Actualizar historial del estudiante
                 await this.actualizarHistorial(evalData.estudianteId);
-                
                 return evaluacion;
             }
 
@@ -1728,7 +1686,6 @@
             }
 
             exportToPDF(data, tipo) {
-                // Generar HTML para impresión/PDF
                 const html = this.generarHTMLReporte(data, tipo);
                 const ventana = window.open('', '_blank');
                 ventana.document.write(html);
@@ -1737,7 +1694,7 @@
             }
 
             generarHTMLReporte(data, tipo) {
-                const config = { nombreInstitucion: 'Institución Educativa' }; // Simplificado
+                const config = { nombreInstitucion: 'Institución Educativa' };
                 
                 return `
                     <!DOCTYPE html>
@@ -1915,12 +1872,10 @@
                     
                     if (!data.version) throw new Error('Archivo de respaldo inválido');
 
-                    // Confirmar antes de sobrescribir
                     if (!confirm('¿Está seguro de restaurar este respaldo? Se sobrescribirán todos los datos actuales.')) {
                         return false;
                     }
 
-                    // Limpiar y restaurar
                     await db.clear('users');
                     await db.clear('grupos');
                     await db.clear('estudiantes');
@@ -1928,7 +1883,6 @@
                     await db.clear('pnft');
                     await db.clear('indicadores');
 
-                    // Restaurar datos
                     if (data.usuarios) {
                         for (const user of data.usuarios) await db.put('users', user);
                     }
@@ -1959,7 +1913,7 @@
         }
 
         // ==========================================
-        // APLICACIÓN PRINCIPAL
+        // APLICACIÓN PRINCIPAL - VERSIÓN ACCESO DIRECTO
         // ==========================================
 
         class App {
@@ -1981,44 +1935,86 @@
             async init() {
                 try {
                     await db.init();
-                    console.log('Base de datos inicializada');
+                    console.log('✅ Base de datos inicializada');
                     
-                    // Verificar sesión
-                    const user = await this.auth.checkSession();
-                    if (user) {
-                        this.showMainApp();
+                    // ==========================================
+                    // USUARIO GENERICO - PUEDES CAMBIAR ESTOS DATOS
+                    // ==========================================
+                    const USUARIO_GENERICO = {
+                        nombre: 'Admin',
+                        apellidos: 'General',
+                        email: 'admin@demo.com',      // ← CAMBIA AQUÍ EL CORREO SI QUIERES
+                        password: 'demo123',           // ← CAMBIA AQUÍ LA CONTRASEÑA
+                        rol: 'admin'
+                    };
+                    
+                    // Verificar si ya existe
+                    const users = await db.getAll('users');
+                    let currentUser = users.find(u => u.email === USUARIO_GENERICO.email);
+                    
+                    if (!currentUser) {
+                        console.log('🔄 Creando usuario genérico...');
+                        currentUser = {
+                            id: utils.generateId(),
+                            ...USUARIO_GENERICO,
+                            createdAt: new Date().toISOString(),
+                            active: true
+                        };
+                        await db.put('users', currentUser);
+                        console.log('✅ Usuario genérico creado:', USUARIO_GENERICO.email);
                     } else {
-                        this.showLogin();
+                        console.log('✅ Usuario genérico ya existe');
                     }
-
-                    // Configurar eventos
-                    this.setupEventListeners();
                     
-                    // Registrar Service Worker
-                    this.registerSW();
+                    // INICIAR SESIÓN AUTOMÁTICAMENTE
+                    this.auth.currentUser = currentUser;
+                    localStorage.setItem('idonet_session', JSON.stringify({
+                        userId: currentUser.id,
+                        timestamp: Date.now()
+                    }));
+                    
+                    console.log('🔑 Sesión iniciada como:', currentUser.email);
+                    
+                    // OCULTAR TODO Y MOSTRAR DASHBOARD
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('registerScreen').classList.add('hidden');
+                    document.getElementById('mainApp').classList.remove('hidden');
+                    
+                    // Actualizar UI
+                    document.getElementById('userRoleDisplay').textContent = currentUser.rol;
+                    document.getElementById('userNameDisplay').textContent = 
+                        `${currentUser.nombre} ${currentUser.apellidos}`;
+                    
+                    // Cargar Dashboard
+                    this.navigate('dashboard');
+                    
+                    // Mostrar mensaje de bienvenida
+                    setTimeout(() => {
+                        this.showToast('👋 Bienvenido al Dashboard', 'success');
+                    }, 500);
+                    
                 } catch (error) {
-                    console.error('Error inicializando aplicación:', error);
-                    this.showToast('Error al inicializar la aplicación', 'error');
+                    console.error('❌ Error inicializando aplicación:', error);
+                    this.showLogin();
                 }
             }
 
             setupEventListeners() {
-                // Login
-                document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     await this.handleLogin();
                 });
 
-                // Registro
-                document.getElementById('registerForm').addEventListener('submit', async (e) => {
+                document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     await this.handleRegister();
                 });
 
-                // Cambio de rol en registro
-                document.getElementById('regRol').addEventListener('change', (e) => {
+                document.getElementById('regRol')?.addEventListener('change', (e) => {
                     const codigoGrupo = document.getElementById('regCodigoGrupo');
-                    codigoGrupo.style.display = e.target.value === 'docente' ? 'block' : 'none';
+                    if (codigoGrupo) {
+                        codigoGrupo.style.display = e.target.value === 'docente' ? 'block' : 'none';
+                    }
                 });
             }
 
@@ -2033,7 +2029,6 @@
                 }
             }
 
-            // Navegación
             showLogin() {
                 document.getElementById('loginScreen').classList.remove('hidden');
                 document.getElementById('registerScreen').classList.add('hidden');
@@ -2046,66 +2041,20 @@
                 document.getElementById('mainApp').classList.add('hidden');
             }
 
-            showMainApp() {
-                document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('registerScreen').classList.add('hidden');
-                document.getElementById('mainApp').classList.remove('hidden');
-                
-                // Actualizar UI con datos del usuario
-                document.getElementById('userRoleDisplay').textContent = this.auth.currentUser.rol;
-                document.getElementById('userNameDisplay').textContent = 
-                    `${this.auth.currentUser.nombre} ${this.auth.currentUser.apellidos}`;
-                
-                // Cargar vista inicial
-                this.navigate('dashboard');
-            }
-
             async handleLogin() {
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-
-                try {
-                    await this.auth.login(email, password);
-                    this.showToast('Inicio de sesión exitoso', 'success');
-                    this.showMainApp();
-                } catch (error) {
-                    this.showToast(error.message, 'error');
-                }
+                this.showToast('El acceso directo ya está activado', 'info');
             }
 
             async handleRegister() {
-                const password = document.getElementById('regPassword').value;
-                const passwordConfirm = document.getElementById('regPasswordConfirm').value;
-
-                if (password !== passwordConfirm) {
-                    this.showToast('Las contraseñas no coinciden', 'error');
-                    return;
-                }
-
-                const userData = {
-                    nombre: document.getElementById('regNombre').value,
-                    apellidos: document.getElementById('regApellidos').value,
-                    email: document.getElementById('regEmail').value,
-                    password: password,
-                    rol: document.getElementById('regRol').value
-                };
-
-                try {
-                    await this.auth.register(userData);
-                    this.showToast('Usuario registrado exitosamente', 'success');
-                    this.showLogin();
-                } catch (error) {
-                    this.showToast(error.message, 'error');
-                }
+                this.showToast('El acceso directo ya está activado', 'info');
             }
 
             logout() {
                 this.auth.logout();
-                this.showLogin();
                 this.showToast('Sesión cerrada', 'success');
+                location.reload();
             }
 
-            // Navegación entre módulos
             navigate(view) {
                 if (!this.auth.hasPermission(view)) {
                     this.showToast('No tiene permisos para acceder a este módulo', 'error');
@@ -2114,13 +2063,15 @@
 
                 this.currentView = view;
                 
-                // Actualizar navegación activa
                 document.querySelectorAll('.nav-item').forEach(item => {
                     item.classList.remove('active');
                 });
-                event?.target?.classList.add('active');
+                
+                const activeButton = Array.from(document.querySelectorAll('.nav-item')).find(
+                    btn => btn.getAttribute('onclick')?.includes(view)
+                );
+                if (activeButton) activeButton.classList.add('active');
 
-                // Cargar contenido
                 this.loadView(view);
             }
 
@@ -2183,13 +2134,11 @@
                 }
             }
 
-            // Renderizado de Vistas
             async renderDashboard() {
                 const grupos = await this.estudianteService.getGrupos();
                 const estudiantes = await db.getAll('estudiantes');
                 const evaluaciones = await db.getAll('evaluaciones');
                 
-                // Calcular estadísticas
                 const bajo65 = estudiantes.filter(e => {
                     const prom = e.historial.length > 0 ? e.historial[e.historial.length - 1].promedio : 100;
                     return prom < 65;
@@ -2855,7 +2804,6 @@
                 `;
             }
 
-            // Acciones específicas
             async cargarEstudiantesEval() {
                 const grupoId = document.getElementById('evalGrupo').value;
                 if (!grupoId) return;
@@ -2994,7 +2942,6 @@
                 }
             }
 
-            // UI Helpers
             showToast(message, type = 'success') {
                 const container = document.getElementById('toastContainer');
                 const toast = document.createElement('div');
@@ -3033,7 +2980,6 @@
                 sidebar.classList.toggle('open');
             }
 
-            // Placeholders para funciones adicionales
             showModalCrearGrupo() { this.showToast('Función en desarrollo', 'warning'); }
             verEstudiantes(id) { this.showToast('Cargando estudiantes...', 'info'); }
             editarGrupo(id) { this.showToast('Editando grupo...', 'info'); }
