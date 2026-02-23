@@ -155,11 +155,6 @@
             opacity: 0.7;
         }
 
-        .nav-item.active .nav-icon,
-        .nav-item:hover .nav-icon {
-            opacity: 1;
-        }
-
         .main-content {
             flex: 1;
             margin-left: 280px;
@@ -375,10 +370,6 @@
             gap: 1rem;
         }
 
-        .form-row-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
         .table-container {
             overflow-x: auto;
         }
@@ -419,15 +410,6 @@
         .btn-sm {
             padding: 0.375rem 0.75rem;
             font-size: 0.75rem;
-        }
-
-        .btn-icon {
-            padding: 0.375rem;
-            width: 32px;
-            height: 32px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .badge {
@@ -540,38 +522,6 @@
             gap: 0.75rem;
         }
 
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 1.5rem;
-        }
-
-        .tab {
-            padding: 0.75rem 1.25rem;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            font-weight: 500;
-            color: var(--secondary);
-            transition: all 0.2s;
-        }
-
-        .tab:hover {
-            color: var(--dark);
-        }
-
-        .tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
         .alert {
             padding: 1rem 1.25rem;
             border-radius: var(--radius);
@@ -645,19 +595,6 @@
             padding: 2rem;
         }
 
-        .progress-bar {
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
         .chart-container {
             height: 300px;
             background: var(--light);
@@ -666,15 +603,6 @@
             align-items: center;
             justify-content: center;
             color: var(--secondary);
-        }
-
-        .rubric-table th {
-            background: var(--dark);
-            color: white;
-        }
-
-        .rubric-cell {
-            min-width: 100px;
         }
 
         @media (max-width: 1024px) {
@@ -713,18 +641,6 @@
             text-align: center;
         }
 
-        .mt-2 {
-            margin-top: 0.5rem;
-        }
-
-        .mt-4 {
-            margin-top: 1rem;
-        }
-
-        .mb-4 {
-            margin-bottom: 1rem;
-        }
-
         .d-flex {
             display: flex;
         }
@@ -745,18 +661,20 @@
             gap: 1rem;
         }
 
-        .loading {
+        .loading-spinner {
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary);
             border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .toast-container {
@@ -781,17 +699,6 @@
             animation: slideIn 0.3s ease;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
         .toast.success {
             border-left: 4px solid var(--success);
         }
@@ -802,6 +709,17 @@
 
         .toast.warning {
             border-left: 4px solid var(--warning);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .toggle {
@@ -866,7 +784,7 @@
     </style>
 </head>
 <body>
-    <!-- Login Screen (OCULTO POR DEFECTO) -->
+    <!-- Login Screen (oculto por defecto) -->
     <div id="loginScreen" class="login-container hidden">
         <div class="login-box">
             <div class="login-header">
@@ -895,16 +813,11 @@
                         Iniciar Sesión
                     </button>
                 </form>
-                <div style="margin-top: 1.5rem; text-align: center;">
-                    <a href="javascript:void(0)" onclick="app.showRegister()" style="color: var(--primary); text-decoration: none; font-size: 0.875rem; cursor: pointer;">
-                        ¿No tiene cuenta? Regístrese aquí
-                    </a>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Register Screen (OCULTO POR DEFECTO) -->
+    <!-- Register Screen (oculto por defecto) -->
     <div id="registerScreen" class="login-container hidden">
         <div class="login-box">
             <div class="login-header">
@@ -948,24 +861,15 @@
                             <option value="admin">Administrador</option>
                         </select>
                     </div>
-                    <div class="form-group" id="regCodigoGrupo" style="display: none;">
-                        <label class="form-label">Código de Grupo (si aplica)</label>
-                        <input type="text" class="form-control" placeholder="Ej: 10-1, 11-A">
-                    </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
                         Crear Cuenta
                     </button>
                 </form>
-                <div style="margin-top: 1.5rem; text-align: center;">
-                    <a href="javascript:void(0)" onclick="app.showLogin()" style="color: var(--primary); text-decoration: none; font-size: 0.875rem;">
-                        ← Volver al inicio de sesión
-                    </a>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Main App (VISIBLE POR DEFECTO) -->
+    <!-- Main App -->
     <div id="mainApp" class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
@@ -975,7 +879,7 @@
             </div>
             
             <div class="user-info">
-                <div class="user-role" id="userRoleDisplay">Admin</div>
+                <div class="user-role" id="userRoleDisplay">Cargando...</div>
                 <div class="user-name" id="userNameDisplay">Cargando...</div>
             </div>
 
@@ -983,13 +887,13 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Principal</div>
                     <button class="nav-item active" onclick="app.navigate('dashboard')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
                         </svg>
                         Dashboard
                     </button>
                     <button class="nav-item" onclick="app.navigate('configuracion')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
@@ -1000,25 +904,25 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Gestión Académica</div>
                     <button class="nav-item" onclick="app.navigate('grupos')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
                         Grupos y Estudiantes
                     </button>
                     <button class="nav-item" onclick="app.navigate('evaluacion')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                         </svg>
                         Evaluación General
                     </button>
                     <button class="nav-item" onclick="app.navigate('pnft')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         Prueba Ejecución PNFT
                     </button>
                     <button class="nav-item" onclick="app.navigate('nee')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                         </svg>
                         Módulo NEE
@@ -1028,19 +932,19 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Herramientas</div>
                     <button class="nav-item" onclick="app.navigate('indicadores')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                         </svg>
                         Banco de Indicadores
                     </button>
                     <button class="nav-item" onclick="app.navigate('reportes')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
                         Reportería
                     </button>
                     <button class="nav-item" onclick="app.navigate('exportar')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
                         </svg>
                         Exportar SEA
@@ -1050,19 +954,19 @@
                 <div class="nav-section">
                     <div class="nav-section-title">Sistema</div>
                     <button class="nav-item" onclick="app.navigate('usuarios')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                         </svg>
                         Usuarios
                     </button>
                     <button class="nav-item" onclick="app.navigate('respaldo')">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
                         </svg>
                         Respaldo y Seguridad
                     </button>
                     <button class="nav-item" onclick="app.logout()">
-                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                         </svg>
                         Cerrar Sesión
@@ -1087,6 +991,10 @@
 
             <div class="content-area" id="contentArea">
                 <!-- Views will be loaded here -->
+                <div style="text-align: center; padding: 2rem;">
+                    <div class="loading-spinner"></div>
+                    <p>Cargando sistema...</p>
+                </div>
             </div>
         </main>
     </div>
@@ -1101,9 +1009,7 @@
                 <h3 class="modal-title" id="modalTitle">Título</h3>
                 <button class="modal-close" onclick="app.closeModal()">&times;</button>
             </div>
-            <div class="modal-body" id="modalBody">
-                <!-- Content -->
-            </div>
+            <div class="modal-body" id="modalBody"></div>
             <div class="modal-footer" id="modalFooter">
                 <button class="btn btn-secondary" onclick="app.closeModal()">Cancelar</button>
                 <button class="btn btn-primary" id="modalConfirm">Guardar</button>
@@ -1115,7 +1021,6 @@
         // ==========================================
         // CONFIGURACIÓN Y UTILIDADES
         // ==========================================
-
         const CONFIG = {
             DB_NAME: 'IdonetPremiumDB',
             DB_VERSION: 1,
@@ -1143,32 +1048,14 @@
 
         const utils = {
             generateId: () => Date.now().toString(36) + Math.random().toString(36).substr(2),
-            
             formatDate: (date) => new Date(date).toLocaleDateString('es-CR'),
-            
-            formatNumber: (num, decimals = CONFIG.DECIMAL_PLACES) => {
-                return parseFloat(num).toFixed(decimals);
-            },
-            
+            formatNumber: (num, decimals = CONFIG.DECIMAL_PLACES) => parseFloat(num).toFixed(decimals),
             validateEmail: (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
-            
             validateRange: (value, min, max) => value >= min && value <= max,
-            
-            calculateWeightedAverage: (values, weights) => {
-                let sum = 0;
-                let weightSum = 0;
-                for (let i = 0; i < values.length; i++) {
-                    sum += values[i] * weights[i];
-                    weightSum += weights[i];
-                }
-                return weightSum > 0 ? sum / weightSum : 0;
-            },
-            
             round: (num, decimals = CONFIG.DECIMAL_PLACES) => {
                 const factor = Math.pow(10, decimals);
                 return Math.round(num * factor) / factor;
             },
-            
             downloadFile: (content, filename, type) => {
                 const blob = new Blob([content], { type });
                 const url = URL.createObjectURL(blob);
@@ -1179,25 +1066,12 @@
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
-            },
-            
-            debounce: (func, wait) => {
-                let timeout;
-                return function executedFunction(...args) {
-                    const later = () => {
-                        clearTimeout(timeout);
-                        func(...args);
-                    };
-                    clearTimeout(timeout);
-                    timeout = setTimeout(later, wait);
-                };
             }
         };
 
         // ==========================================
         // BASE DE DATOS INDEXEDDB
         // ==========================================
-
         class Database {
             constructor() {
                 this.db = null;
@@ -1322,7 +1196,6 @@
         // ==========================================
         // SERVICIOS DE NEGOCIO
         // ==========================================
-
         class AuthService {
             constructor() {
                 this.currentUser = null;
@@ -1913,9 +1786,8 @@
         }
 
         // ==========================================
-        // APLICACIÓN PRINCIPAL - VERSIÓN ACCESO DIRECTO
+        // APLICACIÓN PRINCIPAL
         // ==========================================
-
         class App {
             constructor() {
                 this.auth = new AuthService();
@@ -1934,68 +1806,55 @@
 
             async init() {
                 try {
+                    console.log('🔄 Iniciando aplicación...');
                     await db.init();
-                    console.log('✅ Base de datos inicializada');
                     
-                    // ==========================================
-                    // USUARIO GENERICO - PUEDES CAMBIAR ESTOS DATOS
-                    // ==========================================
-                    const USUARIO_GENERICO = {
-                        nombre: 'Admin',
-                        apellidos: 'General',
-                        email: 'admin@demo.com',      // ← CAMBIA AQUÍ EL CORREO SI QUIERES
-                        password: 'demo123',           // ← CAMBIA AQUÍ LA CONTRASEÑA
-                        rol: 'admin'
-                    };
-                    
-                    // Verificar si ya existe
+                    // Crear usuario por defecto si no existe
                     const users = await db.getAll('users');
-                    let currentUser = users.find(u => u.email === USUARIO_GENERICO.email);
+                    let currentUser;
                     
-                    if (!currentUser) {
-                        console.log('🔄 Creando usuario genérico...');
+                    if (users.length === 0) {
+                        console.log('📝 Creando usuario por defecto...');
                         currentUser = {
                             id: utils.generateId(),
-                            ...USUARIO_GENERICO,
-                            createdAt: new Date().toISOString(),
-                            active: true
+                            nombre: 'Admin',
+                            apellidos: 'General',
+                            email: 'admin@demo.com',
+                            password: 'demo123',
+                            rol: 'admin',
+                            active: true,
+                            createdAt: new Date().toISOString()
                         };
                         await db.put('users', currentUser);
-                        console.log('✅ Usuario genérico creado:', USUARIO_GENERICO.email);
                     } else {
-                        console.log('✅ Usuario genérico ya existe');
+                        currentUser = users[0];
                     }
                     
-                    // INICIAR SESIÓN AUTOMÁTICAMENTE
+                    // Iniciar sesión automáticamente
                     this.auth.currentUser = currentUser;
                     localStorage.setItem('idonet_session', JSON.stringify({
                         userId: currentUser.id,
                         timestamp: Date.now()
                     }));
                     
-                    console.log('🔑 Sesión iniciada como:', currentUser.email);
-                    
-                    // OCULTAR TODO Y MOSTRAR DASHBOARD
-                    document.getElementById('loginScreen').classList.add('hidden');
-                    document.getElementById('registerScreen').classList.add('hidden');
-                    document.getElementById('mainApp').classList.remove('hidden');
-                    
                     // Actualizar UI
                     document.getElementById('userRoleDisplay').textContent = currentUser.rol;
                     document.getElementById('userNameDisplay').textContent = 
                         `${currentUser.nombre} ${currentUser.apellidos}`;
                     
-                    // Cargar Dashboard
-                    this.navigate('dashboard');
+                    // Ocultar pantallas de login
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('registerScreen').classList.add('hidden');
+                    document.getElementById('mainApp').classList.remove('hidden');
                     
-                    // Mostrar mensaje de bienvenida
-                    setTimeout(() => {
-                        this.showToast('👋 Bienvenido al Dashboard', 'success');
-                    }, 500);
+                    // Cargar vista inicial
+                    await this.loadView('dashboard');
+                    
+                    console.log('✅ Sistema listo');
                     
                 } catch (error) {
-                    console.error('❌ Error inicializando aplicación:', error);
-                    this.showLogin();
+                    console.error('❌ Error:', error);
+                    this.showToast('Error al iniciar: ' + error.message, 'error');
                 }
             }
 
@@ -2018,17 +1877,6 @@
                 });
             }
 
-            async registerSW() {
-                if ('serviceWorker' in navigator) {
-                    try {
-                        const registration = await navigator.serviceWorker.register('service-worker.js');
-                        console.log('Service Worker registrado:', registration);
-                    } catch (error) {
-                        console.log('Error registrando Service Worker:', error);
-                    }
-                }
-            }
-
             showLogin() {
                 document.getElementById('loginScreen').classList.remove('hidden');
                 document.getElementById('registerScreen').classList.add('hidden');
@@ -2042,17 +1890,54 @@
             }
 
             async handleLogin() {
-                this.showToast('El acceso directo ya está activado', 'info');
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+
+                try {
+                    await this.auth.login(email, password);
+                    this.showToast('Inicio de sesión exitoso', 'success');
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('registerScreen').classList.add('hidden');
+                    document.getElementById('mainApp').classList.remove('hidden');
+                    document.getElementById('userRoleDisplay').textContent = this.auth.currentUser.rol;
+                    document.getElementById('userNameDisplay').textContent = 
+                        `${this.auth.currentUser.nombre} ${this.auth.currentUser.apellidos}`;
+                    this.navigate('dashboard');
+                } catch (error) {
+                    this.showToast(error.message, 'error');
+                }
             }
 
             async handleRegister() {
-                this.showToast('El acceso directo ya está activado', 'info');
+                const password = document.getElementById('regPassword').value;
+                const passwordConfirm = document.getElementById('regPasswordConfirm').value;
+
+                if (password !== passwordConfirm) {
+                    this.showToast('Las contraseñas no coinciden', 'error');
+                    return;
+                }
+
+                const userData = {
+                    nombre: document.getElementById('regNombre').value,
+                    apellidos: document.getElementById('regApellidos').value,
+                    email: document.getElementById('regEmail').value,
+                    password: password,
+                    rol: document.getElementById('regRol').value
+                };
+
+                try {
+                    await this.auth.register(userData);
+                    this.showToast('Usuario registrado exitosamente', 'success');
+                    this.showLogin();
+                } catch (error) {
+                    this.showToast(error.message, 'error');
+                }
             }
 
             logout() {
                 this.auth.logout();
+                this.showLogin();
                 this.showToast('Sesión cerrada', 'success');
-                location.reload();
             }
 
             navigate(view) {
@@ -2140,7 +2025,7 @@
                 const evaluaciones = await db.getAll('evaluaciones');
                 
                 const bajo65 = estudiantes.filter(e => {
-                    const prom = e.historial.length > 0 ? e.historial[e.historial.length - 1].promedio : 100;
+                    const prom = e.historial?.length > 0 ? e.historial[e.historial.length - 1].promedio : 100;
                     return prom < 65;
                 }).length;
 
@@ -2183,7 +2068,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="chart-container">
-                                    [Gráfico de Distribución]
+                                    <p>Gráfico de Distribución</p>
                                 </div>
                             </div>
                         </div>
@@ -2193,7 +2078,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="chart-container">
-                                    [Gráfico de Promedios]
+                                    <p>Gráfico de Promedios</p>
                                 </div>
                             </div>
                         </div>
@@ -2201,18 +2086,14 @@
 
                     <div class="card" style="margin-top: 1.5rem;">
                         <div class="card-header">
-                            <h3 class="card-title">Alertas Académicas</h3>
+                            <h3 class="card-title">Bienvenido a Idonet Premium</h3>
                         </div>
                         <div class="card-body">
-                            ${bajo65 > 0 ? `
-                                <div class="alert alert-warning">
-                                    <strong>Atención:</strong> ${bajo65} estudiantes con promedio inferior a 65.
-                                </div>
-                            ` : `
-                                <div class="alert alert-success">
-                                    No hay alertas académicas pendientes.
-                                </div>
-                            `}
+                            <p>Usuario: <strong>admin@demo.com</strong></p>
+                            <p>Contraseña: <strong>demo123</strong></p>
+                            <button class="btn btn-primary" onclick="app.crearDatosPrueba()" style="margin-top: 1rem;">
+                                Crear Datos de Prueba
+                            </button>
                         </div>
                     </div>
                 `;
@@ -2238,7 +2119,6 @@
                                         <input type="text" class="form-control" id="confCodigoMEP" value="${config.codigoMEP}" required>
                                     </div>
                                 </div>
-
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label class="form-label required">Modalidad</label>
@@ -2252,51 +2132,6 @@
                                         <input type="number" class="form-control" id="confAño" value="${config.añoLectivo}" required>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Periodos del Año Lectivo</label>
-                                    <div id="periodosContainer">
-                                        ${config.periodos.map((p, i) => `
-                                            <div class="form-row" style="margin-bottom: 0.5rem;">
-                                                <input type="text" class="form-control" placeholder="Nombre" value="${p.nombre}" data-periodo="${i}" data-field="nombre">
-                                                <input type="date" class="form-control" value="${p.inicio}" data-periodo="${i}" data-field="inicio">
-                                                <input type="date" class="form-control" value="${p.fin}" data-periodo="${i}" data-field="fin">
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Componentes de Evaluación (deben sumar 100%)</label>
-                                    <div id="componentesContainer">
-                                        ${config.componentes.map((c, i) => `
-                                            <div class="form-row" style="margin-bottom: 0.5rem;">
-                                                <input type="text" class="form-control" placeholder="ID" value="${c.id}" data-componente="${i}" data-field="id">
-                                                <input type="text" class="form-control" placeholder="Nombre" value="${c.nombre}" data-componente="${i}" data-field="nombre">
-                                                <input type="number" class="form-control" placeholder="%" value="${c.porcentaje}" data-componente="${i}" data-field="porcentaje" min="0" max="100">
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                    <div id="componentesError" class="alert alert-danger hidden" style="margin-top: 0.5rem;">
-                                        La suma de porcentajes debe ser exactamente 100%
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="form-label">Tipo de Redondeo</label>
-                                        <select class="form-control" id="confRedondeo">
-                                            <option value="normal" ${config.redondeo === 'normal' ? 'selected' : ''}>Normal</option>
-                                            <option value="matematico" ${config.redondeo === 'matematico' ? 'selected' : ''}>Matemático</option>
-                                            <option value="truncado" ${config.redondeo === 'truncado' ? 'selected' : ''}>Truncado</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Decimales</label>
-                                        <input type="number" class="form-control" id="confDecimales" value="${config.decimales}" min="0" max="4">
-                                    </div>
-                                </div>
-
                                 <div class="d-flex justify-between items-center" style="margin-top: 1.5rem;">
                                     <button type="button" class="btn btn-secondary" onclick="app.navigate('dashboard')">Cancelar</button>
                                     <button type="submit" class="btn btn-primary">Guardar Configuración</button>
@@ -2338,10 +2173,10 @@
                                             </tr>
                                         ` : grupos.map(g => `
                                             <tr>
-                                                <td>${g.codigo}</td>
-                                                <td>${g.nivel}</td>
-                                                <td>${g.seccion}</td>
-                                                <td>${g.año}</td>
+                                                <td>${g.codigo || ''}</td>
+                                                <td>${g.nivel || ''}</td>
+                                                <td>${g.seccion || ''}</td>
+                                                <td>${g.año || ''}</td>
                                                 <td>${g.estudiantes || 0}</td>
                                                 <td class="actions">
                                                     <button class="btn btn-sm btn-secondary" onclick="app.verEstudiantes('${g.id}')">Ver</button>
@@ -2419,21 +2254,19 @@
                                             <th>Nombre</th>
                                             <th>Competencia</th>
                                             <th>Criterios</th>
-                                            <th>Clasificación</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         ${rubricas.length === 0 ? `
                                             <tr>
-                                                <td colspan="5" class="text-center">No hay rúbricas registradas</td>
+                                                <td colspan="4" class="text-center">No hay rúbricas registradas</td>
                                             </tr>
                                         ` : rubricas.map(r => `
                                             <tr>
                                                 <td>${r.nombre}</td>
                                                 <td>${r.competencia}</td>
                                                 <td>${r.criterios?.length || 0}</td>
-                                                <td><span class="badge badge-info">${r.clasificacion || 'N/A'}</span></td>
                                                 <td class="actions">
                                                     <button class="btn btn-sm btn-secondary" onclick="app.aplicarRubrica('${r.id}')">Aplicar</button>
                                                     <button class="btn btn-sm btn-primary" onclick="app.editarRubrica('${r.id}')">Editar</button>
@@ -2464,51 +2297,27 @@
                                         <tr>
                                             <th>Estudiante</th>
                                             <th>Identificación</th>
-                                            <th>Tipo de Adecuación</th>
-                                            <th>Ajustes Aplicados</th>
+                                            <th>Tipo</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         ${estudiantesNEE.length === 0 ? `
                                             <tr>
-                                                <td colspan="5" class="text-center">No hay estudiantes NEE registrados</td>
+                                                <td colspan="4" class="text-center">No hay estudiantes NEE registrados</td>
                                             </tr>
                                         ` : estudiantesNEE.map(e => `
                                             <tr>
                                                 <td>${e.nombre} ${e.apellidos}</td>
                                                 <td>${e.identificacion}</td>
                                                 <td>${e.tipoNEE || 'No especificado'}</td>
-                                                <td>
-                                                    ${e.ajustesNEE?.map(a => `
-                                                        <span class="badge badge-warning">${a}</span>
-                                                    `).join(' ') || 'Ninguno'}
-                                                </td>
                                                 <td class="actions">
                                                     <button class="btn btn-sm btn-primary" onclick="app.configurarNEE('${e.id}')">Configurar</button>
-                                                    <button class="btn btn-sm btn-secondary" onclick="app.verReporteNEE('${e.id}')">Reporte</button>
                                                 </td>
                                             </tr>
                                         `).join('')}
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" style="margin-top: 1.5rem;">
-                        <div class="card-header">
-                            <h3 class="card-title">Configuración de Ajustes NEE</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="alert alert-info">
-                                <strong>Tipos de ajustes disponibles:</strong>
-                                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
-                                    <li>Ajuste de ponderaciones (reducir porcentajes)</li>
-                                    <li>Exclusión de componentes específicos</li>
-                                    <li>Adaptaciones en instrumentos de evaluación</li>
-                                    <li>Tiempo extendido para evaluaciones</li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -2539,21 +2348,19 @@
                                             <th>Código</th>
                                             <th>Descripción</th>
                                             <th>Clasificación</th>
-                                            <th>Competencia</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         ${indicadores.length === 0 ? `
                                             <tr>
-                                                <td colspan="5" class="text-center">No hay indicadores registrados</td>
+                                                <td colspan="4" class="text-center">No hay indicadores registrados</td>
                                             </tr>
                                         ` : indicadores.map(ind => `
                                             <tr>
                                                 <td>${ind.codigo}</td>
                                                 <td>${ind.descripcion}</td>
                                                 <td><span class="badge badge-info">${ind.clasificacion}</span></td>
-                                                <td>${ind.competencia}</td>
                                                 <td class="actions">
                                                     <button class="btn btn-sm btn-primary" onclick="app.editarIndicador('${ind.id}')">Editar</button>
                                                     <button class="btn btn-sm btn-danger" onclick="app.eliminarIndicador('${ind.id}')">Eliminar</button>
@@ -2584,14 +2391,6 @@
                                         <option value="">Buscar...</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Tipo de Reporte</label>
-                                    <select class="form-control" id="tipoReporteInd">
-                                        <option value="completo">Reporte Completo</option>
-                                        <option value="boleta">Boleta de Calificaciones</option>
-                                        <option value="historial">Historial Académico</option>
-                                    </select>
-                                </div>
                                 <button class="btn btn-primary" onclick="app.generarReporteIndividual()" style="width: 100%;">
                                     Generar Reporte
                                 </button>
@@ -2610,36 +2409,8 @@
                                         ${grupos.map(g => `<option value="${g.id}">${g.codigo}</option>`).join('')}
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label">Periodo</label>
-                                    <select class="form-control" id="reportePeriodoGrupo">
-                                        <option value="anual">Anual</option>
-                                        <option value="1">Periodo 1</option>
-                                        <option value="2">Periodo 2</option>
-                                        <option value="3">Periodo 3</option>
-                                    </select>
-                                </div>
                                 <button class="btn btn-primary" onclick="app.generarReporteGrupal()" style="width: 100%;">
                                     Generar Reporte Grupal
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" style="margin-top: 1.5rem;">
-                        <div class="card-header">
-                            <h3 class="card-title">Estadísticas y Análisis</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="grid grid-3">
-                                <button class="btn btn-secondary" onclick="app.exportarReporte('PDF')">
-                                    Exportar a PDF
-                                </button>
-                                <button class="btn btn-secondary" onclick="app.exportarReporte('Excel')">
-                                    Exportar a Excel
-                                </button>
-                                <button class="btn btn-secondary" onclick="app.exportarReporte('CSV')">
-                                    Exportar a CSV
                                 </button>
                             </div>
                         </div>
@@ -2651,46 +2422,18 @@
                 return `
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Exportación Compatible SEA - MEP Costa Rica</h3>
+                            <h3 class="card-title">Exportación SEA</h3>
                         </div>
                         <div class="card-body">
-                            <div class="alert alert-info">
-                                <strong>Formato SEA:</strong> Esta exportación genera un archivo CSV estructurado 
-                                según los requisitos del Sistema de Evaluación y Acreditación del MEP Costa Rica.
-                            </div>
-
                             <div class="form-group">
                                 <label class="form-label">Año Lectivo</label>
                                 <input type="number" class="form-control" id="seaAño" value="${CONFIG.DEFAULT_YEAR}">
                             </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Configuración de Decimales</label>
-                                <select class="form-control" id="seaDecimales">
-                                    <option value="0">Sin decimales</option>
-                                    <option value="1">1 decimal</option>
-                                    <option value="2" selected>2 decimales</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="toggle">
-                                    <input type="checkbox" id="seaValidar" checked>
-                                    <span class="toggle-slider"></span>
-                                </label>
-                                <span style="margin-left: 0.5rem;">Validar rangos de notas antes de exportar</span>
-                            </div>
-
                             <div class="d-flex gap-2" style="margin-top: 1.5rem;">
                                 <button class="btn btn-primary" onclick="app.exportarSEA()">
                                     Generar Archivo SEA
                                 </button>
-                                <button class="btn btn-secondary" onclick="app.validarDatosSEA()">
-                                    Validar Datos
-                                </button>
                             </div>
-
-                            <div id="seaResultado" style="margin-top: 1.5rem;"></div>
                         </div>
                     </div>
                 `;
@@ -2754,12 +2497,8 @@
                                 <h3 class="card-title">Exportar Respaldo</h3>
                             </div>
                             <div class="card-body">
-                                <p style="margin-bottom: 1rem; color: var(--secondary);">
-                                    Genere un archivo JSON completo con todos los datos del sistema.
-                                    Guárdelo en un lugar seguro.
-                                </p>
                                 <button class="btn btn-primary" onclick="app.exportarBackup()" style="width: 100%;">
-                                    Descargar Respaldo Completo
+                                    Descargar Respaldo
                                 </button>
                             </div>
                         </div>
@@ -2769,39 +2508,41 @@
                                 <h3 class="card-title">Importar Respaldo</h3>
                             </div>
                             <div class="card-body">
-                                <div class="alert alert-warning" style="margin-bottom: 1rem;">
-                                    <strong>Advertencia:</strong> Esta acción sobrescribirá todos los datos actuales.
-                                    Asegúrese de tener un respaldo reciente.
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Archivo de Respaldo (.json)</label>
-                                    <input type="file" class="form-control" id="backupFile" accept=".json">
-                                </div>
+                                <input type="file" class="form-control" id="backupFile" accept=".json" style="margin-bottom: 1rem;">
                                 <button class="btn btn-danger" onclick="app.importarBackup()" style="width: 100%;">
-                                    Restaurar desde Respaldo
+                                    Restaurar
                                 </button>
                             </div>
                         </div>
                     </div>
-
-                    <div class="card" style="margin-top: 1.5rem;">
-                        <div class="card-header">
-                            <h3 class="card-title">Información del Sistema</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="grid grid-2">
-                                <div>
-                                    <p><strong>Versión:</strong> ${CONFIG.APP_VERSION}</p>
-                                    <p><strong>Base de Datos:</strong> ${CONFIG.DB_NAME}</p>
-                                </div>
-                                <div>
-                                    <p><strong>Modo:</strong> <span class="badge badge-success">Offline Ready</span></p>
-                                    <p><strong>Último Respaldo:</strong> <span id="lastBackup">Nunca</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 `;
+            }
+
+            async crearDatosPrueba() {
+                try {
+                    this.showToast('Creando datos de prueba...', 'info');
+                    
+                    const grupo = await this.estudianteService.createGrupo({
+                        codigo: '10-1',
+                        nivel: 'Décimo',
+                        seccion: '1',
+                        año: 2024
+                    });
+                    
+                    for (let i = 1; i <= 3; i++) {
+                        await this.estudianteService.createEstudiante({
+                            nombre: `Estudiante ${i}`,
+                            apellidos: 'Apellido Prueba',
+                            identificacion: `12345${i}`,
+                            grupoId: grupo.id
+                        });
+                    }
+                    
+                    this.showToast('Datos de prueba creados', 'success');
+                    this.navigate('dashboard');
+                } catch (error) {
+                    this.showToast('Error: ' + error.message, 'error');
+                }
             }
 
             async cargarEstudiantesEval() {
@@ -2824,7 +2565,6 @@
                                     <th>Estudiante</th>
                                     <th>Identificación</th>
                                     <th>Nota (0-100)</th>
-                                    <th>Observaciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -2836,10 +2576,6 @@
                                             <input type="number" class="form-control" 
                                                 id="nota_${e.id}" min="0" max="100" step="0.01"
                                                 style="width: 100px;">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" 
-                                                id="obs_${e.id}" placeholder="Opcional">
                                         </td>
                                     </tr>
                                 `).join('')}
@@ -2867,48 +2603,30 @@
                     const nota = parseFloat(notaInput.value);
                     
                     if (!isNaN(nota)) {
-                        try {
-                            await this.evaluacionService.registrarEvaluacion({
-                                estudianteId: est.id,
-                                grupoId,
-                                periodo,
-                                componente,
-                                nota,
-                                observaciones: document.getElementById(`obs_${est.id}`).value,
-                                docenteId: this.auth.currentUser.id
-                            });
-                            guardadas++;
-                        } catch (error) {
-                            console.error(`Error guardando evaluación para ${est.nombre}:`, error);
-                        }
+                        await this.evaluacionService.registrarEvaluacion({
+                            estudianteId: est.id,
+                            grupoId,
+                            periodo,
+                            componente,
+                            nota,
+                            docenteId: this.auth.currentUser.id
+                        });
+                        guardadas++;
                     }
                 }
 
-                this.showToast(`${guardadas} evaluaciones guardadas exitosamente`, 'success');
+                this.showToast(`${guardadas} evaluaciones guardadas`, 'success');
             }
 
             async exportarSEA() {
                 try {
                     const datos = await this.seaService.exportarDatos();
-                    const validacion = this.seaService.validarDatosSEA(datos);
-                    
-                    if (!validacion.valido) {
-                        document.getElementById('seaResultado').innerHTML = `
-                            <div class="alert alert-danger">
-                                <strong>Errores de validación:</strong>
-                                <ul>${validacion.errores.map(e => `<li>${e}</li>`).join('')}</ul>
-                            </div>
-                        `;
-                        return;
-                    }
-
                     const csv = this.seaService.generarCSV(datos);
                     const año = document.getElementById('seaAño').value;
                     utils.downloadFile(csv, `SEA_Export_${año}.csv`, 'text/csv');
-                    
-                    this.showToast('Exportación SEA completada', 'success');
+                    this.showToast('Exportación completada', 'success');
                 } catch (error) {
-                    this.showToast('Error en exportación: ' + error.message, 'error');
+                    this.showToast('Error: ' + error.message, 'error');
                 }
             }
 
@@ -2916,10 +2634,10 @@
                 try {
                     const backup = await this.backupService.exportarBackup();
                     const fecha = new Date().toISOString().split('T')[0];
-                    utils.downloadFile(backup, `Idonet_Backup_${fecha}.json`, 'application/json');
-                    this.showToast('Respaldo exportado exitosamente', 'success');
+                    utils.downloadFile(backup, `Backup_${fecha}.json`, 'application/json');
+                    this.showToast('Respaldo exportado', 'success');
                 } catch (error) {
-                    this.showToast('Error al exportar: ' + error.message, 'error');
+                    this.showToast('Error: ' + error.message, 'error');
                 }
             }
 
@@ -2928,14 +2646,14 @@
                 const file = fileInput.files[0];
                 
                 if (!file) {
-                    this.showToast('Seleccione un archivo de respaldo', 'warning');
+                    this.showToast('Seleccione un archivo', 'warning');
                     return;
                 }
 
                 try {
                     const content = await file.text();
                     await this.backupService.importarBackup(content);
-                    this.showToast('Respaldo restaurado exitosamente', 'success');
+                    this.showToast('Respaldo restaurado', 'success');
                     this.navigate('dashboard');
                 } catch (error) {
                     this.showToast(error.message, 'error');
@@ -2946,24 +2664,16 @@
                 const container = document.getElementById('toastContainer');
                 const toast = document.createElement('div');
                 toast.className = `toast ${type}`;
-                toast.innerHTML = `
-                    <span>${type === 'success' ? '✓' : type === 'error' ? '✗' : '⚠'}</span>
-                    <span>${message}</span>
-                `;
+                toast.innerHTML = `<span>${type === 'success' ? '✓' : '✗'}</span><span>${message}</span>`;
                 container.appendChild(toast);
-                
-                setTimeout(() => {
-                    toast.remove();
-                }, 3000);
+                setTimeout(() => toast.remove(), 3000);
             }
 
             showModal(title, content, onConfirm) {
                 document.getElementById('modalTitle').textContent = title;
                 document.getElementById('modalBody').innerHTML = content;
                 document.getElementById('modalOverlay').classList.add('active');
-                
-                const confirmBtn = document.getElementById('modalConfirm');
-                confirmBtn.onclick = () => {
+                document.getElementById('modalConfirm').onclick = () => {
                     onConfirm();
                     this.closeModal();
                 };
@@ -2976,34 +2686,83 @@
             }
 
             toggleSidebar() {
-                const sidebar = document.getElementById('sidebar');
-                sidebar.classList.toggle('open');
+                document.getElementById('sidebar').classList.toggle('open');
             }
 
-            showModalCrearGrupo() { this.showToast('Función en desarrollo', 'warning'); }
-            verEstudiantes(id) { this.showToast('Cargando estudiantes...', 'info'); }
-            editarGrupo(id) { this.showToast('Editando grupo...', 'info'); }
-            eliminarGrupo(id) { 
-                if (confirm('¿Eliminar este grupo?')) {
-                    this.showToast('Grupo eliminado', 'success');
-                }
+            showModalCrearGrupo() {
+                this.showModal('Nuevo Grupo', `
+                    <div class="form-group">
+                        <label>Código</label>
+                        <input type="text" class="form-control" id="modalGrupoCodigo" placeholder="Ej: 10-1">
+                    </div>
+                    <div class="form-group">
+                        <label>Nivel</label>
+                        <input type="text" class="form-control" id="modalGrupoNivel" placeholder="Ej: Décimo">
+                    </div>
+                    <div class="form-group">
+                        <label>Sección</label>
+                        <input type="text" class="form-control" id="modalGrupoSeccion" placeholder="Ej: 1">
+                    </div>
+                `, async () => {
+                    const codigo = document.getElementById('modalGrupoCodigo').value;
+                    const nivel = document.getElementById('modalGrupoNivel').value;
+                    const seccion = document.getElementById('modalGrupoSeccion').value;
+                    
+                    if (codigo && nivel && seccion) {
+                        await this.estudianteService.createGrupo({
+                            codigo, nivel, seccion,
+                            año: CONFIG.DEFAULT_YEAR
+                        });
+                        this.showToast('Grupo creado', 'success');
+                        this.navigate('grupos');
+                    }
+                });
             }
-            showModalCrearRubrica() { this.showToast('Creando rúbrica...', 'info'); }
-            aplicarRubrica(id) { this.showToast('Aplicando rúbrica...', 'info'); }
-            editarRubrica(id) { this.showToast('Editando rúbrica...', 'info'); }
-            configurarNEE(id) { this.showToast('Configurando NEE...', 'info'); }
-            verReporteNEE(id) { this.showToast('Generando reporte NEE...', 'info'); }
-            showModalCrearIndicador() { this.showToast('Creando indicador...', 'info'); }
-            importarIndicadores() { this.showToast('Importando...', 'info'); }
-            editarIndicador(id) { this.showToast('Editando...', 'info'); }
-            eliminarIndicador(id) { this.showToast('Eliminando...', 'info'); }
-            generarReporteIndividual() { this.showToast('Generando reporte...', 'info'); }
-            generarReporteGrupal() { this.showToast('Generando reporte grupal...', 'info'); }
-            exportarReporte(formato) { this.showToast(`Exportando a ${formato}...`, 'info'); }
-            showModalCrearUsuario() { this.showToast('Creando usuario...', 'info'); }
-            editarUsuario(id) { this.showToast('Editando usuario...', 'info'); }
-            toggleUsuario(id) { this.showToast('Cambiando estado...', 'info'); }
-            validarDatosSEA() { this.showToast('Validando datos SEA...', 'info'); }
+
+            showModalCrearIndicador() {
+                this.showModal('Nuevo Indicador', `
+                    <div class="form-group">
+                        <label>Código</label>
+                        <input type="text" class="form-control" id="modalIndicadorCodigo">
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea class="form-control" id="modalIndicadorDescripcion"></textarea>
+                    </div>
+                `, async () => {
+                    const codigo = document.getElementById('modalIndicadorCodigo').value;
+                    const descripcion = document.getElementById('modalIndicadorDescripcion').value;
+                    
+                    if (codigo && descripcion) {
+                        await this.indicadorService.create({
+                            codigo, descripcion,
+                            clasificacion: 'General',
+                            competencia: 'General'
+                        });
+                        this.showToast('Indicador creado', 'success');
+                        this.navigate('indicadores');
+                    }
+                });
+            }
+
+            verEstudiantes(id) { this.showToast('Función en desarrollo', 'info'); }
+            editarGrupo(id) { this.showToast('Función en desarrollo', 'info'); }
+            eliminarGrupo(id) { this.showToast('Función en desarrollo', 'info'); }
+            showModalCrearRubrica() { this.showToast('Función en desarrollo', 'info'); }
+            aplicarRubrica(id) { this.showToast('Función en desarrollo', 'info'); }
+            editarRubrica(id) { this.showToast('Función en desarrollo', 'info'); }
+            configurarNEE(id) { this.showToast('Función en desarrollo', 'info'); }
+            verReporteNEE(id) { this.showToast('Función en desarrollo', 'info'); }
+            importarIndicadores() { this.showToast('Función en desarrollo', 'info'); }
+            editarIndicador(id) { this.showToast('Función en desarrollo', 'info'); }
+            eliminarIndicador(id) { this.showToast('Función en desarrollo', 'info'); }
+            generarReporteIndividual() { this.showToast('Función en desarrollo', 'info'); }
+            generarReporteGrupal() { this.showToast('Función en desarrollo', 'info'); }
+            exportarReporte(formato) { this.showToast('Función en desarrollo', 'info'); }
+            showModalCrearUsuario() { this.showToast('Función en desarrollo', 'info'); }
+            editarUsuario(id) { this.showToast('Función en desarrollo', 'info'); }
+            toggleUsuario(id) { this.showToast('Función en desarrollo', 'info'); }
+            validarDatosSEA() { this.showToast('Función en desarrollo', 'info'); }
         }
 
         // Inicializar aplicación
