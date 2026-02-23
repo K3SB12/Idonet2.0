@@ -1977,45 +1977,73 @@
                     usuarios: 'Gestión de Usuarios',
                     respaldo: 'Respaldo y Seguridad'
                 };
-
+            
                 pageTitle.textContent = titles[view] || view;
-
-                switch(view) {
-                    case 'dashboard':
-                        contentArea.innerHTML = await this.renderDashboard();
-                        break;
-                    case 'configuracion':
-                        contentArea.innerHTML = await this.renderConfiguracion();
-                        break;
-                    case 'grupos':
-                        contentArea.innerHTML = await this.renderGrupos();
-                        break;
-                    case 'evaluacion':
-                        contentArea.innerHTML = await this.renderEvaluacion();
-                        break;
-                    case 'pnft':
-                        contentArea.innerHTML = await this.renderPNFT();
-                        break;
-                    case 'nee':
-                        contentArea.innerHTML = await this.renderNEE();
-                        break;
-                    case 'indicadores':
-                        contentArea.innerHTML = await this.renderIndicadores();
-                        break;
-                    case 'reportes':
-                        contentArea.innerHTML = await this.renderReportes();
-                        break;
-                    case 'exportar':
-                        contentArea.innerHTML = await this.renderExportar();
-                        break;
-                    case 'usuarios':
-                        contentArea.innerHTML = await this.renderUsuarios();
-                        break;
-                    case 'respaldo':
-                        contentArea.innerHTML = await this.renderRespaldo();
-                        break;
-                    default:
-                        contentArea.innerHTML = '<div class="card"><div class="card-body">Módulo en desarrollo</div></div>';
+                
+                // Mostrar loading mientras carga
+                contentArea.innerHTML = `
+                    <div style="text-align: center; padding: 3rem;">
+                        <div class="loading-spinner"></div>
+                        <p style="margin-top: 1rem; color: var(--secondary);">Cargando ${titles[view] || view}...</p>
+                    </div>
+                `;
+            
+                try {
+                    let html = '';
+                    switch(view) {
+                        case 'dashboard':
+                            html = await this.renderDashboard();
+                            break;
+                        case 'configuracion':
+                            html = await this.renderConfiguracion();
+                            break;
+                        case 'grupos':
+                            html = await this.renderGrupos();
+                            break;
+                        case 'evaluacion':
+                            html = await this.renderEvaluacion();
+                            break;
+                        case 'pnft':
+                            html = await this.renderPNFT();
+                            break;
+                        case 'nee':
+                            html = await this.renderNEE();
+                            break;
+                        case 'indicadores':
+                            html = await this.renderIndicadores();
+                            break;
+                        case 'reportes':
+                            html = await this.renderReportes();
+                            break;
+                        case 'exportar':
+                            html = await this.renderExportar();
+                            break;
+                        case 'usuarios':
+                            html = await this.renderUsuarios();
+                            break;
+                        case 'respaldo':
+                            html = await this.renderRespaldo();
+                            break;
+                        default:
+                            html = '<div class="card"><div class="card-body">Módulo en desarrollo</div></div>';
+                    }
+                    
+                    // Reemplazar el loading con el contenido real
+                    contentArea.innerHTML = html;
+                    
+                } catch (error) {
+                    console.error('Error cargando vista:', error);
+                    contentArea.innerHTML = `
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Error</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Error al cargar: ${error.message}</p>
+                                <button class="btn btn-primary" onclick="app.navigate('dashboard')">Reintentar</button>
+                            </div>
+                        </div>
+                    `;
                 }
             }
 
