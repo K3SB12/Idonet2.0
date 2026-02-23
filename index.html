@@ -1361,9 +1361,11 @@
             }
 
             async register(userData) {
+                // 1. Verificar si el usuario ya existe
                 const existing = await db.get('users', userData.email);
                 if (existing) throw new Error('El correo ya está registrado');
 
+                // 2. Crear el objeto del usuario con un ID único
                 const user = {
                     id: utils.generateId(),
                     ...userData,
@@ -1371,7 +1373,10 @@
                     active: true
                 };
 
+                // 3. Guardar el usuario en la base de datos (¡CORRECCIÓN APLICADA!)
                 await db.put('users', user);
+
+                // 4. Devolver el usuario creado
                 return user;
             }
 
